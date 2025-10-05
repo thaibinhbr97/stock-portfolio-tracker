@@ -13,6 +13,7 @@ public class Stock {
     private double shares;
     private double currentPrice;
 
+    // EFFECTS: constructs a Stock with symbol, companyName, sector, shares, and currentPrice
     public Stock (String symbol, String companyName, String sector, double shares, double currentPrice) {
         // stub
     }
@@ -48,7 +49,7 @@ public class Stock {
         return 0.0; // stub
     }
 
-    public double getCurrentPrice() {
+    public double getPrice() {
         return 0.0; // stub
     }
 
@@ -57,7 +58,7 @@ public class Stock {
     }
 
     // setters
-    public void setCurrentPrice(double price) {
+    public void updatePrice(double newPrice) {
         // stub
     }
 
