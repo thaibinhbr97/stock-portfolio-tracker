@@ -10,18 +10,25 @@ import java.util.List;
  */
 public class Portfolio { 
     private String ownerName;
+    private double cashBalance;
     private List<Stock> stocks;
     private double totalValue;
     private LocalDateTime lastUpdated;
+    private List<String> symbols;
     
-    // EFFECTS: constructs a Portfolio with onwerName, stocks, totalValue, lastUpdated.
-    public Portfolio(String ownerName, List<Stock> stocks, double totalValue, LocalDateTime lastUpdated) {
+    // EFFECTS: constructs a Portfolio with onwerName, cashBalance stocks, totalValue, lastUpdated.
+    public Portfolio(double ownerName, double cashBalance, List<Stock> stocks, double totalValue, LocalDateTime lastUpdated) {
         // stub
     }
 
-    // MODIFIES: this
+    // EFFECTS: returns Stock with given symbol, or null if not found.
+    public Stock getStock(String symbol) {
+        return null; // stub
+    }
+
+    // MODIFIES: this, Stock
     // EFFECTS: adds the given stock to the portfolio if not already presented;
-    // if stock already existed (same symbol), increase its share in portfolio.
+    // if stock already existed (same symbol), increase its share.
     public void addStock(Stock s) {
         // stub
     }
@@ -41,6 +48,10 @@ public class Portfolio {
     }
 
     // getters 
+    public double getCashBalance() {
+        return 0.0; // stub
+    }
+
     public double getTotalValue() {
         return 0.0; // stub
     }
@@ -49,12 +60,12 @@ public class Portfolio {
         return null; // stub
     }
 
-    @Override
-    // EFFECTS: display a portfolio in the console
+    // EFFECTS: display owner information in the console
     // with the format as below:
     // This portfolio owned by ownerName with total value $ and format it to 2 decimal places
-    public String toString() {
+    public String getOwnerInformation() {
         // return "This portfolio owned by " + ownerName + " with total value $" 
         //     + String.format("%.2f", totalValue);
-}
+        return null; // stub
+    }
 }
