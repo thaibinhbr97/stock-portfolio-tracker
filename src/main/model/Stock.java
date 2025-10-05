@@ -13,7 +13,7 @@ public class Stock {
     private double shares;
     private double currentPrice;
 
-    public Stock () {
+    public Stock (String symbol, String companyName, String sector, double shares, double currentPrice) {
         // stub
     }
 
@@ -57,7 +57,7 @@ public class Stock {
     }
 
     // setters
-    public void setCurrentPrice() {
+    public void setCurrentPrice(double price) {
         // stub
     }
 
