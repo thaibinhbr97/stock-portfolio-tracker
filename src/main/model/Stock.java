@@ -18,6 +18,13 @@ public class Stock {
         // stub
     }
 
+    // METHOD OVERLOADING
+    // EFFECTS: constructs a Stock with symbol, companyName, sector and currentPrice with shares initialized to 0.
+    // This can be considered as a watch stock.
+    public Stock (String symbol, String companyName, String sector, double currentPrice) {
+        // stub
+    }    
+
     // REQUIRES: quantity > 0
     // MODIFIES: this
     // EFFECTS: allow user to purchase stock shares based on quantity and stock price
