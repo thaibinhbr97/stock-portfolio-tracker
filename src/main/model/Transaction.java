@@ -9,7 +9,7 @@ import java.time.LocalDateTime;
  * This class is immutable once created and used for maintaining transaction history.
  */
 public class Transaction {
-    private LocalDateTime date;
+    private LocalDateTime dateTime;
     private String symbol;
     private String action;
     private double shares;
@@ -17,13 +17,13 @@ public class Transaction {
     private double total;
 
     // EFFECTS: constructs a Transaction with dateTime is set to LocalDateTime.now(), symbol, action, shares, price, total of 
-    // a recent action (BUY/SELL) of a stock.
+    // a recent action (BUY/SELL) for a stock.
     public Transaction(LocalDateTime dateTime, String symbol, String action, double shares, double price, double total) {
         // stub
     }
 
     // getters
-    public LocalDateTime getDate() {
+    public LocalDateTime getDateTime() {
         return null; // stub
     }
 
@@ -48,7 +48,7 @@ public class Transaction {
     }
 
     @Override
-    // EFFECTS: display a record of a single stock transaction (BUY/ SELL) in the console
+    // EFFECTS: returns a record of a single stock transaction (BUY/ SELL) in the console
     // with the format as below:
     // | Date | Symbol | Action | Shares | Price | Total |
     public String toString() {
