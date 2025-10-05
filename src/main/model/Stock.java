@@ -7,35 +7,36 @@ package model;
  * It provides methods for updating shares and calculating the stock's total market value.
  */
 public class Stock {
-    private String symbol;
+    private final String symbol;
     private String companyName;
     private String sector;
     private double shares;
-    private double currentPrice;
+    private double price;
+    private double averagePurchasePrice;
 
-    // EFFECTS: constructs a Stock with symbol, companyName, sector, shares, and currentPrice
-    public Stock (String symbol, String companyName, String sector, double shares, double currentPrice) {
+    // EFFECTS: constructs a Stock with symbol, companyName, sector, shares, and price
+    public Stock (String symbol, String companyName, String sector, double shares, double price) {
         // stub
     }
 
     // METHOD OVERLOADING
-    // EFFECTS: constructs a Stock with symbol, companyName, sector and currentPrice with shares initialized to 0.
+    // EFFECTS: constructs a Stock with symbol, companyName, sector and price with shares initialized to 0.
     // This can be considered as a watch stock.
-    public Stock (String symbol, String companyName, String sector, double currentPrice) {
+    public Stock (String symbol, String companyName, String sector, double price) {
         // stub
     }    
 
-    // REQUIRES: quantity > 0
+    // REQUIRES: quantity > 0, price > 0
     // MODIFIES: this
-    // EFFECTS: allow user to purchase stock shares based on quantity and stock price
-    public void buyShares(int quantity, double price) {
+    // EFFECTS: allow user to purchase stock shares based on quantity and stock price.
+    public void buyShares(double quantity, double price) {
         // stub
     }
 
-    // REQUIRES: quantity > 0
+    // REQUIRES: quantity > 0, price > 0
     // MODIFIES: this
-    // EFFECTS: allow user to sell stock shares based on quantity and stock price; however, the shares cannot be negative
-    public void sellShares(int quantity, double price) {
+    // EFFECTS: allow user to sell stock shares based on quantity and stock price; however, the shares after sell cannot be negative.
+    public void sellShares(double quantity, double price) {
         // stub
     }
 
@@ -52,7 +53,7 @@ public class Stock {
         return null; // stub
     }
 
-    public double getShares() {
+    public double getSharesOwned() {
         return 0.0; // stub
     }
 
@@ -65,8 +66,9 @@ public class Stock {
     }
 
     // setters
-    public void updatePrice(double newPrice) {
+    public void updateStockPrice(double newPrice) {
         // stub
     }
+
 
 }
