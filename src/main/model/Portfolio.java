@@ -52,7 +52,7 @@ public class Portfolio {
     @Override
     // EFFECTS: display a portfolio in the console
     // with the format as below:
-    // This portfolio owned by ownerName with total value $ and format it using 2 decimals
+    // This portfolio owned by ownerName with total value $ and format it to 2 decimal places
     public String toString() {
         // return "This portfolio owned by " + ownerName + " with total value $" 
         //     + String.format("%.2f", totalValue);
