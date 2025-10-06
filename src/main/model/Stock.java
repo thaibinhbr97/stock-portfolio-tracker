@@ -7,7 +7,7 @@ package model;
  * It provides methods for updating shares and calculating the stock's total market value.
  */
 public class Stock {
-    private final String symbol;
+    private String symbol;
     private String companyName;
     private String sector;
     private double shares;
