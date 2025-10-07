@@ -3,7 +3,7 @@ package model;
 import java.time.LocalDateTime;
 
 /*
- * Represents a history record of a single stock transaction (buy or sell).
+ * Represents a history record of a single transaction BUY/SELL.
  * Each Transaction object includes details such as the date, stock symbol,
  * action type (BUY/SELL), number of shares, price per share, and total amount.
  * This class is immutable once created and used for maintaining transaction history.
@@ -11,7 +11,7 @@ import java.time.LocalDateTime;
 public class Transaction {
     private LocalDateTime dateTime;
     private String symbol;
-    private String action;
+    private String action; // BUY/SELL
     private double shares;
     private double price;
     private double total;
@@ -47,11 +47,10 @@ public class Transaction {
         return 0.0; // stub
     }
 
-    @Override
-    // EFFECTS: returns a record of a single stock transaction (BUY/ SELL) in the console
+    // EFFECTS: print out a record of a single transaction BUY/SELL in the console
     // with the format as below:
     // | Date | Symbol | Action | Shares | Price | Total |
-    public String toString() {
+    public String printTransaction() {
         return null; // stub
     }
 }
