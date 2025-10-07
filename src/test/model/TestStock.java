@@ -6,13 +6,13 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 public class TestStock {
-    Stock apple;
-    Stock amazon;
-    Stock google;
-    Stock nvidia;
-    Stock nvidiaWithoutShares;
-    Stock costco;
-    Stock jpmorgan;
+    private Stock apple;
+    private Stock amazon;
+    private Stock google;
+    private Stock nvidia;
+    private Stock nvidiaWithoutShares;
+    private Stock costco;
+    private Stock jpmorgan;
     
     @BeforeEach
     void runBefore() {
@@ -35,25 +35,25 @@ public class TestStock {
         assertEquals("JPMorgan Chase & Corp", jpmorgan.getCompanyName());
         assertEquals("Financial Services", jpmorgan.getSector());
         assertEquals(10, jpmorgan.getSharesOwned());
-        assertEquals(310.35, jpmorgan.getPrice());
+        assertEquals(310.35, jpmorgan.getStockPrice());
         assertEquals(10 * 310.35, jpmorgan.getMarketValue());
     }
 
     @Test
     void testConstrutorWithoutShares() {
-        // test JPMorgan stock
+        // test NVDA stock
         assertEquals("NVDA", nvidiaWithoutShares.getSymbol());
         assertEquals("Nvidia Corp", nvidiaWithoutShares.getCompanyName());
         assertEquals("Technology", nvidiaWithoutShares.getSector());
         assertEquals(0, nvidiaWithoutShares.getSharesOwned());
-        assertEquals(187.55, nvidiaWithoutShares.getPrice());
+        assertEquals(187.55, nvidiaWithoutShares.getStockPrice());
         assertEquals(0 * 187.55, nvidiaWithoutShares.getMarketValue());
     }
 
     @Test
     void testUpdateStockPrice() {
         costco.updateStockPrice(1500.55);
-        assertEquals(915.95, costco.getAveragePurchasePrice());
+        assertEquals(1500.55, costco.getStockPrice());
         assertEquals(1500.55 * 4, costco.getMarketValue());
     }
 
@@ -61,7 +61,6 @@ public class TestStock {
     void testBuyShares() {
         costco.buyShares(20, 105.55);
         assertEquals(4 + 20, costco.getSharesOwned());
-        assertEquals((915.95 * 4 + 105.55 * 20) / 2, costco.getAveragePurchasePrice());
     }
 
     @Test

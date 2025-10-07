@@ -17,7 +17,7 @@ public class Portfolio {
     private List<String> symbols;
     
     // EFFECTS: constructs a Portfolio with onwerName, cashBalance stocks, totalValue, lastUpdated.
-    public Portfolio(double ownerName, double cashBalance, List<Stock> stocks, double totalValue, LocalDateTime lastUpdated) {
+    public Portfolio(String ownerName, double cashBalance, List<Stock> stocks, double totalValue, LocalDateTime lastUpdated) {
         // stub
     }
 
@@ -27,8 +27,7 @@ public class Portfolio {
     }
 
     // MODIFIES: this, Stock
-    // EFFECTS: adds the given stock to the portfolio if not already presented;
-    // if stock already existed (same symbol), increase its share.
+    // EFFECTS: adds the given stock to the portfolio if not already presented.
     public void addStock(Stock s) {
         // stub
     }
@@ -57,6 +56,10 @@ public class Portfolio {
     }
 
     public List<Stock> getStocks() {
+        return null; // stub
+    }
+
+    public List<String> getSymbols() {
         return null; // stub
     }
 

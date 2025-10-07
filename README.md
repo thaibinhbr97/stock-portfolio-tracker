@@ -35,10 +35,3 @@ In addition to managing stocks, it also provides simple **recommendations** base
 #### Transaction history
 - As a user, I want to view history of stocks that I buy and sell in transaction including date, symbol, action, share, price, total.
 - As a user, I want to filter a transaction history of stocks by all transactions, only buys, or only sell, search by symbol, filter by date range.
-
-#### Insights
-- As a user, I want to view my portfolio allocation in insights.
-- As a user, I want to view my portfolio performance in insights.
-
-#### Recommendations
-- As a user, I want to see recommendations of portfolio.
