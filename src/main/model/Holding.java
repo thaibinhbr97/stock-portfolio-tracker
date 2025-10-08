@@ -1,22 +1,22 @@
 package model;
 
 /*
- * Represents how much of a stock you own, including your average purchase price.
+ * Represents how much of a stock you own, including your purchase price.
  * Holding has the ability to buy or sell shares.
  */
 public class Holding {
     private Stock stock;
     private double shares;
-    private double averagePrice; // cost basis per share
+    private double purchasePrice; // cost basis per share
 
-    public Holding(Stock stock, double shares, double averagePrice) {
+    public Holding(Stock stock, double shares) {
         
     }
 
-    // REQUIRES: quantity > 0, currentPrice > 0
+    // REQUIRES: quantity > 0
     // MODIFIES: this, Portfolio, Transaction, TransactionManager
-    // EFFECTS: allow user to purchase stock shares based on quantity and stock price.
-    public void buyShare(double quantity, double price) {
+    // EFFECTS: allow user to purchase stock shares based on quantity and current stock's price.
+    public void buyShare(double quantity) {
         // stub
     }
 
@@ -27,12 +27,26 @@ public class Holding {
         // stub
     }
 
+    public Stock getStock() {
+        return null; // stub
+    }
+
+    // EFFECTS: get total shares of this stock holding
+    public double getShares() {
+        return 0.0; // stub
+    }
+
+    // EFFECTS: get an average price of this holding
+    public double getAveragePrice() {
+        return 0.0;
+    }
+
     // EFFECTS: get the market value of a stock in a holding
     public double getMarketValue() {
         return 0.0; // stub
     }
 
-    // EFFECTS: get unrealized profile of a holding (profit/loss based on current stock's price)
+    // EFFECTS: get unrealized profit/loss of a holding (profit/loss based on current stock's price)
     public double getUnrealizedProfit() {
         return 0.0; // stub
     }
