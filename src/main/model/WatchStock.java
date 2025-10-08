@@ -26,12 +26,6 @@ public class WatchStock {
         // stub
     }
 
-    // EFFECTS: prints out WatchStock with the format below
-    // | Symbol | CompanyName | Sector | CurrentPrice |
-    public void printWatchStock() {
-        
-    }
-
     // EFFECTS: returns the size of the watchStock
     public int size() {
         return 0;
@@ -40,4 +34,11 @@ public class WatchStock {
     public List<String> getSymbols() {
         return null;
     }
+
+    // EFFECTS: Overriding toString() method of WatchStock class as below
+    // | Symbol | CompanyName | Sector | CurrentPrice |    
+    @Override
+    public String toString() {
+        return null;
+    }    
 }
