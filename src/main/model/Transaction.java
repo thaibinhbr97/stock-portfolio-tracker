@@ -50,7 +50,7 @@ public class Transaction {
     // EFFECTS: print out a record of a single transaction BUY/SELL in the console
     // with the format as below:
     // | Date | Symbol | Action | Shares | Price | Total |
-    public String printTransaction() {
+    public String logTransaction() {
         return null; // stub
     }
 }
