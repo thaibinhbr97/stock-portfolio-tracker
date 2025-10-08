@@ -8,20 +8,21 @@ import java.util.List;
  */
 public class WatchStock {
     private List<Stock> watchStock;
+    private List<String> symbols;
 
     public WatchStock() {
         
     }
 
     // MODIFIES: this
-    // EFFECTS: adds a stock to watch lists if it is in watchStocks. Otherwise, does nothing.
-    public void addStock() {
+    // EFFECTS: adds a stock to watch list if it is not in watchStock. Otherwise, do nothing.
+    public void addStock(Stock stock) {
         // stub
     }
 
     // MODIFIES: this
-    // EFFECTS: removes a stock to watch lists if it is in watchStocks. Otherwise, does nothing.
-    public void removeStock() {
+    // EFFECTS: removes a stock to watch list if it is in watchStock. Otherwise, do nothing.
+    public void removeStock(Stock stock) {
         // stub
     }
 
@@ -29,5 +30,14 @@ public class WatchStock {
     // | Symbol | CompanyName | Sector | CurrentPrice |
     public void printWatchStock() {
         
+    }
+
+    // EFFECTS: returns the size of the watchStock
+    public int size() {
+        return 0;
+    }
+
+    public List<String> getSymbols() {
+        return null;
     }
 }
