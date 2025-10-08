@@ -40,7 +40,7 @@ public class Stock {
     }
 
     // EFFECTS: print out Stock object with the format below:
-    // | Symbol | CompanyName | Sector | CurrentPrice
+    // | Symbol | CompanyName | Sector | CurrentPrice |
     public void printStock() {
         
     }
