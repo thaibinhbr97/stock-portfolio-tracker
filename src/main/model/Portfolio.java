@@ -1,48 +1,50 @@
 package model;
 
 import java.time.LocalDateTime;
-import java.util.List;
+import java.util.Map;
 
 /*
- * Represents the user's overall stock portfolio.
- * The Portfolio maintains a collection of Stock objects and provides
- * methods for adding, removing, and retrieving stocks as well as calculating the total value of all owned stocks.
+ * Represents auser's overall stock portfolio.
+ * The Portfolio maintains a collection of holdings and provides
+ * methods for buying, selling, showcase  as well as calculating the total value of all owned stocks.
  */
 public class Portfolio { 
     private String ownerName;
     private double cashBalance;
-    private List<Stock> stocks;
-    private double totalValue;
+    private double portfolioValue;
     private LocalDateTime lastUpdated;
-    private List<String> symbols;
+
+        private Map<String, Holding> holdings;
+
     
-    // EFFECTS: constructs a Portfolio with onwerName, cashBalance stocks, totalValue, lastUpdated.
-    public Portfolio(String ownerName, double cashBalance, List<Stock> stocks, double totalValue, LocalDateTime lastUpdated) {
+    // EFFECTS: constructs a Portfolio with holdings, watch, lastUpdated.
+    public Portfolio(String ownerName, double cashBalance,  double totalValue, LocalDateTime lastUpdated) {
         // stub
     }
 
-    // EFFECTS: returns Stock with given symbol, or null if not found.
-    public Stock getStock(String symbol) {
-        return null; // stub
-    }
+    // // EFFECTS: returns Stock with given symbol, or null if not found.
+    // public Stock getStock(String symbol) {
+    //     return null; // stub
+    // }
 
-    // MODIFIES: this, Stock
-    // EFFECTS: adds the given stock to the portfolio if not already presented.
-    public void addStock(Stock s) {
+    // REQUIRES: shares and price >= 0
+    // MODIFIES: this, Transaction
+    // EFFECTS: buy shares of stock with price. 
+    public void buyShare(Stock stock, double shares, double price) {
+        // stub
+    }
+    
+    // REQUIRES: shares and price >= 0
+    // MODIFIES: this
+    // EFFECTS: sell shares of stock with price. 
+    public void sellShare(Stock stock, double shares, double price) {
         // stub
     }
 
-    // MODIFIES: this
-    // EFFECTS: returns true and removes the stock with the given symbol from the portfolio if it exists in portfolio and that stock share needs to
-    // be 0.0 to be removed. Otherwise, returns false when that stock cannot be removed from the portfolio.
-    public boolean removeStock(Stock s) {
-        return false; // stub
-    }
-
-    // MODIFIES: this
-    // EFFECTS: recalculates and updates totalValue to sum of all stock market values
+    // MODIFIES: this, Holding
+    // EFFECTS: recalculates and updates portfolioValue.
     // (shares * current price)
-    public void updateTotalValue() {
+    public void calculatePortfolioValue() {
         // stub
     }
 
@@ -51,24 +53,28 @@ public class Portfolio {
         return 0.0; // stub
     }
 
-    public double getTotalValue() {
+    public double getPortfolioValue() {
         return 0.0; // stub
-    }
-
-    public List<Stock> getStocks() {
-        return null; // stub
-    }
-
-    public List<String> getSymbols() {
-        return null; // stub
     }
 
     // EFFECTS: display owner information in the console
     // with the format as below:
     // This portfolio owned by ownerName with total value $ and format it to 2 decimal places
-    public String getOwnerInformation() {
+    public String showOwnerInformation() {
         // return "This portfolio owned by " + ownerName + " with total value $" 
         //     + String.format("%.2f", totalValue);
         return null; // stub
+    }
+
+    // EFFECTS: display portfolio information in the console
+    // with the format as an example below:
+    // ================================ Porfolio ==================================
+    // Owner name: 
+    // Cash Balance: $10000
+    // | Symbol | CurrentPrice | AveragePrice | Shares | MarketValue | Profit/Loss | 
+    // | AAPL | $100 | $150 | 2.0 | $300.00 | +$100 |
+    // | AMZN | $200 | $400 | 1.0 | $300.00 | +$200 |
+    public String showPortfolio() {
+        return null;
     }
 }
