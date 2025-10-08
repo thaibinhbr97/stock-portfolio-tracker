@@ -14,14 +14,14 @@ public class Holding {
     }
 
     // REQUIRES: quantity > 0, currentPrice > 0
-    // MODIFIES: this, Portfolio, Transaction
+    // MODIFIES: this, Portfolio, Transaction, TransactionManager
     // EFFECTS: allow user to purchase stock shares based on quantity and stock price.
     public void buyShare(double quantity, double price) {
         // stub
     }
 
     // REQUIRES: quantity > 0
-    // MODIFIES: this, Portfolio, Transaction
+    // MODIFIES: this, Portfolio, Transaction, TransactionManager
     // EFFECTS: allow user to sell stock shares based on quantity. Quantity cannot be greater than shares.
     public void sellShare(double quantity) {
         // stub
@@ -38,7 +38,7 @@ public class Holding {
     }
 
     // EFFECTS: print out Holding object with the format below
-    // | Symbol | PurchasePrice | AveragePrice | Shares | MarketValue | Gain/Loss |     
+    // | Symbol | CurrentPrice | AveragePrice | Shares | MarketValue | Gain/Loss |     
     public void printHolding() {
 
     }
