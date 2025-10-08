@@ -78,6 +78,12 @@ public class TestWatchStock {
         assertTrue(watchStock.getSymbols().size() == 0);
         assertFalse(watchStock.getSymbols().contains("COST"));        
     }
+
+    @Test
+    void testWatchStockToString() {
+        String watchStockString = "| NVDA | Nvidia Corp | Technology | 187.55 |";
+        assertTrue(watchStockString.equals(nvidia.toString()));
+    }    
 }
 
 
