@@ -35,8 +35,13 @@ public class Stock {
     }
 
     // setters
-    public void updateStockPrice(double newPrice) {
+    public void updateCurrentPrice(double newPrice) {
         // stub
+    }
+
+    // EFFECTS: return a String format object of Stock
+    public String stockToString() {
+        return null; // stub
     }
 
     // EFFECTS: print out Stock object with the format below:
