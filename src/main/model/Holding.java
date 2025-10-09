@@ -9,6 +9,7 @@ public class Holding {
     private double shares;
     private double purchasePrice; // cost basis per share
 
+    // initialize symbol to be stock symbol
     public Holding(Stock stock, double shares) {
         
     }
@@ -28,6 +29,10 @@ public class Holding {
     }
 
     public Stock getStock() {
+        return null; // stub
+    }
+
+    public String getSymbol() {
         return null; // stub
     }
 
@@ -51,9 +56,10 @@ public class Holding {
         return 0.0; // stub
     }
 
-    // EFFECTS: print out Holding object with the format below
-    // | Symbol | CurrentPrice | AveragePrice | Shares | MarketValue | Gain/Loss |     
-    public void printHolding() {
-
+    // EFFECTS: Overriding toString() method of Holding class as below
+    // | Symbol | CurrentPrice | AveragePrice | Shares | MarketValue | Gain/Loss |  
+    @Override
+    public String toString() {
+        return null;
     }
 }
