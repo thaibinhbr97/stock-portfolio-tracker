@@ -14,26 +14,27 @@ public class TestTransaction {
     private Transaction buyGOOGL;
     private Transaction sellGOOGL;
     
+    private LocalDateTime dateTime;
+
     @BeforeEach
     void runBefore() {
         LocalDateTime dateTime = LocalDateTime.of(2025, 10, 5, 6, 23, 32);
-        buyAMZN = new Transaction(dateTime, "AMZN", "BUY", 5, 219.51, 5 * 219.51);
+        buyAMZN = new Transaction("AMZN", "BUY", 5, 200.00, 5 * 200.00, dateTime);
     }
 
     @Test
     void testConstrutor() {
-        LocalDateTime dateTimeTest = LocalDateTime.of(2025, 10, 5, 6, 23, 32);
-        assertEquals(dateTimeTest, buyAMZN.getDateTime());
+        assertEquals(LocalDateTime.of(2025, 10, 5, 6, 23, 32), buyAMZN.getDateTime());
         assertEquals("AMZN", buyAMZN.getSymbol());
         assertEquals("BUY", buyAMZN.getAction());
         assertEquals(5, buyAMZN.getShares());
-        assertEquals(219.51, buyAMZN.getPrice());
-        assertEquals(5 * 219.51, buyAMZN.getTotal());
+        assertEquals(200.00, buyAMZN.getPrice());
+        assertEquals(1000.00, buyAMZN.getTotal());
     }
     
     @Test
-    void testPrinting() {
-        String output = "| 2025-10-5T6:23:32 | AMZN | BUY | 5 | 219.51 | 1097.55 |";
-        assertTrue(output.equals(buyAMZN.toString()));
+    void testTransactionToString() {
+        String transactionString = "| 2025-10-5T6:23:32 | AMZN | BUY | 5 | 200.00 | 1000.00 |";
+        assertTrue(transactionString.equals(buyAMZN.toString()));
     }
 }
