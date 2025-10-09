@@ -4,46 +4,45 @@ import java.time.LocalDateTime;
 import java.util.Map;
 
 /*
- * Represents auser's overall stock portfolio.
+ * Represents user's overall stock portfolio.
  * The Portfolio maintains a collection of holdings and provides
  * methods for buying, selling, showcase  as well as calculating the total value of all owned stocks.
  */
 public class Portfolio { 
-    private String ownerName;
-    private double cashBalance;
-    private double portfolioValue;
-    private LocalDateTime lastUpdated;
+    private static String ownerName;
+    private static double cashBalance;
+    private static double portfolioValue;
+    private static LocalDateTime lastUpdated;
 
-        private Map<String, Holding> holdings;
+    private static Map<String, Holding> holdings;
 
     
-    // EFFECTS: constructs a Portfolio with holdings, watch, lastUpdated.
-    public Portfolio(String ownerName, double cashBalance,  double totalValue, LocalDateTime lastUpdated) {
+    // EFFECTS: constructs a Portfolio with owner name, cash balance, 
+    // portfolioValue initilized to 0.0, lastUpdated initialized to LocalDateTime.now(), 
+    // holdings initialized to HashMap<>() to keep track of key-value pairs String symbol: Holding holding
+    public Portfolio(String ownerName, double cashBalance, LocalDateTime lastUpdated) {
         // stub
     }
 
-    // // EFFECTS: returns Stock with given symbol, or null if not found.
-    // public Stock getStock(String symbol) {
-    //     return null; // stub
-    // }
-
-    // REQUIRES: shares and price >= 0
-    // MODIFIES: this, Transaction
-    // EFFECTS: buy shares of stock with price. 
-    public void buyShare(Stock stock, double shares, double price) {
-        // stub
-    }
-    
-    // REQUIRES: shares and price >= 0
-    // MODIFIES: this
-    // EFFECTS: sell shares of stock with price. 
-    public void sellShare(Stock stock, double shares, double price) {
+    // REQUIRES: shares > 0, total price (stock current price * shares) <= cashBalance
+    // MODIFIES: this, Transaction, Holding, TransactionManager
+    // EFFECTS: buy shares of a stock symbol with stock's current price.
+    // Update portfolio value and cash balance for owner once action is done.
+    public void buyShare(String symbol, double shares) {
         // stub
     }
 
-    // MODIFIES: this, Holding
-    // EFFECTS: recalculates and updates portfolioValue.
-    // (shares * current price)
+    // REQUIRES: shares > 0, shares <= shares in this stock holding
+    // MODIFIES: this, Transaction, Holding, TransactionManager
+    // EFFECTS: sell shares of a stock symbol with stock's current price. 
+    // Update portfolio value and cash balance for owner once action is done.
+    public void sellShare(String symbol, double shares) {
+        // stub
+    }
+
+    // MODIFIES: this, Transaction, Holding
+    // EFFECTS: recalculates and updates portfolioValue once a successful BUY/SELL action occurs.
+    // (shares * current stock price)
     public void calculatePortfolioValue() {
         // stub
     }
@@ -57,24 +56,36 @@ public class Portfolio {
         return 0.0; // stub
     }
 
-    // EFFECTS: display owner information in the console
+    public Map<String, Holding> getHoldings() {
+        return null; // stub
+    }
+
+    public LocalDateTime getLastUpdated() {
+        return null; // stub
+    }
+    
+    public String getOwner() {
+        return null; // stub
+    }
+
+    // EFFECTS: returns owner information
     // with the format as below:
     // This portfolio owned by ownerName with total value $ and format it to 2 decimal places
-    public String showOwnerInformation() {
+    public String getOwnerInformation() {
         // return "This portfolio owned by " + ownerName + " with total value $" 
         //     + String.format("%.2f", totalValue);
         return null; // stub
     }
 
-    // EFFECTS: display portfolio information in the console
+    // EFFECTS: Overriding toString() method of Portfolio class
     // with the format as an example below:
     // ================================ Porfolio ==================================
-    // Owner name: 
+    // Owner name: Brad
     // Cash Balance: $10000
-    // | Symbol | CurrentPrice | AveragePrice | Shares | MarketValue | Profit/Loss | 
+    // | Symbol | CurrentPrice | AveragePrice | Shares | MarketValue | Profit/Loss |
     // | AAPL | $100 | $150 | 2.0 | $300.00 | +$100 |
-    // | AMZN | $200 | $400 | 1.0 | $300.00 | +$200 |
-    public String showPortfolio() {
+    @Override
+    public String toString() {
         return null;
     }
 }
