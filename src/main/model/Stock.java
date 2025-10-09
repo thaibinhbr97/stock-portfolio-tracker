@@ -39,14 +39,10 @@ public class Stock {
         // stub
     }
 
-    // EFFECTS: return a String format object of Stock
-    public String stockToString() {
-        return null; // stub
-    }
-
-    // EFFECTS: print out Stock object with the format below:
-    // | Symbol | CompanyName | Sector | CurrentPrice |
-    public void printStock() {
-        
+    // EFFECTS: Overriding toString() method of Stock class as below
+    // | Symbol | CompanyName | Sector | CurrentPrice |    
+    @Override
+    public String toString() {
+        return null;
     }
 }
