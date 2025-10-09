@@ -7,10 +7,10 @@ Built using **Java with Object-Oriented Programming (OOP)** principles and a **G
 In addition to managing stocks, it also provides simple **recommendations** based on stock performance and portfolio trends, making it a practical tool for investment tracking and a great project for reinforcing software engineering concepts.
 
 ### What will the application do?
-- Allow users to add, update, and remove stocks in their portfolio.  
-- Record buy/sell transactions and maintain a history of investments.  
-- Display portfolio value and performance trends over time.  
-- Provide simple recommendations based on stock data and portfolio composition.
+- Allow users to buy, sell, and view stocks in their portfolio.
+- Allow users to view their holdings and profit/loss in their portfolio.
+- Record buy/sell transactions and maintain a history of investments.
+- Filter transactions by action(buy/sell), date and time, or symbol.
 
 ### Who will use it?
 - Individual investors who want to track their holdings.  
@@ -23,15 +23,15 @@ In addition to managing stocks, it also provides simple **recommendations** base
 - It’s also personally interesting because investing and finance are practical areas where technology directly impacts decision-making and user experience.
 
 ### User Stories
-#### Portfolio
-- As a user, I want to add a stock to portfolio including fields such as symbol, sector, company name, shares (0 to start), current price, value.
-- As a user, I want to update a stock in portfolio.
-- As a user, I want to remove a stock from portfolio.
-- As a user, I want to view the list of stocks in portfolio.
-- As a user, I want to view my total value of owned stocks in portfolio.
-- As a user, I want to buy shares of a stock in my portfolio.
-- As a user, I want to sell shares of a stock in my portfolio.
+#### Holding
+- As a user, I want to buy or sell holding of a stock including fields such as symbol, sector, company name, shares, current stock price.
+- As a user, I want to view a market value of my holding.
+- As a user, I want to see my unrealized profit or loss of my holding.
 
-#### Transaction history
-- As a user, I want to view history of stocks that I buy and sell in transaction including date, symbol, action, share, price, total.
-- As a user, I want to filter a transaction history of stocks by all transactions, only buys, or only sell, search by symbol, filter by date range.
+#### Portflio
+- As a user, I want to use my cash balance to buy or sell shares of a stock in my portfolio.
+- As a user, I want to view my current portfolio value.
+
+#### TransactionManager
+- As a user, I want to view a record of stocks that I buy and sell in transaction manager including date time, symbol, action, share, purchase price, total.
+- As a user, I want to filter a transaction history of stocks by all transactions, only buy or only sell, symbol, or date time range.
