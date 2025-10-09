@@ -16,9 +16,9 @@ public class Transaction {
     private double price;
     private double total;
 
-    // EFFECTS: constructs a Transaction with dateTime is set to LocalDateTime.now(), symbol, action, shares, price, total of 
+    // EFFECTS: constructs a Transaction with dateTime is set to dateTime initilized to LocalDateTime.now(), symbol, action, shares, price, total of 
     // a recent action (BUY/SELL) for a stock.
-    public Transaction(LocalDateTime dateTime, String symbol, String action, double shares, double price, double total) {
+    public Transaction(String symbol, String action, double shares, double price, double total, LocalDateTime dateTime) {
         // stub
     }
 
@@ -47,10 +47,10 @@ public class Transaction {
         return 0.0; // stub
     }
 
-    // EFFECTS: print out a record of a single transaction BUY/SELL in the console
-    // with the format as below:
+    // EFFECTS: Overriding toString() method of Transaction class as below
     // | Date | Symbol | Action | Shares | Price | Total |
-    public String logTransaction() {
-        return null; // stub
+    @Override
+    public String toString() {
+        return null;
     }
 }
