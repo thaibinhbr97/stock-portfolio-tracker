@@ -16,7 +16,7 @@ public class TestTransactionManager {
 
     // symbol strings
     private static final String ORCL = "ORCL";
-    private static final String APPL = "AAPL";
+    private static final String AAPL = "AAPL";
     private static final String AMZN = "AMZN";
     private static final String GOOGL = "GOOGL";
     private static final String NVDA = "NVDA";
@@ -30,9 +30,9 @@ public class TestTransactionManager {
 
     private List<Transaction> transactions;
 
-    LocalDateTime dateTime = LocalDateTime.of(2025, 10, 5, 6, 23, 32);
+    private LocalDateTime dateTime = LocalDateTime.of(2025, 10, 5, 6, 23, 32);
     @BeforeEach
-    void runBefore() {
+    public void runBefore() {
         transactionManager = new TransactionManager();
 
         buyAMZN = new Transaction("AMZN", "BUY", 5, 200.00, dateTime);
@@ -44,7 +44,7 @@ public class TestTransactionManager {
     }
 
     @Test
-    void testAddOneBuyTransaction() {
+    public void testAddOneBuyTransaction() {
         assertFalse(transactions.contains(buyAMZN));
         assertEquals(0, transactions.size());
 
@@ -55,7 +55,7 @@ public class TestTransactionManager {
     }
 
     @Test
-    void testAddMoreThanOneBuyTransaction() {
+    public void testAddMoreThanOneBuyTransaction() {
         assertFalse(transactions.contains(buyAMZN));
         assertFalse(transactions.contains(buyGOOGL));
         assertEquals(0, transactions.size());
@@ -72,7 +72,7 @@ public class TestTransactionManager {
     }
 
     @Test
-    void testAddOneSellTransaction() {
+    public void testAddOneSellTransaction() {
         assertFalse(transactions.contains(sellAMZN));
         transactionManager.addTransaction(buyAMZN);        
         transactionManager.addTransaction(sellAMZN);
@@ -82,7 +82,7 @@ public class TestTransactionManager {
     }
 
     @Test
-    void testAddMoreThanOneSellTransaction() {
+    public void testAddMoreThanOneSellTransaction() {
         assertFalse(transactions.contains(sellAMZN));
         transactionManager.addTransaction(buyAMZN);        
         transactionManager.addTransaction(buyAMZN);        
@@ -95,7 +95,7 @@ public class TestTransactionManager {
     }
     
     @Test
-    void testFilterByBuyAction() {
+    public void testFilterByBuyAction() {
         transactionManager.addTransaction(buyAMZN);
         transactionManager.addTransaction(buyGOOGL);  
         transactionManager.addTransaction(sellAMZN);
@@ -111,7 +111,7 @@ public class TestTransactionManager {
     }                
     
     @Test
-    void testFilterBySellAction() {
+    public void testFilterBySellAction() {
         transactionManager.addTransaction(buyAMZN);
         transactionManager.addTransaction(buyGOOGL);  
         transactionManager.addTransaction(sellAMZN);
@@ -127,7 +127,7 @@ public class TestTransactionManager {
     }
 
     @Test
-    void testFilterByDateTimes() {
+    public void testFilterByDateTimes() {
         transactionManager.addTransaction(buyAMZN);
         transactionManager.addTransaction(buyGOOGL);  
         transactionManager.addTransaction(sellAMZN);
@@ -139,7 +139,7 @@ public class TestTransactionManager {
     }
 
     @Test
-    void testFilterBySymbol() {
+    public void testFilterBySymbol() {
         transactionManager.addTransaction(buyAMZN);
         transactionManager.addTransaction(buyGOOGL);  
         transactionManager.addTransaction(sellAMZN);
@@ -153,7 +153,7 @@ public class TestTransactionManager {
     }
 
     @Test 
-    void testTransactionManagerToString() {
+    public void testTransactionManagerToString() {
         String transactionManagerString = transactionManager.getHeader();
         transactionManager.addTransaction(buyAMZN);
         transactionManagerString += "\n| 2025-10-05T06:23:32 | AMZN | BUY | 5.00 | $200.00 | $1000.00 |\n";

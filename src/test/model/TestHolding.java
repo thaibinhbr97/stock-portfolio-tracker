@@ -15,7 +15,7 @@ public class TestHolding {
     private Holding nvidiaHolding;
 
     @BeforeEach
-    void runBefore() {
+    public void runBefore() {
         // constructor with shares parameter
         apple = new Stock("AAPL", "Apple Inc.", "Technology", 258.02);
         amazon = new Stock("AMZN", "Amazon Com Inc.", "Consumer Discretionary", 219.51);
@@ -28,14 +28,14 @@ public class TestHolding {
     }
 
     @Test
-    void testConstructor() {
+    public void testConstructor() {
         assertEquals(3.0 , nvidiaHolding.getShares(), 1e-3);
         assertEquals(150.0 , nvidiaHolding.getAveragePrice(), 1e-3);
         assertEquals(450.0 , nvidiaHolding.getMarketValue(), 1e-3);
     }
 
     @Test
-    void testBuyOneSamePriceWholeShare() {
+    public void testBuyOneSamePriceWholeShare() {
         nvidiaHolding.buyShare(1.0);
         assertEquals(4.0 , nvidiaHolding.getShares(), 1e-3);
         assertEquals(150.0 , nvidiaHolding.getAveragePrice(), 1e-3);
@@ -43,7 +43,7 @@ public class TestHolding {
     }
 
     @Test
-    void testBuyManySamePriceWholeShares() {
+    public void testBuyManySamePriceWholeShares() {
         nvidiaHolding.buyShare(5.0);
         assertEquals(8.0 , nvidiaHolding.getShares(), 1e-3);
         assertEquals(150.0 , nvidiaHolding.getAveragePrice(), 1e-3);
@@ -52,7 +52,7 @@ public class TestHolding {
     }    
 
     @Test
-    void testBuyOneSamePriceFractionalShare() {
+    public void testBuyOneSamePriceFractionalShare() {
         nvidiaHolding.buyShare(0.1);
         assertEquals(3.1 , nvidiaHolding.getShares(), 1e-3);
         assertEquals(150.0 , nvidiaHolding.getAveragePrice(), 1e-3);
@@ -60,7 +60,7 @@ public class TestHolding {
     }
 
     @Test
-    void testBuyManySamePriceFractionalShares() {
+    public void testBuyManySamePriceFractionalShares() {
         nvidiaHolding.buyShare(5.5);
         assertEquals(8.5 , nvidiaHolding.getShares(), 1e-3);
         assertEquals(150.0 , nvidiaHolding.getAveragePrice(), 1e-3);
@@ -69,7 +69,7 @@ public class TestHolding {
     }
 
     @Test
-    void testBuyOneDifferentPriceWholeShare() {
+    public void testBuyOneDifferentPriceWholeShare() {
         nvidiaHolding.getStock().updateCurrentPrice(200.0);
         nvidiaHolding.buyShare(1.0);
         assertEquals(4.0 , nvidiaHolding.getShares(), 1e-3);
@@ -79,7 +79,7 @@ public class TestHolding {
     }
 
     @Test
-    void testBuyDifferentPriceWholeShares() {
+    public void testBuyDifferentPriceWholeShares() {
         nvidiaHolding.getStock().updateCurrentPrice(200.0);
         nvidiaHolding.buyShare(5.0);
         assertEquals(8.0 , nvidiaHolding.getShares(), 1e-3);
@@ -89,7 +89,7 @@ public class TestHolding {
     }    
 
     @Test
-    void testBuyDifferentPriceFractionalShare() {
+    public void testBuyDifferentPriceFractionalShare() {
         nvidiaHolding.getStock().updateCurrentPrice(200.0);
         nvidiaHolding.buyShare(0.1);
         assertEquals(3.1 , nvidiaHolding.getShares(), 1e-3);
@@ -97,7 +97,7 @@ public class TestHolding {
     }
 
     @Test
-    void testBuyManyDifferentPriceFractionalShares() {
+    public void testBuyManyDifferentPriceFractionalShares() {
         nvidiaHolding.getStock().updateCurrentPrice(200.0);
         nvidiaHolding.buyShare(5.5);
         assertEquals(8.5 , nvidiaHolding.getShares(), 1e-3);
@@ -105,7 +105,7 @@ public class TestHolding {
     }
     
     @Test
-    void testSellWholeShare() {
+    public void testSellWholeShare() {
         nvidiaHolding.sellShare(1.0);
         assertEquals(2.0 , nvidiaHolding.getShares(), 1e-3);
         assertEquals(150.0 , nvidiaHolding.getAveragePrice(), 1e-3);
@@ -114,7 +114,7 @@ public class TestHolding {
     }
 
     @Test
-    void testSellFractionalShare() {
+    public void testSellFractionalShare() {
         nvidiaHolding.sellShare(2.5);
         assertEquals(0.5 , nvidiaHolding.getShares(), 1e-3);
         assertEquals(150.0 , nvidiaHolding.getAveragePrice(), 1e-3);
@@ -123,7 +123,7 @@ public class TestHolding {
     }
 
     @Test
-    void testSellShareLargerThanCurrentShares() {
+    public void testSellShareLargerThanCurrentShares() {
         nvidiaHolding.sellShare(3.5);
         assertEquals(3.0 , nvidiaHolding.getShares(), 1e-3);
         assertEquals(150.0 , nvidiaHolding.getAveragePrice(), 1e-3);
@@ -132,8 +132,24 @@ public class TestHolding {
     }    
 
     @Test
-    void testHoldingToString() {
+    public void testHoldingToStringWithZeroProfit() {
         String holdingString = "| NVDA | $150.00 | $150.00 | 3.00 | $450.00 | $0.00 |";
+        assertEquals(holdingString, nvidiaHolding.toString());
+    }
+
+    @Test
+    public void testHoldingToStringWithProfit() {
+        String holdingString = "| NVDA | $200.00 | $150.00 | 3.00 | $600.00 | +$150.00 |";
+        nvidiaHolding.getStock().updateCurrentPrice(200.00);
+        System.out.println(nvidiaHolding.toString());
+        assertEquals(holdingString, nvidiaHolding.toString());
+    }
+
+    @Test
+    public void testHoldingToStringWithLoss() {
+        String holdingString = "| NVDA | $100.00 | $150.00 | 3.00 | $300.00 | -$150.00 |";
+        nvidiaHolding.getStock().updateCurrentPrice(100.00);
+        System.out.println(nvidiaHolding.toString());
         assertEquals(holdingString, nvidiaHolding.toString());
     }
 

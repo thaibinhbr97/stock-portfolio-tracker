@@ -14,7 +14,7 @@ public class TestStock {
     private Stock jpmorgan;
     
     @BeforeEach
-    void runBefore() {
+    public void runBefore() {
         // constructor with shares parameter
         apple = new Stock("AAPL", "Apple Inc.", "Technology", 258.02);
         amazon = new Stock("AMZN", "Amazon Com Inc.", "Consumer Discretionary", 219.51);
@@ -25,7 +25,7 @@ public class TestStock {
     }
 
     @Test
-    void testConstrutor() {
+    public void testConstrutor() {
         // test JPMorgan stock
         assertEquals("JPM", jpmorgan.getSymbol());
         assertEquals("JPMorgan Chase & Corp", jpmorgan.getCompanyName());
@@ -34,13 +34,13 @@ public class TestStock {
     }
 
     @Test
-    void testUpdateCurrentPrice() {
+    public void testUpdateCurrentPrice() {
         costco.updateCurrentPrice(1500.55);
         assertEquals(1500.55, costco.getCurrentPrice());
     }
 
     @Test
-    void testStockToString() {
+    public void testStockToString() {
         String stockString = "| NVDA | Nvidia Corp | Technology | $187.55 |";
         assertEquals(stockString, nvidia.toString());
     }

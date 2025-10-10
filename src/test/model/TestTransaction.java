@@ -17,13 +17,13 @@ public class TestTransaction {
     private LocalDateTime dateTime;
 
     @BeforeEach
-    void runBefore() {
+    public void runBefore() {
         LocalDateTime dateTime = LocalDateTime.of(2025, 10, 5, 6, 23, 32);
         buyAMZN = new Transaction("AMZN", "BUY", 5, 200.00, dateTime);
     }
 
     @Test
-    void testConstrutor() {
+    public void testConstrutor() {
         assertEquals(LocalDateTime.of(2025, 10, 5, 6, 23, 32), buyAMZN.getDateTime());
         assertEquals("AMZN", buyAMZN.getSymbol());
         assertEquals("BUY", buyAMZN.getAction());
@@ -33,7 +33,7 @@ public class TestTransaction {
     }
     
     @Test
-    void testTransactionToString() {
+    public void testTransactionToString() {
         String transactionString = "| 2025-10-05T06:23:32 | AMZN | BUY | 5.00 | $200.00 | $1000.00 |";
         System.out.println(buyAMZN.toString());
         System.out.println(transactionString);
