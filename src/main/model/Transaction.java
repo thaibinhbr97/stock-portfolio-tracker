@@ -14,43 +14,51 @@ public class Transaction {
     private String action; // BUY/SELL
     private double shares;
     private double price;
-    private double total;
 
-    // EFFECTS: constructs a Transaction with dateTime is set to dateTime initilized to LocalDateTime.now(), symbol, action, shares, price, total of 
+    // EFFECTS: constructs a Transaction with dateTime 
+    // is initialized to LocalDateTime.now(),
+    // symbol, action, shares, price,
     // a recent action (BUY/SELL) for a stock.
-    public Transaction(String symbol, String action, double shares, double price, double total, LocalDateTime dateTime) {
-        // stub
+    public Transaction(String symbol, String action, double shares, double price, LocalDateTime dateTime) {
+        this.symbol = symbol.toUpperCase();
+        this.action = action.toUpperCase();
+        this.shares = shares;
+        this.price = price;
+        this.dateTime = dateTime;
     }
 
     // getters
     public LocalDateTime getDateTime() {
-        return null; // stub
+        return dateTime;
     }
 
     public String getSymbol() {
-        return null; // stub
+        return symbol;
     }
 
     public String getAction() {
-        return null; // stub
+        return action;
     }
 
     public double getShares() {
-        return 0.0; // stub
+        return shares;
     }
 
     public double getPrice() {
-        return 0.0; // stub
+        return price;
     }
 
     public double getTotal() {
-        return 0.0; // stub
+        return shares * price;
     }
 
-    // EFFECTS: Overriding toString() method of Transaction class as below
-    // | Date | Symbol | Action | Shares | Price | Total |
+    // EFFECTS: Overriding toString() method of Transaction class as example below
+    // |        Date         | Symbol |  Action  |          Shares          |          Price         |          Total         |
+    // | 2025-10-05T06:23:32 |  AMZN  |   BUY    |          5.00            |        $200.00         |        $1000.00        |
     @Override
     public String toString() {
-        return null;
+        String transactionString = String.format("| %s | %s | %s | %.2f | $%.2f | $%.2f |", 
+                getDateTime().toString(), getSymbol(), getAction(), getShares(), getPrice(), getTotal());
+        return transactionString;
     }
 }
