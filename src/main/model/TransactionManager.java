@@ -58,7 +58,7 @@ public class TransactionManager {
     }
 
     // EFFECTS: returns a header as a below format
-    // |        Date         | Symbol |  Action  |          Shares          |          Price         |          Total         |
+    // | Date | Symbol | Action | Shares | Price | Total |
     public String getHeader() {
         String headerString = String.format("| %s | %s | %s | %s | %s | %s |",
                 "Date", "Symbol", "Action", "Shares", "Price", "Total");
@@ -66,9 +66,9 @@ public class TransactionManager {
     }
 
     // EFFECTS: Overriding toString() method of TransactionManager class as below
-    // |        Date         | Symbol |  Action  |          Shares          |          Price         |          Total         |
-    // | 2025-10-05T10:44:00 |  AAPL  |   SELL   |          10.00           |        $100.00         |        $1000.00        |
-    // | 2025-10-05T10:44:00 |  AAPL  |   SELL   |          50.00           |        $100.00         |        $5000.00        |
+    // | Date | Symbol | Action | Shares | Price | Total |
+    // | 2025-10-05T10:44:00 | AAPL | SELL | 10.00 | $100.00 | $1000.00 |
+    // | 2025-10-05T10:44:00 | AAPL | SELL | 50.00 | $100.00 | $5000.00 |
     // ...
     @Override
     public String toString() {
