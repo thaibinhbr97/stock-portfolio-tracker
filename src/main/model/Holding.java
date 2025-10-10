@@ -64,9 +64,9 @@ public class Holding {
     public double getUnrealizedProfit() {
         return (stock.getCurrentPrice() - averagePurchasePrice) * shares;
     }
-
+    
     // EFFECTS: Overriding toString() method of Holding class as example below
-    // | Symbol |          CurrentPrice          |          AveragePrice          |          Shares          |          MarketValue         |          Gain/Loss          |  
+    // | Symbol | CurrentPrice | AveragePrice | Shares | MarketValue| Gain/Loss |  
     @Override
     public String toString() {
         double profit = getUnrealizedProfit();
