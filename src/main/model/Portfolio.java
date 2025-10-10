@@ -128,7 +128,7 @@ public class Portfolio {
 
     public TransactionManager getTransactionManager() {
         return transactionManager;
-}    
+    }    
 
     // EFFECTS: returns portfolio information with owner name, cash balance, and portfolio.
     // with the format as below:
@@ -145,7 +145,7 @@ public class Portfolio {
     }
 
     // EFFECTS: returns a header as a below format
-    // |   Symbol   |          Current Price          |          Average Price          |          Shares          |          Market Value         |          Profit/Loss         |
+    // | Symbol | Current Price | Average Price | Shares | Market Value | Profit/Loss |
     public String getHeader() {
         String headerString = String.format("| %s | %s | %s | %s | %s | %s |",
                 "Symbol", "Current Price", "Average Price", "Shares", "Market Value", "Profit/Loss");
@@ -157,8 +157,8 @@ public class Portfolio {
     // ================================ Portfolio ==================================
     // Owner name: Brad
     // Cash Balance: $10000
-    // | Symbol |          Current Price          |          Average Price          |          Shares          |          Market Value         |          Profit/Loss         |
-    // |  AAPL  |            $100.00              |            $150.00              |            2.00          |            $300.00            |            +$100.00          |
+    // | Symbol | Current Price | Average Price | Shares | Market Value | Profit/Loss |
+    // |  AAPL  | $100.00 | $150.00 | 2.00 | $300.00 | +$100.00 |
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
