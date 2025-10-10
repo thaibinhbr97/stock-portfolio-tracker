@@ -1,6 +1,5 @@
 package model;
 
-import static org.junit.Assert.assertTrue;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import org.junit.jupiter.api.BeforeEach;
@@ -42,7 +41,7 @@ public class TestStock {
 
     @Test
     void testStockToString() {
-        String stockString = "| NVDA | Nvidia Corp | Technology | 187.55 |";
-        assertTrue(stockString.equals(nvidia.toString()));
+        String stockString = "| NVDA | Nvidia Corp | Technology | $187.55 |";
+        assertEquals(stockString, nvidia.toString());
     }
 }

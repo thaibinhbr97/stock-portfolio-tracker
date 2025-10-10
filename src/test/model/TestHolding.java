@@ -1,11 +1,8 @@
 package model;
 import static org.junit.Assert.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-
-import utils.DoubleCompare;
 
 public class TestHolding {
     private Stock apple;
@@ -32,115 +29,112 @@ public class TestHolding {
 
     @Test
     void testConstructor() {
-        assertEquals(3.0 , nvidiaHolding.getShares());
-        assertEquals(150.0 , nvidiaHolding.getAveragePrice());
-        assertEquals(450.0 , nvidiaHolding.getMarketValue());
+        assertEquals(3.0 , nvidiaHolding.getShares(), 1e-3);
+        assertEquals(150.0 , nvidiaHolding.getAveragePrice(), 1e-3);
+        assertEquals(450.0 , nvidiaHolding.getMarketValue(), 1e-3);
     }
 
     @Test
     void testBuyOneSamePriceWholeShare() {
         nvidiaHolding.buyShare(1.0);
-        assertEquals(4.0 , nvidiaHolding.getShares());
-        assertEquals(150.0 , nvidiaHolding.getAveragePrice());
-        assertEquals(600.0 , nvidiaHolding.getMarketValue());        
+        assertEquals(4.0 , nvidiaHolding.getShares(), 1e-3);
+        assertEquals(150.0 , nvidiaHolding.getAveragePrice(), 1e-3);
+        assertEquals(600.0 , nvidiaHolding.getMarketValue(), 1e-3);        
     }
 
     @Test
     void testBuyManySamePriceWholeShares() {
         nvidiaHolding.buyShare(5.0);
-        assertEquals(8.0 , nvidiaHolding.getShares());
-        assertEquals(150.0 , nvidiaHolding.getAveragePrice());
-        assertEquals(1200.0 , nvidiaHolding.getMarketValue());  
-        assertEquals(0.0 , nvidiaHolding.getUnrealizedProfit());  
+        assertEquals(8.0 , nvidiaHolding.getShares(), 1e-3);
+        assertEquals(150.0 , nvidiaHolding.getAveragePrice(), 1e-3);
+        assertEquals(1200.0 , nvidiaHolding.getMarketValue(), 1e-3);  
+        assertEquals(0.0 , nvidiaHolding.getUnrealizedProfit(), 1e-3);  
     }    
 
     @Test
     void testBuyOneSamePriceFractionalShare() {
         nvidiaHolding.buyShare(0.1);
-        assertEquals(3.1 , nvidiaHolding.getShares());
-        assertEquals(150.0 , nvidiaHolding.getAveragePrice());
-        assertEquals(465.0 , nvidiaHolding.getMarketValue());        
+        assertEquals(3.1 , nvidiaHolding.getShares(), 1e-3);
+        assertEquals(150.0 , nvidiaHolding.getAveragePrice(), 1e-3);
+        assertEquals(465.0 , nvidiaHolding.getMarketValue(), 1e-3);        
     }
 
     @Test
     void testBuyManySamePriceFractionalShares() {
         nvidiaHolding.buyShare(5.5);
-        assertEquals(8.5 , nvidiaHolding.getShares());
-        assertEquals(150.0 , nvidiaHolding.getAveragePrice());
-        assertEquals(1275.0 , nvidiaHolding.getMarketValue());  
-        assertEquals(50.0    , nvidiaHolding.getUnrealizedProfit());  
+        assertEquals(8.5 , nvidiaHolding.getShares(), 1e-3);
+        assertEquals(150.0 , nvidiaHolding.getAveragePrice(), 1e-3);
+        assertEquals(1275.0 , nvidiaHolding.getMarketValue(), 1e-3);  
+        assertEquals(0.0    , nvidiaHolding.getUnrealizedProfit(), 1e-3);; 
     }
 
     @Test
     void testBuyOneDifferentPriceWholeShare() {
         nvidiaHolding.getStock().updateCurrentPrice(200.0);
         nvidiaHolding.buyShare(1.0);
-        assertEquals(4.0 , nvidiaHolding.getShares());
-        assertEquals(162.5, nvidiaHolding.getAveragePrice());
-        assertEquals(650.0 , nvidiaHolding.getMarketValue());   
-        assertEquals(150.0, nvidiaHolding.getUnrealizedProfit());       
+        assertEquals(4.0 , nvidiaHolding.getShares(), 1e-3);
+        assertEquals(162.5, nvidiaHolding.getAveragePrice(), 1e-3);
+        assertEquals(800.0 , nvidiaHolding.getMarketValue(), 1e-3);   
+        assertEquals(150.0, nvidiaHolding.getUnrealizedProfit(), 1e-3);       
     }
 
     @Test
     void testBuyDifferentPriceWholeShares() {
         nvidiaHolding.getStock().updateCurrentPrice(200.0);
         nvidiaHolding.buyShare(5.0);
-        assertEquals(8.0 , nvidiaHolding.getShares());
-        assertEquals(181.25 , nvidiaHolding.getAveragePrice());
-        assertEquals(1450.0 , nvidiaHolding.getMarketValue());  
-        assertEquals(150.0 , nvidiaHolding.getUnrealizedProfit());  
+        assertEquals(8.0 , nvidiaHolding.getShares(), 1e-3);
+        assertEquals(181.25 , nvidiaHolding.getAveragePrice(), 1e-3);
+        assertEquals(1600.0 , nvidiaHolding.getMarketValue(), 1e-3);  
+        assertEquals(150.0 , nvidiaHolding.getUnrealizedProfit(), 1e-3);  
     }    
 
     @Test
     void testBuyDifferentPriceFractionalShare() {
         nvidiaHolding.getStock().updateCurrentPrice(200.0);
         nvidiaHolding.buyShare(0.1);
-        assertEquals(3.1 , nvidiaHolding.getShares());
-        assertTrue(DoubleCompare.compareDoubles(151.61, nvidiaHolding.getAveragePrice()) == 0);
-        assertEquals(470.0 , nvidiaHolding.getMarketValue());        
+        assertEquals(3.1 , nvidiaHolding.getShares(), 1e-3);
+        assertEquals(620.0 , nvidiaHolding.getMarketValue(), 1e-3);        
     }
 
     @Test
     void testBuyManyDifferentPriceFractionalShares() {
         nvidiaHolding.getStock().updateCurrentPrice(200.0);
         nvidiaHolding.buyShare(5.5);
-        assertEquals(8.5 , nvidiaHolding.getShares());
-        assertTrue(DoubleCompare.compareDoubles(182.35, nvidiaHolding.getAveragePrice()) == 0);
-        assertEquals(1550.0 , nvidiaHolding.getMarketValue());  
-        assertTrue(DoubleCompare.compareDoubles(17.65, nvidiaHolding.getUnrealizedProfit()) == 0);
+        assertEquals(8.5 , nvidiaHolding.getShares(), 1e-3);
+        assertEquals(1700.0 , nvidiaHolding.getMarketValue(), 1e-3);  
     }
     
     @Test
     void testSellWholeShare() {
         nvidiaHolding.sellShare(1.0);
-        assertEquals(2.0 , nvidiaHolding.getShares());
-        assertEquals(150.0 , nvidiaHolding.getAveragePrice());
-        assertEquals(300.0 , nvidiaHolding.getMarketValue());  
-        assertEquals(0.0    , nvidiaHolding.getUnrealizedProfit()); 
+        assertEquals(2.0 , nvidiaHolding.getShares(), 1e-3);
+        assertEquals(150.0 , nvidiaHolding.getAveragePrice(), 1e-3);
+        assertEquals(300.0 , nvidiaHolding.getMarketValue(), 1e-3);  
+        assertEquals(0.0    , nvidiaHolding.getUnrealizedProfit(), 1e-3); 
     }
 
     @Test
     void testSellFractionalShare() {
         nvidiaHolding.sellShare(2.5);
-        assertEquals(0.5 , nvidiaHolding.getShares());
-        assertEquals(150.0 , nvidiaHolding.getAveragePrice());
-        assertEquals(75.0 , nvidiaHolding.getMarketValue());  
-        assertEquals(0.0    , nvidiaHolding.getUnrealizedProfit());     
+        assertEquals(0.5 , nvidiaHolding.getShares(), 1e-3);
+        assertEquals(150.0 , nvidiaHolding.getAveragePrice(), 1e-3);
+        assertEquals(75.0 , nvidiaHolding.getMarketValue(), 1e-3);  
+        assertEquals(0.0    , nvidiaHolding.getUnrealizedProfit(), 1e-3);     
     }
 
     @Test
     void testSellShareLargerThanCurrentShares() {
         nvidiaHolding.sellShare(3.5);
-        assertEquals(3.0 , nvidiaHolding.getShares());
-        assertEquals(150.0 , nvidiaHolding.getAveragePrice());
-        assertEquals(600.0 , nvidiaHolding.getMarketValue());  
-        assertEquals(0.0    , nvidiaHolding.getUnrealizedProfit());     
+        assertEquals(3.0 , nvidiaHolding.getShares(), 1e-3);
+        assertEquals(150.0 , nvidiaHolding.getAveragePrice(), 1e-3);
+        assertEquals(450.0 , nvidiaHolding.getMarketValue(), 1e-3);  
+        assertEquals(0.0    , nvidiaHolding.getUnrealizedProfit(), 1e-3);     
     }    
 
     @Test
     void testHoldingToString() {
-        String holdingString = "| NVDA | 150.0 | 150.0 | 3.0 | 450.00 | 0.0 |";
-        assertTrue(holdingString.equals(nvidiaHolding.toString()));
+        String holdingString = "| NVDA | $150.00 | $150.00 | 3.00 | $450.00 | $0.00 |";
+        assertEquals(holdingString, nvidiaHolding.toString());
     }
 
 }

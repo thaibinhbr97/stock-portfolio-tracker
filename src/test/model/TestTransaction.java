@@ -19,7 +19,7 @@ public class TestTransaction {
     @BeforeEach
     void runBefore() {
         LocalDateTime dateTime = LocalDateTime.of(2025, 10, 5, 6, 23, 32);
-        buyAMZN = new Transaction("AMZN", "BUY", 5, 200.00, 5 * 200.00, dateTime);
+        buyAMZN = new Transaction("AMZN", "BUY", 5, 200.00, dateTime);
     }
 
     @Test
@@ -34,7 +34,9 @@ public class TestTransaction {
     
     @Test
     void testTransactionToString() {
-        String transactionString = "| 2025-10-5T6:23:32 | AMZN | BUY | 5 | 200.00 | 1000.00 |";
+        String transactionString = "| 2025-10-05T06:23:32 | AMZN | BUY | 5.00 | $200.00 | $1000.00 |";
+        System.out.println(buyAMZN.toString());
+        System.out.println(transactionString);
         assertTrue(transactionString.equals(buyAMZN.toString()));
     }
 }

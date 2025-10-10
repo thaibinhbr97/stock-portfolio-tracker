@@ -29,15 +29,16 @@ public class TestTransactionManager {
     private Transaction sellGOOGL;
 
     private List<Transaction> transactions;
-    
+
+    LocalDateTime dateTime = LocalDateTime.of(2025, 10, 5, 6, 23, 32);
     @BeforeEach
     void runBefore() {
         transactionManager = new TransactionManager();
 
-        buyAMZN = new Transaction("AMZN", "BUY", 5, 200.00, 5 * 200.00, LocalDateTime.now());
-        sellAMZN = new Transaction("AMZN", "SELL", 3, 200.00, 3 * 200.00, LocalDateTime.now());
-        buyGOOGL = new Transaction("GOOGL", "BUY", 10, 300.00, 10 * 300.00, LocalDateTime.now());
-        sellGOOGL = new Transaction("GOOGL", "SELL", 5, 200.00, 5 * 200.00, LocalDateTime.now());
+        buyAMZN = new Transaction("AMZN", "BUY", 5, 200.00, dateTime);
+        sellAMZN = new Transaction("AMZN", "SELL", 3, 200.00, dateTime);
+        buyGOOGL = new Transaction("GOOGL", "BUY", 10, 300.00, dateTime);
+        sellGOOGL = new Transaction("GOOGL", "SELL", 5, 200.00, dateTime);
 
         transactions = transactionManager.getTransactions();
     }
@@ -67,7 +68,7 @@ public class TestTransactionManager {
         transactionManager.addTransaction(buyGOOGL);
         assertTrue(transactions.contains(buyGOOGL));
         assertEquals(2, transactions.size());
-        assertEquals(buyAMZN, transactions.get(1));
+        assertEquals(buyGOOGL, transactions.get(1));
     }
 
     @Test
@@ -89,8 +90,8 @@ public class TestTransactionManager {
         transactionManager.addTransaction(sellAMZN);
         assertTrue(transactions.contains(sellAMZN));
         assertEquals(4, transactions.size()); 
+        assertEquals(sellAMZN, transactions.get(2));
         assertEquals(sellAMZN, transactions.get(3));
-        assertEquals(sellAMZN, transactions.get(4));
     }
     
     @Test
@@ -155,8 +156,10 @@ public class TestTransactionManager {
     void testTransactionManagerToString() {
         String transactionManagerString = transactionManager.getHeader();
         transactionManager.addTransaction(buyAMZN);
-        transactionManagerString += "| 2025-10-5T6:23:32 | AMZN | BUY | 5 | 200.00 | 1000.00 |\n";
-        assertTrue(transactionManagerString.equals(transactionManager.toString()));        
+        transactionManagerString += "\n| 2025-10-05T06:23:32 | AMZN | BUY | 5.00 | $200.00 | $1000.00 |\n";
+        System.out.println(transactionManagerString.toString());
+        System.out.println(transactionManagerString);
+        assertEquals(transactionManagerString, transactionManager.toString());        
     }
     
 }

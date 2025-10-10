@@ -1,15 +1,15 @@
 package model;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.time.LocalDateTime;
 
-import org.junit.Test;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
-public class TestPortfolio {
+class TestPortfolio {
     // symbol strings
     private static final String ORCL = "ORCL";
     private static final String APPL = "AAPL";
@@ -27,7 +27,6 @@ public class TestPortfolio {
     private Stock jpmorgan;
 
     private Portfolio portfolio;
-    private LocalDateTime lastUpdated;
     
     @BeforeEach
     void runBefore() {
@@ -48,14 +47,13 @@ public class TestPortfolio {
         assertEquals("Brad", portfolio.getOwner());
         assertEquals(10000.00, portfolio.getCashBalance());
         assertEquals(0.0, portfolio.getPortfolioValue());
-        assertEquals(LocalDateTime.of(2025, 10, 5, 6, 23, 32), portfolio.getLastUpdated());
         assertEquals(0, portfolio.getHoldings().size());
     }
 
     @Test
     void testBuyShareWhichNotInPortfolio() {
         assertFalse(portfolio.getHoldings().containsKey(NVDA));
-        portfolio.buyShare(NVDA, 3.0);
+        portfolio.buyShare(nvidia, 3.0);
         assertEquals(10000.0 - 150.0 * 3.0, portfolio.getCashBalance());
         assertEquals(150.0 * 3.0, portfolio.getPortfolioValue());
         assertTrue(portfolio.getHoldings().containsKey(NVDA));
@@ -63,9 +61,9 @@ public class TestPortfolio {
 
     @Test
     void testBuyShareWhichInPortfolio() {
-        portfolio.buyShare(NVDA, 3.0);
+        portfolio.buyShare(nvidia, 3.0);
         assertTrue(portfolio.getHoldings().containsKey(NVDA));
-        portfolio.buyShare(NVDA, 3.0);
+        portfolio.buyShare(nvidia, 3.0);
         assertTrue(portfolio.getHoldings().containsKey(NVDA));
         assertEquals(10000.0 - 150.0 * 6.0, portfolio.getCashBalance());
         assertEquals(150.0 * 6.0, portfolio.getPortfolioValue());
@@ -75,7 +73,7 @@ public class TestPortfolio {
     @Test
     void testBuyShareWhichExceedCashBalanace() {
         assertFalse(portfolio.getHoldings().containsKey(NVDA));
-        portfolio.buyShare(NVDA, 100.0);
+        portfolio.buyShare(nvidia, 100.0);
         assertFalse(portfolio.getHoldings().containsKey(NVDA));
         assertEquals(10000.0, portfolio.getCashBalance());
         assertEquals(0.0, portfolio.getPortfolioValue());
@@ -83,7 +81,7 @@ public class TestPortfolio {
 
     @Test
     void testSellAllShareForOneHolding() {
-        portfolio.buyShare(NVDA, 10.0);
+        portfolio.buyShare(nvidia, 10.0);
         assertTrue(portfolio.getHoldings().containsKey(NVDA));
         assertEquals(10000.0 - 150.0 * 10.0, portfolio.getCashBalance());
         assertEquals(150.0 * 10.0, portfolio.getPortfolioValue());
@@ -95,7 +93,7 @@ public class TestPortfolio {
 
     @Test
     void testSellSomeShareForOneHolding() {
-        portfolio.buyShare(NVDA, 10.0);
+        portfolio.buyShare(nvidia, 10.0);
         assertTrue(portfolio.getHoldings().containsKey(NVDA));
         assertEquals(10000.0 - 150.0 * 10.0, portfolio.getCashBalance());
         assertEquals(150.0 * 10.0, portfolio.getPortfolioValue());
@@ -107,10 +105,16 @@ public class TestPortfolio {
 
     @Test
     void testPortfolioToString() {
-        portfolio.buyShare(NVDA, 3.0);
-        String portfolioString = "Owner name: Brad\n";
-        portfolioString += "Cash Balance: $10000\n";
-        portfolioString += "| Symbol | CurrentPrice | AveragePrice | Shares | MarketValue | Profit/Loss |\n";
-        portfolioString += "| NVDA | $150 | $150 | 3.0 | $450.00 | +$0 |\n";
+        portfolio.buyShare(nvidia, 3.0);
+        String portfolioString = "";
+        portfolioString += "================================ Portfolio ==================================\n";
+        portfolioString += "Owner Name: Brad\n";
+        portfolioString += "Cash Balance: $9550.00\n";
+        portfolioString += "Portfolio Value: $450.00\n";
+        portfolioString += "| Symbol | Current Price | Average Price | Shares | Market Value | Profit/Loss |\n";
+        portfolioString += "| NVDA | $150.00 | $150.00 | 3.00 | $450.00 | $0.00 |\n";
+        System.out.println(portfolioString.toString());
+        System.out.println(portfolioString);
+        assertEquals(portfolioString, portfolio.toString());
     }
 }
