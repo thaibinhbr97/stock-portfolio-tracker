@@ -53,8 +53,8 @@ public class Transaction {
     }
 
     // EFFECTS: Overriding toString() method of Transaction class as example below
-    // |        Date         | Symbol |  Action  |          Shares          |          Price         |          Total         |
-    // | 2025-10-05T06:23:32 |  AMZN  |   BUY    |          5.00            |        $200.00         |        $1000.00        |
+    // | Date | Symbol | Action | Shares |  Price | Total |
+    // | 2025-10-05T06:23:32 | AMZN | BUY | 5.00 |$200.00 | $1000.00 |
     @Override
     public String toString() {
         String transactionString = String.format("| %s | %s | %s | %.2f | $%.2f | $%.2f |", 
