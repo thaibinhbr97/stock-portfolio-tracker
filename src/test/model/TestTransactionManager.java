@@ -102,13 +102,19 @@ public class TestTransactionManager {
         transactionManager.addTransaction(sellGOOGL);
         assertEquals(4, transactions.size()); 
 
-        List<Transaction> buyTransactions = new ArrayList<>();  
-        buyTransactions.add(buyAMZN);                 
-        buyTransactions.add(buyGOOGL);
-        assertEquals(2, buyTransactions.size()); 
-        assertEquals(buyAMZN, buyTransactions.get(0));                 
-        assertEquals(buyGOOGL, buyTransactions.get(1)); 
-    }                
+        // List<Transaction> buyTransactions = new ArrayList<>();  
+        // buyTransactions.add(buyAMZN);                 
+        // buyTransactions.add(buyGOOGL);
+        // assertEquals(2, buyTransactions.size()); 
+        // assertEquals(buyAMZN, buyTransactions.get(0));                 
+        // assertEquals(buyGOOGL, buyTransactions.get(1)); 
+        List<Transaction> buys = transactionManager.filterByAction("BUY");
+        assertEquals(2, buys.size());
+        assertEquals("BUY", buys.get(0).getAction());
+        assertEquals("BUY", buys.get(1).getAction());
+        assertEquals(buyAMZN, buys.get(0));
+        assertEquals(buyGOOGL, buys.get(1));
+    }           
     
     @Test
     public void testFilterBySellAction() {
@@ -118,12 +124,45 @@ public class TestTransactionManager {
         transactionManager.addTransaction(sellGOOGL);
         assertEquals(4, transactions.size()); 
 
-        List<Transaction> sellTransactions = new ArrayList<>();  
-        sellTransactions.add(sellAMZN);                 
-        sellTransactions.add(sellGOOGL);
-        assertEquals(2, sellTransactions.size()); 
-        assertEquals(sellAMZN, sellTransactions.get(0));                 
-        assertEquals(sellGOOGL, sellTransactions.get(1));          
+        // List<Transaction> sellTransactions = new ArrayList<>();  
+        // sellTransactions.add(sellAMZN);                 
+        // sellTransactions.add(sellGOOGL);
+        // assertEquals(2, sellTransactions.size()); 
+        // assertEquals(sellAMZN, sellTransactions.get(0));                 
+        // assertEquals(sellGOOGL, sellTransactions.get(1));   
+        List<Transaction> sells = transactionManager.filterByAction("SELL");
+        assertEquals(2, sells.size());
+        assertEquals("SELL", sells.get(0).getAction());
+        assertEquals("SELL", sells.get(1).getAction());
+        assertEquals(sellAMZN, sells.get(0));
+        assertEquals(sellGOOGL, sells.get(1));       
+    }
+
+    public void testFilterByActionCaseInsensitiveQuery() {
+        transactionManager.addTransaction(buyAMZN);
+        transactionManager.addTransaction(buyGOOGL);
+        transactionManager.addTransaction(sellAMZN);
+        transactionManager.addTransaction(sellGOOGL);
+
+        List<Transaction> buys = transactionManager.filterByAction("buy"); // lower-case query
+        assertEquals(2, buys.size());
+        assertEquals("BUY", buys.get(0).getAction());
+        assertEquals("BUY", buys.get(1).getAction());
+    }
+
+    @Test
+    public void testFilterByActionNoMatches() {
+        transactionManager.addTransaction(buyAMZN);
+        transactionManager.addTransaction(sellAMZN);
+        List<Transaction> divs = transactionManager.filterByAction("DIVIDEND");
+        assertTrue(divs.isEmpty());
+    }
+
+    @Test
+    public void testFilterByActionOnEmptyManager() {
+        TransactionManager empty = new TransactionManager();
+        List<Transaction> res = empty.filterByAction("BUY");
+        assertTrue(res.isEmpty());
     }
 
     @Test

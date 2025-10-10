@@ -37,7 +37,7 @@ public class TestHolding {
     @Test
     public void testBuyOneSamePriceWholeShare() {
         nvidiaHolding.buyShare(1.0);
-        assertEquals(4.0 , nvidiaHolding.getShares(), 1e-3);
+        assertEquals(4.0, nvidiaHolding.getShares(), 1e-3);
         assertEquals(150.0 , nvidiaHolding.getAveragePrice(), 1e-3);
         assertEquals(600.0 , nvidiaHolding.getMarketValue(), 1e-3);        
     }

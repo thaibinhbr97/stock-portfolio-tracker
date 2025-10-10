@@ -40,6 +40,12 @@ public class TestStock {
     }
 
     @Test
+    public void testUpdateNegativeCurrentPrice() {
+        costco.updateCurrentPrice(-1500.55);
+        assertEquals(915.95, costco.getCurrentPrice());        
+    }
+
+    @Test
     public void testStockToString() {
         String stockString = "| NVDA | Nvidia Corp | Technology | $187.55 |";
         assertEquals(stockString, nvidia.toString());
