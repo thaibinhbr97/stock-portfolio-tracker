@@ -7,59 +7,78 @@ package model;
 public class Holding {
     private Stock stock;
     private double shares;
-    private double purchasePrice; // cost basis per share
+    private double averagePurchasePrice; // cost basis per share
+    private String symbol;
 
-    // initialize symbol to be stock symbol
+    // initialize symbol to be stock symbol, 
     public Holding(Stock stock, double shares) {
-        
+        this.stock = stock;
+        this.shares = shares;
+        this.averagePurchasePrice = stock.getCurrentPrice();
+        this.symbol = stock.getSymbol();
     }
 
     // REQUIRES: quantity > 0
-    // MODIFIES: this, Portfolio, Transaction, TransactionManager
-    // EFFECTS: allow user to purchase stock shares based on quantity and current stock's price.
+    // MODIFIES: this
+    // EFFECTS: buy quantity shares of a stock, and update average purchase price and shares
     public void buyShare(double quantity) {
-        // stub
+        double totalShares = shares + quantity;
+        double totalCost = (averagePurchasePrice * shares) + (stock.getCurrentPrice() * quantity);
+        averagePurchasePrice = totalCost / totalShares;
+        shares = totalShares;
     }
 
     // REQUIRES: quantity > 0
-    // MODIFIES: this, Portfolio, Transaction, TransactionManager
-    // EFFECTS: allow user to sell stock shares based on quantity. Quantity cannot be greater than shares.
+    // MODIFIES: this
+    // EFFECTS: sell quantity shares of a stock, and update shares if quanity <= shares. Otherwise, do nothing.
     public void sellShare(double quantity) {
-        // stub
+        if (quantity <= shares) {
+            shares = shares - quantity;
+        }
     }
 
     public Stock getStock() {
-        return null; // stub
+        return stock;
     }
 
     public String getSymbol() {
-        return null; // stub
+        return symbol;
     }
 
     // EFFECTS: get total shares of this stock holding
     public double getShares() {
-        return 0.0; // stub
+        return shares;
     }
 
     // EFFECTS: get an average price of this holding
     public double getAveragePrice() {
-        return 0.0;
+        return averagePurchasePrice;
     }
 
     // EFFECTS: get the market value of a stock in a holding
     public double getMarketValue() {
-        return 0.0; // stub
+        return stock.getCurrentPrice() * shares;
     }
 
     // EFFECTS: get unrealized profit/loss of a holding (profit/loss based on current stock's price)
     public double getUnrealizedProfit() {
-        return 0.0; // stub
+        return (stock.getCurrentPrice() - averagePurchasePrice) * shares;
     }
 
-    // EFFECTS: Overriding toString() method of Holding class as below
-    // | Symbol | CurrentPrice | AveragePrice | Shares | MarketValue | Gain/Loss |  
+    // EFFECTS: Overriding toString() method of Holding class as example below
+    // | Symbol |          CurrentPrice          |          AveragePrice          |          Shares          |          MarketValue         |          Gain/Loss          |  
     @Override
     public String toString() {
-        return null;
+        double profit = getUnrealizedProfit();
+        String profitString = "";
+        if (profit > 0) {
+            profitString += "+";
+        } else if (profit < 0) {
+            profitString += "-";            
+        }
+        profitString += String.format("$%.2f", Math.abs(profit));
+        String holdingString = String.format("| %s | $%.2f | $%.2f | %.2f | $%.2f | %s |", 
+                getSymbol(), stock.getCurrentPrice(), getAveragePrice(), getShares(), getMarketValue(), profitString);
+        return holdingString;
     }
 }
