@@ -70,7 +70,7 @@ public class TestPortfolio {
         nvidia.updateCurrentPrice(200);
         portfolio.buyShare(nvidia, 5); // 5 @ 200
         double avg = portfolio.getHoldings().get(NVDA).getAveragePrice();
-        assertEquals((10*150 + 5*200) / 15.0, avg, 1e-3);
+        assertEquals((10 * 150 + 5 * 200) / 15.0, avg, 1e-3);
     }
 
     @Test
