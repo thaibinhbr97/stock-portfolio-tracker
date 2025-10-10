@@ -13,36 +13,44 @@ public class Stock {
     private double currentPrice;
 
     // EFFECTS: constructs a Stock with symbol, companyName, sector, shares, currentPrice
-    public Stock (String symbol, String companyName, String sector, double currentPrice) {
-        // stub
+    public Stock(String symbol, String companyName, String sector, double currentPrice) {
+        this.symbol = symbol.toUpperCase();
+        this.companyName = companyName;
+        this.sector = sector;
+        this.currentPrice = currentPrice;
     }
 
     // getters
     public String getSymbol() {
-        return null; // stub
+        return symbol;
     }
 
     public String getCompanyName() {
-        return null; // stub
+        return companyName;
     }
 
     public String getSector() {
-        return null; // stub
+        return sector;
     }
 
     public double getCurrentPrice() {
-        return 0.0; // stub
+        return currentPrice;
     }
 
     // setters
     public void updateCurrentPrice(double newPrice) {
-        // stub
+        if (newPrice < 0) {
+            return;
+        }
+        this.currentPrice = newPrice;
     }
 
-    // EFFECTS: Overriding toString() method of Stock class as below
-    // | Symbol | CompanyName | Sector | CurrentPrice |    
+    // EFFECTS: Overriding toString() method of Stock class as example below
+    // | Symbol |          CompanyName          |          Sector          |          CurrentPrice       |    
     @Override
     public String toString() {
-        return null;
+        String stockString = String.format("| %s | %s | %s | $%.2f |", 
+                symbol, companyName, sector, currentPrice);
+        return stockString;
     }
 }
