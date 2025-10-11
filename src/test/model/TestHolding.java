@@ -93,7 +93,7 @@ public class TestHolding {
     public void testBuyDifferentPriceFractionalShare() {
         nvidiaHolding.getStock().updateCurrentPrice(200.0);
         nvidiaHolding.buyShare(0.1);
-        assertEquals(3, nvidiaHolding.getShares(), 1e-3);
+        assertEquals(3.1, nvidiaHolding.getShares(), 1e-3);
         assertEquals(620, nvidiaHolding.getMarketValue(), 1e-3);        
     }
 
@@ -101,7 +101,7 @@ public class TestHolding {
     public void testBuyManyDifferentPriceFractionalShares() {
         nvidiaHolding.getStock().updateCurrentPrice(200.0);
         nvidiaHolding.buyShare(5.5);
-        assertEquals(8., nvidiaHolding.getShares(), 1e-3);
+        assertEquals(8.5, nvidiaHolding.getShares(), 1e-3);
         assertEquals(1700., nvidiaHolding.getMarketValue(), 1e-3);  
     }
     
