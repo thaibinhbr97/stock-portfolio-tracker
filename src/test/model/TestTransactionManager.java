@@ -31,6 +31,7 @@ public class TestTransactionManager {
     private List<Transaction> transactions;
 
     private LocalDateTime dateTime = LocalDateTime.of(2025, 10, 5, 6, 23, 32);
+    
     @BeforeEach
     public void runBefore() {
         transactionManager = new TransactionManager();
@@ -138,6 +139,7 @@ public class TestTransactionManager {
         assertEquals(sellGOOGL, sells.get(1));       
     }
 
+    @Test
     public void testFilterByActionCaseInsensitiveQuery() {
         transactionManager.addTransaction(buyAMZN);
         transactionManager.addTransaction(buyGOOGL);
