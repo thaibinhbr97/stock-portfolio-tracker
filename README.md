@@ -35,3 +35,8 @@ In addition to managing stocks, it also provides simple **recommendations** base
 #### TransactionManager
 - As a user, I want to view a record of stocks that I buy and sell in transaction manager including date time, symbol, action, share, purchase price, total.
 - As a user, I want to filter a transaction history of stocks by all transactions, only buy or only sell, symbol, or date time range.
+
+### Data Persistence
+- As a user, I want to be able to have an option to save my entire state of stock portfolio and transaction history to file (if I choose).
+- As a user, I want to be able to have an option to load my entire state of stock portfolio and transaction history from file (if I choose).
+
