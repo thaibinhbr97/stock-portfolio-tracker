@@ -161,13 +161,13 @@ public class Portfolio {
     // |  AAPL  | $100.00 | $150.00 | 2.00 | $300.00 | +$100.00 |
     @Override
     public String toString() {
-        StringBuilder sb = new StringBuilder();
-        sb.append("================================ Portfolio ==================================\n");
-        sb.append(getPortfolioInformation()).append("\n");
-        sb.append(getHeader()).append("\n");
+        StringBuilder contentBuilder = new StringBuilder();
+        contentBuilder.append("================================ Portfolio ==================================\n");
+        contentBuilder.append(getPortfolioInformation()).append("\n");
+        contentBuilder.append(getHeader()).append("\n");
         for (Holding h : holdings.values()) {
-            sb.append(h.toString()).append("\n");
+            contentBuilder.append(h.toString()).append("\n");
         }
-        return sb.toString();
+        return contentBuilder.toString();
     }
 }

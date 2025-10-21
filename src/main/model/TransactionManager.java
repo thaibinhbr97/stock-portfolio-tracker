@@ -21,9 +21,9 @@ public class TransactionManager {
     // EFFECTS: returns a new transactions object filltered by action (BUY/SELL)
     public List<Transaction> filterByAction(String action) {
         List<Transaction> filltered = new ArrayList<>();
-        for (Transaction t : transactions) {
-            if (t.getAction().equalsIgnoreCase(action)) {
-                filltered.add(t);
+        for (Transaction transaction : transactions) {
+            if (transaction.getAction().equalsIgnoreCase(action)) {
+                filltered.add(transaction);
             }
         }
         return filltered;
@@ -33,10 +33,10 @@ public class TransactionManager {
     // EFFECTS: returns a new transactions object filltered by date
     public List<Transaction> filterByDateTime(LocalDateTime startTime, LocalDateTime endTime) {
         List<Transaction> filtered = new ArrayList<>();
-        for (Transaction t : transactions) {
-            LocalDateTime dt = t.getDateTime();
-            if ((dt.isEqual(startTime) || dt.isAfter(startTime)) && (dt.isEqual(endTime) || dt.isBefore(endTime))) {
-                filtered.add(t);
+        for (Transaction transaction : transactions) {
+            LocalDateTime dateTime = transaction.getDateTime();
+            if ((dateTime.isEqual(startTime) || dateTime.isAfter(startTime)) && (dateTime.isEqual(endTime) || dateTime.isBefore(endTime))) {
+                filtered.add(transaction);
             }
         }
         return filtered;
@@ -45,9 +45,9 @@ public class TransactionManager {
     // EFFECTS: returns a new transactions object filltered by symbol
     public List<Transaction> filterBySymbol(String symbol) {
         List<Transaction> filltered = new ArrayList<>();
-        for (Transaction t : transactions) {
-            if (t.getSymbol().equalsIgnoreCase(symbol)) {
-                filltered.add(t);
+        for (Transaction transaction : transactions) {
+            if (transaction.getSymbol().equalsIgnoreCase(symbol)) {
+                filltered.add(transaction);
             }
         }
         return filltered;        
@@ -72,11 +72,11 @@ public class TransactionManager {
     // ...
     @Override
     public String toString() {
-        StringBuilder sb = new StringBuilder();
-        sb.append(getHeader()).append("\n");
-        for (Transaction t : transactions) {
-            sb.append(t.toString()).append("\n");
+        StringBuilder contentBuilder = new StringBuilder();
+        contentBuilder.append(getHeader()).append("\n");
+        for (Transaction transaction : transactions) {
+            contentBuilder.append(transaction.toString()).append("\n");
         }
-        return sb.toString();
+        return contentBuilder.toString();
     }        
 }
