@@ -9,34 +9,34 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 public class TestTransaction {
-    private Transaction buyAMZN;
-    private Transaction sellAMZN;
-    private Transaction buyGOOGL;
-    private Transaction sellGOOGL;
+    private Transaction buyAmazon;
+    private Transaction sellAmazon;
+    private Transaction buyGoogle;
+    private Transaction sellGoogle;
     
     private LocalDateTime dateTime;
 
     @BeforeEach
     public void runBefore() {
         LocalDateTime dateTime = LocalDateTime.of(2025, 10, 5, 6, 23, 32);
-        buyAMZN = new Transaction("AMZN", "BUY", 5, 200.00, dateTime);
+        buyAmazon = new Transaction("AMZN", "BUY", 5, 200.00, dateTime);
     }
 
     @Test
     public void testConstrutor() {
-        assertEquals(LocalDateTime.of(2025, 10, 5, 6, 23, 32), buyAMZN.getDateTime());
-        assertEquals("AMZN", buyAMZN.getSymbol());
-        assertEquals("BUY", buyAMZN.getAction());
-        assertEquals(5, buyAMZN.getShares());
-        assertEquals(200.00, buyAMZN.getPrice());
-        assertEquals(1000.00, buyAMZN.getTotal());
+        assertEquals(LocalDateTime.of(2025, 10, 5, 6, 23, 32), buyAmazon.getDateTime());
+        assertEquals("AMZN", buyAmazon.getSymbol());
+        assertEquals("BUY", buyAmazon.getAction());
+        assertEquals(5, buyAmazon.getShares());
+        assertEquals(200.00, buyAmazon.getPrice());
+        assertEquals(1000.00, buyAmazon.getTotal());
     }
     
     @Test
     public void testTransactionToString() {
         String transactionString = "| 2025-10-05T06:23:32 | AMZN | BUY | 5.00 | $200.00 | $1000.00 |";
-        System.out.println(buyAMZN.toString());
+        System.out.println(buyAmazon.toString());
         System.out.println(transactionString);
-        assertTrue(transactionString.equals(buyAMZN.toString()));
+        assertTrue(transactionString.equals(buyAmazon.toString()));
     }
 }
