@@ -1,19 +1,20 @@
 package ui;
 
 import java.time.LocalDateTime;
-import java.util.HashMap;
 import java.util.Locale;
-import java.util.Map;
 import java.util.Scanner;
 
 import model.Holding;
+import model.Market;
+import model.MarketCatalog;
 import model.Portfolio;
 import model.Stock;
 import model.Transaction;
 import model.TransactionManager;
 
 public class StockPortfolioApp {
-    private final Map<String, Stock> market = new HashMap<>(); // available stocks by symbol
+    private static final String JSON_STORE = "./data/portfolio.json";    
+    private Market market;
     private Portfolio portfolio;
     private Scanner input;
 
@@ -44,29 +45,30 @@ public class StockPortfolioApp {
         
         // create demo portfolio
         portfolio = new Portfolio("Brad", 10_000.00, LocalDateTime.now());
-        loadSampleStocks();
+        market = new Market();
+        MarketCatalog.seed(market);
     }
 
-    // MODIFIES: this
-    // EFFECTS: loads sample stocks to market
-    public void loadSampleStocks() {
-        market.put("AAPL", new Stock("AAPL", "Apple Inc.", "Technology", 150.00));
-        market.put("AMZN", new Stock("AMZN", "Amazon.com, Inc.", "Consumer Discretionary", 3300.00));
-        market.put("GOOGL", new Stock("GOOGL", "Alphabet Inc.", "Technology", 2800.00));
-        market.put("MSFT", new Stock("MSFT", "Microsoft Corporation", "Technology", 350.00));
-        market.put("TSLA", new Stock("TSLA", "Tesla, Inc.", "Automotive", 250.00));
-        market.put("NFLX", new Stock("NFLX", "Netflix, Inc.", "Communication Services", 600.00));
-        market.put("NVDA", new Stock("NVDA", "NVIDIA Corporation", "Technology", 900.00));
-        market.put("META", new Stock("META", "Meta Platforms, Inc.", "Technology", 470.00));
-        market.put("BABA", new Stock("BABA", "Alibaba Group Holding Limited", "Consumer Discretionary", 85.00));
-        market.put("ORCL", new Stock("ORCL", "Oracle Corporation", "Technology", 120.00));
-    }
+    // // MODIFIES: this
+    // // EFFECTS: loads sample stocks to market
+    // public void loadSampleStocks() {
+    //     market.put("AAPL", new Stock("AAPL", "Apple Inc.", "Technology", 150.00));
+    //     market.put("AMZN", new Stock("AMZN", "Amazon.com, Inc.", "Consumer Discretionary", 3300.00));
+    //     market.put("GOOGL", new Stock("GOOGL", "Alphabet Inc.", "Technology", 2800.00));
+    //     market.put("MSFT", new Stock("MSFT", "Microsoft Corporation", "Technology", 350.00));
+    //     market.put("TSLA", new Stock("TSLA", "Tesla, Inc.", "Automotive", 250.00));
+    //     market.put("NFLX", new Stock("NFLX", "Netflix, Inc.", "Communication Services", 600.00));
+    //     market.put("NVDA", new Stock("NVDA", "NVIDIA Corporation", "Technology", 900.00));
+    //     market.put("META", new Stock("META", "Meta Platforms, Inc.", "Technology", 470.00));
+    //     market.put("BABA", new Stock("BABA", "Alibaba Group Holding Limited", "Consumer Discretionary", 85.00));
+    //     market.put("ORCL", new Stock("ORCL", "Oracle Corporation", "Technology", 120.00));
+    // }
 
     // EFFECTS: print market by listing each stock to the console
     public void printMarket() {
-        for (Stock s: market.values()) {
+        for (Stock stock: market.getAllStocks()) {
             System.out.printf("| %s | %s | %s | $%.2f |\n",
-                    s.getSymbol(), s.getCompanyName(), s.getSector(), s.getCurrentPrice());   
+                    stock.getSymbol(), stock.getCompanyName(), stock.getSector(), stock.getCurrentPrice());   
         }
     }
 
@@ -178,22 +180,22 @@ public class StockPortfolioApp {
     // . Otherwise, prints a message and returns null
     private Holding resolveHoldingForSell() {
         String symbol = readSymbol("Enter stock symbol to SELL: ").toUpperCase(Locale.ROOT);
-        Holding h = portfolio.getHoldings().get(symbol);
-        if (h == null) {
+        Holding holding = portfolio.getHoldings().get(symbol);
+        if (holding == null) {
             System.out.println("You don't hold that stock symbol.");
             return null;
         }
         System.out.printf("You hold %.2f of %s. Current price $%.2f, Avg price $%.2f%n",
-                h.getShares(), symbol, h.getStock().getCurrentPrice(), h.getAveragePrice());
-        return h;        
+                holding.getShares(), symbol, holding.getStock().getCurrentPrice(), holding.getAveragePrice());
+        return holding;        
     }
 
     // EFFECTS: returns true if the holding has at least qty shares; otherwise prints an error
-    private boolean hasEnoughShares(Holding h, double quantity) {
-        if (quantity <= h.getShares()) {
+    private boolean hasEnoughShares(Holding holding, double quantity) {
+        if (quantity <= holding.getShares()) {
             return true;
         }
-        System.out.printf("Cannot sell %.2f; only %.2f held.%n", quantity, h.getShares());
+        System.out.printf("Cannot sell %.2f; only %.2f held.%n", quantity, holding.getShares());
         return false;
     }
 
@@ -203,38 +205,38 @@ public class StockPortfolioApp {
             return;
         }
         System.out.println("\n| Symbol | Company | Sector | Price |");
-        for (Stock s : market.values()) {
+        for (Stock stock : market.getAllStocks()) {
             System.out.printf("| %s | %s | %s | $%.2f |%n",
-                    s.getSymbol(), s.getCompanyName(), s.getSector(), s.getCurrentPrice());            
+                    stock.getSymbol(), stock.getCompanyName(), stock.getSector(), stock.getCurrentPrice());            
         }
     }
 
     // EFFECTS: update stock price
     private void updateStockPrice() {
         String symbol = readSymbol("Enter stock symbol to update price: ").toUpperCase(Locale.ROOT);
-        Stock s = market.get(symbol);
-        if (s == null) {
+        Stock stock = market.getStock(symbol);
+        if (stock == null) {
             System.out.println("Unknown symbol in market.");
             return;
         }
         double newPrice = readPositiveDouble("New price: $");
-        s.updateCurrentPrice(newPrice);
+        stock.updateCurrentPrice(newPrice);
         portfolio.calculatePortfolioValue();
-        System.out.printf("%s price updated to $%.2f%n", symbol, s.getCurrentPrice());
+        System.out.printf("%s price updated to $%.2f%n", symbol, stock.getCurrentPrice());
     }    
 
     // EFFECTS: view transactions history
     private void viewTransactionHistory() {
-        TransactionManager tm = portfolio.getTransactionManager();
-        if (tm.getTransactions().isEmpty()) {
+        TransactionManager transactionManager = portfolio.getTransactionManager();
+        if (transactionManager.getTransactions().isEmpty()) {
             System.out.println("(No transactions yet)");
             return;
         }
         System.out.println();
-        System.out.println(tm.toString());
+        System.out.println(transactionManager.toString());
     }    
 
-
+    // EFFECTS: filterTransaction based on user commands
     private void filterTransactions() {
         TransactionManager transactionManager = portfolio.getTransactionManager();
         if (transactionManager.getTransactions().isEmpty()) {
@@ -267,7 +269,7 @@ public class StockPortfolioApp {
     // Returns null if user declines creation.
     private Stock resolveOrCreateStockForBuy() {
         String symbol = readSymbol("Enter stock symbol to buy: ").toUpperCase(Locale.ROOT);
-        Stock stock = market.get(symbol);
+        Stock stock = market.getStock(symbol);
         if (stock != null) {
             return stock;
         }
@@ -280,7 +282,7 @@ public class StockPortfolioApp {
         String sector = readLine("Sector: ");
         double price = readPositiveDouble("Current price: $");
         stock = new Stock(symbol, company, sector, price);
-        market.put(symbol, stock);
+        market.addOrReplace(stock);
         return stock;
     }
 
@@ -308,8 +310,8 @@ public class StockPortfolioApp {
     private void filterByAction(TransactionManager transactionManager) {
         String action = readLine("Enter action (BUY/SELL): ").trim();
         System.out.println(transactionManager.getHeader());
-        for (Transaction t : transactionManager.filterByAction(action)) {
-            System.out.println(t.toString());
+        for (Transaction transaction : transactionManager.filterByAction(action)) {
+            System.out.println(transaction.toString());
         }
     }
 
@@ -317,8 +319,8 @@ public class StockPortfolioApp {
     private void filterBySymbol(TransactionManager transactionManager) {
         String symbol = readSymbol("Enter symbol: ").toUpperCase(Locale.ROOT);
         System.out.println(transactionManager.getHeader());
-        for (Transaction t : transactionManager.filterBySymbol(symbol)) {
-            System.out.println(t.toString());
+        for (Transaction transaction : transactionManager.filterBySymbol(symbol)) {
+            System.out.println(transaction.toString());
         }
     }
 
