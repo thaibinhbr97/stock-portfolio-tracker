@@ -25,7 +25,7 @@ public class TestHolding {
         costco = new Stock("COST", "Costco Wholesale Corp.", "Consumer Staples",915.95);
         jpmorgan = new Stock("JPM", "JPMorgan Chase & Corp", "Financial Services", 310.35);
 
-        nvidiaHolding = new Holding(nvidia, 3.0);
+        nvidiaHolding = new Holding(nvidia, 3.0, 150.00);
     }
 
     @Test
