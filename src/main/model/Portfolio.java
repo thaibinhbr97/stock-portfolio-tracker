@@ -4,12 +4,17 @@ import java.time.LocalDateTime;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.json.JSONArray;
+import org.json.JSONObject;
+
+import persistence.Writable;
+
 /*
  * Represents user's overall stock portfolio.
  * The Portfolio maintains a collection of holdings and provides
- * methods for buying, selling, showcase  as well as calculating the total value of all owned stocks.
+ * methods for buying, selling, showcase current holdings as well as calculating the total value of all owned stock holdings.
  */
-public class Portfolio { 
+public class Portfolio implements Writable { 
     private String ownerName;
     private double cashBalance;
     private double portfolioValue;
@@ -47,7 +52,7 @@ public class Portfolio {
         String symbol = stock.getSymbol();
         Holding holding = holdings.get(symbol);
         if (holding == null) {
-            holding = new Holding(stock, quantity);
+            holding = new Holding(stock, quantity, stock.getCurrentPrice());
             holdings.put(symbol, holding);
         } else {
             holding.buyShare(quantity);
@@ -170,4 +175,15 @@ public class Portfolio {
         }
         return contentBuilder.toString();
     }
+
+    @Override
+    // EFFECTS: turns a portfolio object to a JSON object
+    public JSONObject toJson() {
+        return null;
+    }
+
+    // EFFECTS: returns a transaction manager array from a JSON object
+    public static Portfolio fromJson(JSONObject o, JSONArray transactionsArray) {
+        return null; // stub
+    }       
 }
