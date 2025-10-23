@@ -1,0 +1,31 @@
+{
+  "portfolio": {
+    "ownerName": "Brad",
+    "cashBalance": 10000.0,
+    "lastUpdated": "2025-10-21T12:33:00",
+    "portfolioValue": 14292.15,
+    "holdings": [
+      {
+        "symbol": "AAPL",
+        "shares": 10.0,
+        "averagePurchasePrice": 200.50,
+        "stock": {
+          "symbol": "AAPL",
+          "companyName": "Apple Inc.",
+          "sector": "Technology",
+          "currentPrice": 258.02
+        }
+      }
+    ]
+  },
+  "transactions": [
+    {
+      "dateTime": "2025-10-20T09:30:15",
+      "symbol": "AAPL",
+      "action": "BUY",
+      "shares": 5.0,
+      "price": 219.51,
+      "total": 1097.55
+    }
+  ]
+}
