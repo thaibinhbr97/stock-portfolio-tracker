@@ -1,7 +1,9 @@
 package model;
 
 import java.util.Collection;
+import java.util.Collections;
 import java.util.Map;
+import java.util.TreeMap;
 
 /**
  * Represents a stock market containing available stocks.
@@ -13,37 +15,49 @@ public class Market {
 
     // EFFECTS: constructs an empty market
     public Market() {
-        // stub
+        market = new TreeMap<>();
     }
 
     // MODIFIES: this
-    // EFFECTS: adds or replaces the given stock in the market
+    // EFFECTS: adds or replaces the given stock in the market (keyed by uppercase symbol)
     public void addOrReplace(Stock stock) {
-        // if (stock == null || stock.getSymbol() == null) {
-        //     return;
-        // }
-        // market.put(stock.getSymbol().toUpperCase(), stock);
+        if (stock == null) {
+            return;
+        }
+        String symbol = stock.getSymbol();
+        if (symbol == null) {
+            return;
+        }
+        market.put(symbol.toUpperCase(), stock);
     }
 
     // MODIFIES: this
     // EFFECTS: adds all given stocks (nulls ignored)
     public void addAll(Collection<Stock> stocks) {
-        // stub
+        if (stocks == null) {
+            return;
+        }
+        for (Stock s : stocks) {
+            addOrReplace(s);
+        }
     }
 
     // EFFECTS: returns the stock with the given symbol, or null if not found
     public Stock getStock(String symbol) {
-        return null; // stub
+        if (symbol == null) {
+            return null;
+        }
+        return market.get(symbol.toUpperCase());
     }
 
 
     // EFFECTS: returns an unmodifiable view of all stocks in the market (sorted by symbol)
     public Collection<Stock> getAllStocks() {
-        return null;// stub
+        return Collections.unmodifiableCollection(market.values());
     }
 
     // EFFECTS: returns true if the market is empty
     public boolean isEmpty() {
-        return false; // stub
+        return market.isEmpty();
     }
 }
