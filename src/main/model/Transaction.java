@@ -2,13 +2,17 @@ package model;
 
 import java.time.LocalDateTime;
 
+import org.json.JSONObject;
+
+import persistence.Writable;
+
 /*
  * Represents a history record of a single transaction BUY/SELL.
  * Each Transaction object includes details such as the date, stock symbol,
  * action type (BUY/SELL), number of shares, price per share, and total amount.
  * This class is immutable once created and used for maintaining transaction history.
  */
-public class Transaction {
+public class Transaction implements Writable {
     private LocalDateTime dateTime;
     private String symbol;
     private String action; // BUY/SELL
@@ -61,4 +65,16 @@ public class Transaction {
                 getDateTime().toString(), getSymbol(), getAction(), getShares(), getPrice(), getTotal());
         return transactionString;
     }
+
+    @Override
+    public JSONObject toJson() {
+        return null; // stub
+    }
+
+    // EFFECTS: returns a transaction object from a JSON object
+    public static Transaction fromJson(JSONObject o) {
+        return null; // stub
+    }     
+    
+    
 }
