@@ -4,6 +4,14 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.json.JSONArray;
+
+/*
+ * Represents a history record of all transactions for BUY/SELL action. 
+ * TransactionManager allows user filter transactions history based on 
+ * BUY/SELL action, stock symbol, date and time.
+ * This class is immutable once created and used for maintaining a history record of all transactions.
+ */
 public class TransactionManager {
     private List<Transaction> transactions;
 
@@ -65,6 +73,11 @@ public class TransactionManager {
         return headerString;
     }
 
+    // setters
+    public void setTransactions(List<Transaction> transactions) {
+        this.transactions = transactions;
+    }
+
     // EFFECTS: Overriding toString() method of TransactionManager class as below
     // | Date | Symbol | Action | Shares | Price | Total |
     // | 2025-10-05T10:44:00 | AAPL | SELL | 10.00 | $100.00 | $1000.00 |
@@ -78,5 +91,14 @@ public class TransactionManager {
             contentBuilder.append(transaction.toString()).append("\n");
         }
         return contentBuilder.toString();
+    }      
+    
+    public JSONArray toJsonArray() {
+        return null; // stub
+    }
+
+    // EFFECTS: returns a transaction manager array from a JSON object
+    public static Holding fromJsonArray(JSONArray o) {
+        return null; // stub
     }        
 }
