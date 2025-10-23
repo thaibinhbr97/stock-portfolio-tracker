@@ -1,20 +1,24 @@
 package model;
 
+import org.json.JSONObject;
+
+import persistence.Writable;
+
 /*
  * Represents how much of a stock you own, including your purchase price.
  * Holding has the ability to buy or sell shares.
  */
-public class Holding {
+public class Holding implements Writable {
     private Stock stock;
     private double shares;
     private double averagePurchasePrice; // cost basis per share
     private String symbol;
 
-    // initialize symbol to be stock symbol, 
-    public Holding(Stock stock, double shares) {
+    // EFFECTS: Initialized with symbol to be stock symbol, stock, shares, and averagePurchasesPrice
+    public Holding(Stock stock, double shares, double averagePurchasePrice) {
         this.stock = stock;
         this.shares = shares;
-        this.averagePurchasePrice = stock.getCurrentPrice();
+        this.averagePurchasePrice = averagePurchasePrice;
         this.symbol = stock.getSymbol();
     }
 
@@ -64,6 +68,11 @@ public class Holding {
     public double getUnrealizedProfit() {
         return (stock.getCurrentPrice() - averagePurchasePrice) * shares;
     }
+
+    // setters
+    public void setAveragePrice(double newAveragePurchasePrice) {
+        averagePurchasePrice = newAveragePurchasePrice;
+    }
     
     // EFFECTS: Overriding toString() method of Holding class as example below
     // | Symbol | CurrentPrice | AveragePrice | Shares | MarketValue| Gain/Loss |  
@@ -81,4 +90,14 @@ public class Holding {
                 getSymbol(), stock.getCurrentPrice(), getAveragePrice(), getShares(), getMarketValue(), profitString);
         return holdingString;
     }
+
+    @Override
+    public JSONObject toJson() {
+        return null; // stub
+    }
+
+    // EFFECTS: returns a holding object from a JSON object
+    public static Holding fromJson(JSONObject o) {
+        return null; // stub
+    }    
 }
