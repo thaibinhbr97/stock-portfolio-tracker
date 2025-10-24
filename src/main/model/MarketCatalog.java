@@ -24,7 +24,6 @@ public final class MarketCatalog {
         stocks.add(new Stock("META", "Meta Platforms, Inc.", "Technology", 470.00));
         stocks.add(new Stock("BABA", "Alibaba Group Holding Limited", "Consumer Discretionary", 85.00));
         stocks.add(new Stock("ORCL", "Oracle Corporation", "Technology", 120.00));        
-
         return stocks;
     }
 
