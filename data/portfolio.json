@@ -1,31 +1,89 @@
 {
-  "portfolio": {
-    "ownerName": "Brad",
-    "cashBalance": 10000.0,
-    "lastUpdated": "2025-10-21T12:33:00",
-    "portfolioValue": 14292.15,
-    "holdings": [
-      {
-        "symbol": "AAPL",
-        "shares": 10.0,
-        "averagePurchasePrice": 200.50,
-        "stock": {
-          "symbol": "AAPL",
-          "companyName": "Apple Inc.",
-          "sector": "Technology",
-          "currentPrice": 258.02
-        }
-      }
-    ]
-  },
-  "transactions": [
+  "market": {"stocks": [
     {
-      "dateTime": "2025-10-20T09:30:15",
       "symbol": "AAPL",
-      "action": "BUY",
-      "shares": 5.0,
-      "price": 219.51,
-      "total": 1097.55
+      "companyName": "Apple Inc.",
+      "currentPrice": 150,
+      "sector": "AAPL"
+    },
+    {
+      "symbol": "AMZN",
+      "companyName": "Amazon.com, Inc.",
+      "currentPrice": 3300,
+      "sector": "AMZN"
+    },
+    {
+      "symbol": "BABA",
+      "companyName": "Alibaba Group Holding Limited",
+      "currentPrice": 85,
+      "sector": "BABA"
+    },
+    {
+      "symbol": "GOOGL",
+      "companyName": "Alphabet Inc.",
+      "currentPrice": 2800,
+      "sector": "GOOGL"
+    },
+    {
+      "symbol": "META",
+      "companyName": "Meta Platforms, Inc.",
+      "currentPrice": 470,
+      "sector": "META"
+    },
+    {
+      "symbol": "MSFT",
+      "companyName": "Microsoft Corporation",
+      "currentPrice": 350,
+      "sector": "MSFT"
+    },
+    {
+      "symbol": "NFLX",
+      "companyName": "Netflix, Inc.",
+      "currentPrice": 600,
+      "sector": "NFLX"
+    },
+    {
+      "symbol": "NVDA",
+      "companyName": "NVIDIA Corporation",
+      "currentPrice": 900,
+      "sector": "NVDA"
+    },
+    {
+      "symbol": "ORCL",
+      "companyName": "Oracle Corporation",
+      "currentPrice": 120,
+      "sector": "ORCL"
+    },
+    {
+      "symbol": "TSLA",
+      "companyName": "Tesla, Inc.",
+      "currentPrice": 100,
+      "sector": "TSLA"
     }
-  ]
+  ]},
+  "lastUpdated": "2025-10-24T13:03:23.317504",
+  "portfolio": {
+    "lastUpdated": "2025-10-24T13:01:35.578660",
+    "ownerName": "Brad",
+    "cashBalance": 9500,
+    "holdings": [{
+      "shares": 2,
+      "symbol": "TSLA",
+      "averagePurchasePrice": 250,
+      "stock": {
+        "symbol": "TSLA",
+        "companyName": "Tesla, Inc.",
+        "currentPrice": 100,
+        "sector": "TSLA"
+      }
+    }],
+    "transactions": [{
+      "dateTime": "2025-10-24T13:01:35.578660",
+      "shares": 2,
+      "symbol": "TSLA",
+      "total": 500,
+      "price": 250,
+      "action": "BUY"
+    }]
+  }
 }

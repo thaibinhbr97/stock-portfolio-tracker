@@ -1,0 +1,11 @@
+{
+  "market": {"stocks": []},
+  "lastUpdated": "2025-10-24T15:43:27.631651",
+  "portfolio": {
+    "lastUpdated": "2024-01-01T12:00",
+    "ownerName": "Brad",
+    "cashBalance": 10000,
+    "holdings": [],
+    "transactions": []
+  }
+}
