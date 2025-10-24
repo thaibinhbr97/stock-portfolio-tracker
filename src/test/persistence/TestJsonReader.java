@@ -10,11 +10,13 @@ import java.util.Map;
 
 import org.junit.jupiter.api.Test;
 
+import ca.ubc.cs.ExcludeFromJacocoGeneratedReport;
 import model.Holding;
 import model.Market;
 import model.Portfolio;
 import model.Transaction;
 
+@ExcludeFromJacocoGeneratedReport
 public class TestJsonReader extends TestJson {
     @Test
     void testReaderNonExistentFile() {

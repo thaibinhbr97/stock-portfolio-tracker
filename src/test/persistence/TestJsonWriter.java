@@ -12,9 +12,11 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 import org.junit.jupiter.api.Test;
 
+import ca.ubc.cs.ExcludeFromJacocoGeneratedReport;
 import model.Market;
 import model.Portfolio;
 
+@ExcludeFromJacocoGeneratedReport
 public class TestJsonWriter extends TestJson {
     @Test
     void testWriterInvalidFile() {

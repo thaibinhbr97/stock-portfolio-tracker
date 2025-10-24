@@ -5,12 +5,14 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 import java.time.LocalDateTime;
 
+import ca.ubc.cs.ExcludeFromJacocoGeneratedReport;
 import model.Holding;
 import model.Market;
 import model.Portfolio;
 import model.Stock;
 import model.Transaction;
 
+@ExcludeFromJacocoGeneratedReport
 public abstract class TestJson {
     protected static final double EPSILON = 1e-9;
     protected static final LocalDateTime FIXED_TIME = LocalDateTime.of(2024, 1, 1, 12, 0);
