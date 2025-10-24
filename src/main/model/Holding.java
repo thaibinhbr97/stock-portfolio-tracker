@@ -93,11 +93,19 @@ public class Holding implements Writable {
 
     @Override
     public JSONObject toJson() {
-        return null; // stub
+        JSONObject jsonObject = new JSONObject();
+        jsonObject.put("stock", stock.toJson());
+        jsonObject.put("shares", getShares());
+        jsonObject.put("averagePurchasePrice", getAveragePrice());
+        jsonObject.put("symbol",getSymbol());
+        return jsonObject;
     }
 
     // EFFECTS: returns a holding object from a JSON object
-    public static Holding fromJson(JSONObject o) {
-        return null; // stub
+    public static Holding fromJson(JSONObject jsonObject) {
+        Stock s = Stock.fromJson(jsonObject.getJSONObject("stock"));
+        double shares = jsonObject.getDouble("shares");
+        double avg = jsonObject.getDouble("averagePurchasePrice");
+        return new Holding(s, shares, avg);
     }    
 }
