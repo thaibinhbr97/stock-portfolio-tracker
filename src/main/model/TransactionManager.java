@@ -43,7 +43,10 @@ public class TransactionManager {
         List<Transaction> filtered = new ArrayList<>();
         for (Transaction transaction : transactions) {
             LocalDateTime dateTime = transaction.getDateTime();
-            if ((dateTime.isEqual(startTime) || dateTime.isAfter(startTime)) && (dateTime.isEqual(endTime) || dateTime.isBefore(endTime))) {
+            if ((dateTime.isEqual(startTime) 
+                    || dateTime.isAfter(startTime)) 
+                    && (dateTime.isEqual(endTime) 
+                    || dateTime.isBefore(endTime))) {
                 filtered.add(transaction);
             }
         }
