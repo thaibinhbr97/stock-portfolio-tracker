@@ -12,7 +12,8 @@ import persistence.Writable;
 /*
  * Represents user's overall stock portfolio.
  * The Portfolio maintains a collection of holdings and provides
- * methods for buying, selling, showcase current holdings as well as calculating the total value of all owned stock holdings.
+ * methods for buying, selling, showcase current holdings as well 
+ * as calculating the total value of all owned stock holdings.
  */
 public class Portfolio implements Writable { 
     private String ownerName;
@@ -208,30 +209,42 @@ public class Portfolio implements Writable {
         // holdings
         JSONArray holds = jsonObject.getJSONArray("holdings");
         if (holds != null) {
-            for (int i = 0; i < holds.length(); i++) {
-                JSONObject ho = holds.getJSONObject(i);
-                Holding holding = Holding.fromJson(ho);
-                p.getHoldings().put(holding.getSymbol(), holding);
-            }
+            parseHoldings(holds, p);
         }
 
         // transactions
         JSONArray transactionsArray = jsonObject.getJSONArray("transactions");
         if (transactionsArray != null) {
-            for (int i = 0; i < transactionsArray.length(); i++) {
-                JSONObject to = transactionsArray.getJSONObject(i);
-                Transaction t = new Transaction(
-                    to.getString("symbol"), 
-                    to.getString("action"), 
-                    to.getDouble("shares"), 
-                    to.getDouble("price"), 
-                    LocalDateTime.parse(to.getString("dateTime"))
-                );
-                p.getTransactionManager().addTransaction(t);
-            }
+            parseTransactions(transactionsArray, p);
         }
 
         p.calculatePortfolioValue();
         return p;
     }       
+
+    // MODIFIES: p
+    // EFFECTS: parses holdings array and inserts into portfolio by symbol
+    private static void parseHoldings(JSONArray holds, Portfolio p) {
+        for (int i = 0; i < holds.length(); i++) {
+            JSONObject ho = holds.getJSONObject(i);
+            Holding holding = Holding.fromJson(ho);
+            p.getHoldings().put(holding.getSymbol(), holding);
+        }
+    }
+
+    // MODIFIES: p
+    // EFFECTS: parses transactions array and appends to the portfolio's transaction manager
+    private static void parseTransactions(JSONArray transactionsArray, Portfolio p) {
+        for (int i = 0; i < transactionsArray.length(); i++) {
+            JSONObject to = transactionsArray.getJSONObject(i);
+            Transaction t = new Transaction(
+                    to.getString("symbol"),
+                    to.getString("action"),
+                    to.getDouble("shares"),
+                    to.getDouble("price"),
+                    LocalDateTime.parse(to.getString("dateTime"))
+            );
+            p.getTransactionManager().addTransaction(t);
+        }
+    }    
 }
