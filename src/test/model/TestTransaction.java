@@ -19,7 +19,7 @@ public class TestTransaction {
     @BeforeEach
     public void runBefore() {
         LocalDateTime dateTime = LocalDateTime.of(2025, 10, 5, 6, 23, 32);
-        buyAmazon = new Transaction("AMZN", "BUY", 5, 200.00, dateTime);
+        buyAmazon = new Transaction("AMZN", "BUY", 5.0, 200.00, dateTime);
     }
 
     @Test

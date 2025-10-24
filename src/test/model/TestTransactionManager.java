@@ -36,10 +36,10 @@ public class TestTransactionManager {
     public void runBefore() {
         transactionManager = new TransactionManager();
 
-        buyAmazon = new Transaction("AMZN", "BUY", 5, 200.00, dateTime);
-        sellAmazon = new Transaction("AMZN", "SELL", 3, 200.00, dateTime);
-        buyGoogle = new Transaction("GOOGL", "BUY", 10, 300.00, dateTime);
-        sellGoogle = new Transaction("GOOGL", "SELL", 5, 200.00, dateTime);
+        buyAmazon = new Transaction("AMZN", "BUY", 5.0, 200.00, dateTime);
+        sellAmazon = new Transaction("AMZN", "SELL", 3.0, 200.00, dateTime);
+        buyGoogle = new Transaction("GOOGL", "BUY", 10.0, 300.00, dateTime);
+        sellGoogle = new Transaction("GOOGL", "SELL", 5.0, 200.00, dateTime);
 
         transactions = transactionManager.getTransactions();
     }
