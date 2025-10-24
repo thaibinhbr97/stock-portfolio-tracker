@@ -5,12 +5,16 @@ import java.util.Collections;
 import java.util.Map;
 import java.util.TreeMap;
 
+import org.json.JSONObject;
+
+import persistence.Writable;
+
 /**
  * Represents a stock market containing available stocks.
  * Internally uses a TreeMap to keep stocks sorted alphabetically by their symbol.
  * This class is the single source of truth for available listings that the UI and Portfolio consult.
  */
-public class Market {
+public class Market implements Writable {
     private final Map<String, Stock> market;
 
     // EFFECTS: constructs an empty market
@@ -60,4 +64,15 @@ public class Market {
     public boolean isEmpty() {
         return market.isEmpty();
     }
+
+    @Override
+    public JSONObject toJson() {
+        return null; // stub
+    }
+
+    // EFFECTS: returns a market object from JSON object
+    public static Market fromJson(JSONObject jsonObject) {
+        return null;
+    }
+
 }
