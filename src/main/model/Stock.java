@@ -58,32 +58,24 @@ public class Stock implements Writable {
         return stockString;
     }
 
-    // @Override
-    // public JSONObject toJson() {
-    //     JSONObject json = new JSONObject();
-    //     json.put("name", name);
-    //     json.put("thingies", thingiesToJson());
-    //     return json;
-    // }
-
-    // // EFFECTS: returns things in this workroom as a JSON array
-    // private JSONArray thingiesToJson() {
-    //     JSONArray jsonArray = new JSONArray();
-
-    //     for (Thingy t : thingies) {
-    //         jsonArray.put(t.toJson());
-    //     }
-
-    //     return jsonArray;
-    // }
-    
     @Override
     public JSONObject toJson() {
-        return null; // stub
+        JSONObject jsonObject = new JSONObject();
+        jsonObject.put("symbol", getSymbol());
+        jsonObject.put("companyName", getCompanyName());
+        jsonObject.put("sector", getSymbol());
+        jsonObject.put("currentPrice", getCurrentPrice());
+        return jsonObject;
+
     }
 
     // EFFECTS: returns a stock object from a JSON object
-    public static Stock fromJson(JSONObject o) {
-        return null; // stub
+    public static Stock fromJson(JSONObject jsonObject) {
+        return new Stock(
+            jsonObject.getString("symbol"), 
+            jsonObject.getString("companyName"), 
+            jsonObject.getString("sector"), 
+            jsonObject.getDouble("currentPrice")
+        ); 
     }
 }
