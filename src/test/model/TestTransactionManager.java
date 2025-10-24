@@ -1,13 +1,16 @@
 package model;
 
+import static org.junit.Assert.assertSame;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.json.JSONArray;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -30,16 +33,24 @@ public class TestTransactionManager {
 
     private List<Transaction> transactions;
 
-    private LocalDateTime dateTime = LocalDateTime.of(2025, 10, 5, 6, 23, 32);
+    private LocalDateTime dateTime = LocalDateTime.of(2025, 10, 5, 0, 0, 0);
+
+    // Deterministic date-times for testing
+    private static LocalDateTime t(int hour) {
+        return LocalDateTime.of(2025, 10, 5, hour, 0, 0);
+    }
+    private final LocalDateTime dt10 = t(10);
+    private final LocalDateTime dt12 = t(12);
+    private final LocalDateTime dt14 = t(14);
     
     @BeforeEach
     public void runBefore() {
         transactionManager = new TransactionManager();
 
-        buyAmazon = new Transaction("AMZN", "BUY", 5.0, 200.00, dateTime);
-        sellAmazon = new Transaction("AMZN", "SELL", 3.0, 200.00, dateTime);
-        buyGoogle = new Transaction("GOOGL", "BUY", 10.0, 300.00, dateTime);
-        sellGoogle = new Transaction("GOOGL", "SELL", 5.0, 200.00, dateTime);
+        buyAmazon  = new Transaction("AMZN", "BUY",  5.0, 200.00, dt10);
+        sellAmazon = new Transaction("AMZN", "SELL", 3.0, 200.00, dt12);
+        buyGoogle  = new Transaction("GOOGL", "BUY", 10.0, 300.00, dt14);
+        sellGoogle = new Transaction("GOOGL", "SELL", 5.0, 200.00, dt14);
 
         transactions = transactionManager.getTransactions();
     }
@@ -168,24 +179,42 @@ public class TestTransactionManager {
     }
 
     @Test
-    public void testFilterByDateTimes() {
+    public void testFilterByDateTime_InclusiveBounds() {
         transactionManager.addTransaction(buyAmazon);
-        transactionManager.addTransaction(buyGoogle);  
         transactionManager.addTransaction(sellAmazon);
+        transactionManager.addTransaction(buyGoogle);  
+
+        List<Transaction> filtered = transactionManager.filterByDateTime(dt12, dt14);
+        assertEquals(2, filtered.size());
+        assertEquals(dt12, filtered.get(0).getDateTime());
+        assertEquals(dt14, filtered.get(1).getDateTime());
+    }
+
+    @Test
+    public void testFilterByDateTime_FullRange() {
+        transactionManager.addTransaction(buyAmazon);
+        transactionManager.addTransaction(sellAmazon);
+        transactionManager.addTransaction(buyGoogle);
         transactionManager.addTransaction(sellGoogle);
 
-        List<Transaction> dateTimeFilteredTransactions = new ArrayList<>();          
-        dateTimeFilteredTransactions = transactionManager.filterByDateTime(
-            LocalDateTime.of(
-                2025, 
-                10,
-                5, 
-                6, 
-                23, 
-                32), 
-                LocalDateTime.now());
-        assertEquals(4, dateTimeFilteredTransactions.size());         
+        List<Transaction> filtered = transactionManager.filterByDateTime(dt10, dt14);
+        assertEquals(4, filtered.size());        
     }
+
+    public void testFilterByDateTime_OutOfRange() {
+        transactionManager.addTransaction(buyAmazon);
+        transactionManager.addTransaction(sellAmazon);
+        List<Transaction> filtered = transactionManager.filterByDateTime(t(6), t(9));
+        assertTrue(filtered.isEmpty());
+    }
+
+    @Test
+    public void testFilterByDateTime_StartAfterEnd_ReturnsEmpty() {
+        transactionManager.addTransaction(buyAmazon);
+        transactionManager.addTransaction(sellAmazon);
+        List<Transaction> filtered = transactionManager.filterByDateTime(dt14, dt12);
+        assertTrue(filtered.isEmpty());
+    }    
 
     @Test
     public void testFilterBySymbol() {
@@ -203,12 +232,44 @@ public class TestTransactionManager {
 
     @Test 
     public void testTransactionManagerToString() {
-        String transactionManagerString = transactionManager.getHeader();
+        String expected = transactionManager.getHeader() + "\n";
         transactionManager.addTransaction(buyAmazon);
-        transactionManagerString += "\n| 2025-10-05T06:23:32 | AMZN | BUY | 5.00 | $200.00 | $1000.00 |\n";
-        System.out.println(transactionManagerString.toString());
-        System.out.println(transactionManagerString);
-        assertEquals(transactionManagerString, transactionManager.toString());        
+        expected += buyAmazon.toString() + "\n";
+        assertEquals(expected, transactionManager.toString());      
     }
-    
+
+    @Test
+    public void testFromJsonArray_RoundTrip() {
+        transactionManager.addTransaction(buyAmazon);
+        transactionManager.addTransaction(sellAmazon);
+        transactionManager.addTransaction(buyGoogle);
+
+        JSONArray arr = transactionManager.toJsonArray();
+        TransactionManager rebuilt = TransactionManager.fromJsonArray(arr);
+
+        assertNotNull(rebuilt);
+        assertEquals(3, rebuilt.getTransactions().size());
+        assertEquals(buyAmazon.getSymbol(), rebuilt.getTransactions().get(0).getSymbol());
+        assertEquals(sellAmazon.getAction(), rebuilt.getTransactions().get(1).getAction());
+        assertEquals(buyGoogle.getDateTime(), rebuilt.getTransactions().get(2).getDateTime());
+    }
+
+    @Test
+    public void testFromJsonArray_Null_ReturnsEmptyManager() {
+        TransactionManager rebuilt = TransactionManager.fromJsonArray(null);
+        assertNotNull(rebuilt);
+        assertTrue(rebuilt.getTransactions().isEmpty());
+    }
+
+    @Test
+    public void testSetTransactions_ReplacesUnderlyingList() {
+        List<Transaction> replacement = new ArrayList<>();
+        replacement.add(buyAmazon);
+        replacement.add(sellAmazon);
+
+        transactionManager.setTransactions(replacement);
+        assertSame(replacement, transactionManager.getTransactions());
+        assertEquals(2, transactionManager.getTransactions().size());
+        assertEquals("AMZN", transactionManager.getTransactions().get(0).getSymbol());
+    }    
 }
