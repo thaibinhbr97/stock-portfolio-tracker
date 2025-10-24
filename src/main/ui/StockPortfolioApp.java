@@ -1,5 +1,6 @@
 package ui;
 
+import java.io.FileNotFoundException;
 import java.time.LocalDateTime;
 import java.util.Locale;
 import java.util.Scanner;
@@ -11,36 +12,52 @@ import model.Portfolio;
 import model.Stock;
 import model.Transaction;
 import model.TransactionManager;
+import persistence.JsonReader;
+import persistence.JsonWriter;
+import persistence.Loaded;
 
 public class StockPortfolioApp {
-    private static final String JSON_STORE = "./data/portfolio.json";    
+    private static final String JSON_STORE = "./data/portfolio.json";
+    private JsonWriter jsonWriter;
+    private JsonReader jsonReader;
+    private Loaded loaded;
+    
     private Market market;
     private Portfolio portfolio;
     private Scanner input;
+    
 
     public StockPortfolioApp() {
         runStockPortfolioApp();
     }
 
     public void runStockPortfolioApp() {
-        init();
-        System.out.println("\nWelcome to the Stock Portfolio Application!\n");
-        boolean keepGoing = true;
-        while (keepGoing) {
-            displayMenu();
-            String command = readLine("Select an option: ");
-            keepGoing = processCommand(command);
-        }
-        System.out.println("Goodbye!");
-        if (input != null) {
-            input.close();
-        }        
+        
+        try {
+            init();
+            System.out.println("\nWelcome to the Stock Portfolio Application!\n");
+            boolean keepGoing = true;
+            while (keepGoing) {
+                displayMenu();
+                String command = readLine("Select an option: ");
+                keepGoing = processCommand(command);
+            }
+            System.out.println("Goodbye!");
+            if (input != null) {
+                input.close();
+            }                
+        } catch (FileNotFoundException e) {
+            System.out.println("Unable to find file");
+        }    
         
     }
 
-    // initialize portfolio
-    public void init() {
+    // EFFECTS: initialize portfolio
+    public void init() throws FileNotFoundException {
         input = new Scanner(System.in);
+        jsonWriter = new JsonWriter(JSON_STORE);
+        jsonReader = new JsonReader(JSON_STORE);
+
         input.useDelimiter("\r?\n|\r");
         
         // create demo portfolio
@@ -397,4 +414,14 @@ public class StockPortfolioApp {
             System.out.println("Please answer y/n.");
         }
     }    
+
+    // EFFECTS: saves portfolio to file
+    private void saveStockPortfolioApp() {
+
+    }
+
+    // EFFECTS: loads portfolio from file
+    private void loadStockPortfolioApp() {
+        
+    }
 }
