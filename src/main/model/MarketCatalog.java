@@ -9,7 +9,9 @@ import java.util.List;
  */
 public final class MarketCatalog {
 
-    private MarketCatalog() { } // prevent instantiation
+    private MarketCatalog() { 
+
+    }
 
     // EFFECTS: returns a list of stocks
     public static List<Stock> marketStocks() {
