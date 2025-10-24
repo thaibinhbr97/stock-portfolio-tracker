@@ -23,7 +23,7 @@ public class Transaction implements Writable {
     // is initialized to LocalDateTime.now(),
     // symbol, action, shares, price,
     // a recent action (BUY/SELL) for a stock.
-    public Transaction(String symbol, String action, double shares, double price, LocalDateTime dateTime) {
+    public Transaction(String symbol, String action, Double shares, Double price, LocalDateTime dateTime) {
         this.symbol = symbol.toUpperCase();
         this.action = action.toUpperCase();
         this.shares = shares;
@@ -68,12 +68,25 @@ public class Transaction implements Writable {
 
     @Override
     public JSONObject toJson() {
-        return null; // stub
+        JSONObject jsonObject = new JSONObject();
+        jsonObject.put("dateTime", getDateTime().toString());
+        jsonObject.put("symbol", getSymbol());
+        jsonObject.put("action", getAction());
+        jsonObject.put("shares", getShares());
+        jsonObject.put("price", getPrice());
+        jsonObject.put("total", getTotal());
+        return jsonObject;
     }
 
     // EFFECTS: returns a transaction object from a JSON object
-    public static Transaction fromJson(JSONObject o) {
-        return null; // stub
+    public static Transaction fromJson(JSONObject jsonObject) {
+        return new Transaction(
+            jsonObject.getString("symbol"), 
+            jsonObject.getString("action"), 
+            jsonObject.getDouble("shares"), 
+            jsonObject.getDouble("price"), 
+            LocalDateTime.parse(jsonObject.getString("dateTime"))
+        );
     }     
     
     
