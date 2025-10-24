@@ -5,6 +5,7 @@ import java.util.Collections;
 import java.util.Map;
 import java.util.TreeMap;
 
+import org.json.JSONArray;
 import org.json.JSONObject;
 
 import persistence.Writable;
@@ -67,12 +68,25 @@ public class Market implements Writable {
 
     @Override
     public JSONObject toJson() {
-        return null; // stub
+        JSONArray jsonArray = new JSONArray();
+        for (Stock s : getAllStocks()) {
+            jsonArray.put(s.toJson());
+        }
+        JSONObject jsonObject = new JSONObject();
+        jsonObject.put("stocks", jsonArray);
+        return jsonObject;
     }
 
     // EFFECTS: returns a market object from JSON object
     public static Market fromJson(JSONObject jsonObject) {
-        return null;
+        Market m = new Market();
+        JSONArray jsonArray = jsonObject.getJSONArray("stocks");
+        if (jsonArray != null) {
+            for (int i = 0; i < jsonArray.length(); i++) {
+                m.addOrReplace(Stock.fromJson(jsonArray.getJSONObject(i)));
+            }
+        }
+        return m;
     }
 
 }
