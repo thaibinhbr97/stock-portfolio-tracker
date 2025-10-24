@@ -1,6 +1,7 @@
 package ui;
 
 import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.time.LocalDateTime;
 import java.util.Locale;
 import java.util.Scanner;
@@ -14,13 +15,11 @@ import model.Transaction;
 import model.TransactionManager;
 import persistence.JsonReader;
 import persistence.JsonWriter;
-import persistence.Loaded;
 
 public class StockPortfolioApp {
     private static final String JSON_STORE = "./data/portfolio.json";
     private JsonWriter jsonWriter;
     private JsonReader jsonReader;
-    private Loaded loaded;
     
     private Market market;
     private Portfolio portfolio;
@@ -47,7 +46,7 @@ public class StockPortfolioApp {
                 input.close();
             }                
         } catch (FileNotFoundException e) {
-            System.out.println("Unable to find file");
+            System.out.println("Unable to find file at " + JSON_STORE);
         }    
         
     }
@@ -65,21 +64,6 @@ public class StockPortfolioApp {
         market = new Market();
         MarketCatalog.seed(market);
     }
-
-    // // MODIFIES: this
-    // // EFFECTS: loads sample stocks to market
-    // public void loadSampleStocks() {
-    //     market.put("AAPL", new Stock("AAPL", "Apple Inc.", "Technology", 150.00));
-    //     market.put("AMZN", new Stock("AMZN", "Amazon.com, Inc.", "Consumer Discretionary", 3300.00));
-    //     market.put("GOOGL", new Stock("GOOGL", "Alphabet Inc.", "Technology", 2800.00));
-    //     market.put("MSFT", new Stock("MSFT", "Microsoft Corporation", "Technology", 350.00));
-    //     market.put("TSLA", new Stock("TSLA", "Tesla, Inc.", "Automotive", 250.00));
-    //     market.put("NFLX", new Stock("NFLX", "Netflix, Inc.", "Communication Services", 600.00));
-    //     market.put("NVDA", new Stock("NVDA", "NVIDIA Corporation", "Technology", 900.00));
-    //     market.put("META", new Stock("META", "Meta Platforms, Inc.", "Technology", 470.00));
-    //     market.put("BABA", new Stock("BABA", "Alibaba Group Holding Limited", "Consumer Discretionary", 85.00));
-    //     market.put("ORCL", new Stock("ORCL", "Oracle Corporation", "Technology", 120.00));
-    // }
 
     // EFFECTS: print market by listing each stock to the console
     public void printMarket() {
@@ -99,6 +83,8 @@ public class StockPortfolioApp {
         System.out.println("5: Update Stock Price");
         System.out.println("6: View Transaction History");
         System.out.println("7: Filter Transactions");
+        System.out.println("s: Save to File");
+        System.out.println("l: Load from File");
         System.out.println("q: Quit");
         System.out.println("===============================================");
     }    
@@ -131,6 +117,12 @@ public class StockPortfolioApp {
             case "7":
                 filterTransactions();
                 break;
+            case "s":
+                saveStockPortfolioApp();
+                break;
+            case "l":
+                loadStockPortfolioApp();
+                break;                
             case "q":
                 return false;
             default:
@@ -415,13 +407,41 @@ public class StockPortfolioApp {
         }
     }    
 
-    // EFFECTS: saves portfolio to file
+    // EFFECTS: saves stock portfolio data to file
     private void saveStockPortfolioApp() {
-
+        try {
+            jsonWriter.open();
+            jsonWriter.write(market, portfolio);
+            jsonWriter.close();
+            System.out.println("Save StockPortfolioApp state to " + JSON_STORE);
+        } catch (FileNotFoundException e) {
+            System.out.println("Unable to write to file: " + JSON_STORE);
+        }
     }
 
-    // EFFECTS: loads portfolio from file
+    // EFFECTS: loads stock portfolio data from file
     private void loadStockPortfolioApp() {
-        
+        try {
+            Portfolio loadedPortfolio = jsonReader.readPortfolio();
+            Market loadedMarket = jsonReader.readMarket();
+
+            if (loadedPortfolio != null) {
+                this.portfolio = loadedPortfolio;
+            }
+
+            if (loadedMarket != null) {
+                this.market = loadedMarket;
+            } else {
+                // Fallback: ensure market is available even if file lacked a market section
+                if (this.market == null || this.market.isEmpty()) {
+                    this.market = new Market();
+                    MarketCatalog.seed(this.market);
+                }
+            }
+
+            System.out.println("Loaded StockPortfolioApp state from " + JSON_STORE);
+        } catch (IOException e) {
+            System.out.println("Unable to read from file: " + JSON_STORE);
+        }
     }
 }
