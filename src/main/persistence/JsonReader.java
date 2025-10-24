@@ -4,17 +4,12 @@ import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Paths;
-import java.time.LocalDateTime;
 import java.util.stream.Stream;
 
-import org.json.JSONArray;
 import org.json.JSONObject;
 
-import model.Holding;
 import model.Market;
 import model.Portfolio;
-import model.Stock;
-import model.Transaction;
 
 // Represents a reader that reads portfolio from JSON data stored in file
 public class JsonReader {
@@ -53,73 +48,73 @@ public class JsonReader {
         return new JSONObject(contentBuilder.toString());
     }
 
-    // EFFECTS: parses portfolio from JSON object and returns it
-    private Portfolio parsePortfolio(JSONObject obj) {
-        String owner = obj.getString("ownerName");
-        double cash = obj.getDouble("cashBalance");
-        LocalDateTime lastUpdated = LocalDateTime.parse(obj.getString("lastUpdated"));
+    // // EFFECTS: parses portfolio from JSON object and returns it
+    // private Portfolio parsePortfolio(JSONObject obj) {
+    //     String owner = obj.getString("ownerName");
+    //     double cash = obj.getDouble("cashBalance");
+    //     LocalDateTime lastUpdated = LocalDateTime.parse(obj.getString("lastUpdated"));
 
-        Portfolio p = new Portfolio(owner, cash, lastUpdated);
+    //     Portfolio p = new Portfolio(owner, cash, lastUpdated);
 
-        // holdings
-        addHoldings(obj.getJSONArray("holdings"), p);
+    //     // holdings
+    //     addHoldings(obj.getJSONArray("holdings"), p);
 
-        // transactions (into portfolio's TransactionManager)
-        if (obj.has("transactions")) {
-            addTransactions(obj.getJSONArray("transactions"), p);
-        }
+    //     // transactions (into portfolio's TransactionManager)
+    //     if (obj.has("transactions")) {
+    //         addTransactions(obj.getJSONArray("transactions"), p);
+    //     }
 
-        // ensure correct portfolio totals
-        p.calculatePortfolioValue();
-        return p;
-    }    
+    //     // ensure correct portfolio totals
+    //     p.calculatePortfolioValue();
+    //     return p;
+    // }    
 
-    // MODIFIES: portfolio
-    // EFFECTS: parses holdings from JSON array and adds it to portfolio 
-    private void addHoldings(JSONArray arr, Portfolio p) {
-        for (int i = 0; i < arr.length(); i++) {
-            addHolding(arr.getJSONObject(i), p);
-        }
-    }    
+    // // MODIFIES: portfolio
+    // // EFFECTS: parses holdings from JSON array and adds it to portfolio 
+    // private void addHoldings(JSONArray arr, Portfolio p) {
+    //     for (int i = 0; i < arr.length(); i++) {
+    //         addHolding(arr.getJSONObject(i), p);
+    //     }
+    // }    
 
-    // MODIFIES: portfolio
-    // EFFECTS: parses holding from JSON object and adds it to portfolio    
-    private void addHolding(JSONObject obj, Portfolio p) {
-        JSONObject s = obj.getJSONObject("stock");
-        Stock stock = new Stock(
-            s.getString("symbol"),
-            s.getString("companyName"),
-            s.getString("sector"),
-            s.getDouble("currentPrice")
-        );
+    // // MODIFIES: portfolio
+    // // EFFECTS: parses holding from JSON object and adds it to portfolio    
+    // private void addHolding(JSONObject obj, Portfolio p) {
+    //     JSONObject s = obj.getJSONObject("stock");
+    //     Stock stock = new Stock(
+    //         s.getString("symbol"),
+    //         s.getString("companyName"),
+    //         s.getString("sector"),
+    //         s.getDouble("currentPrice")
+    //     );
 
-        double shares = obj.getDouble("shares");
-        double avg = obj.getDouble("averagePurchasePrice");
+    //     double shares = obj.getDouble("shares");
+    //     double avg = obj.getDouble("averagePurchasePrice");
 
-        Holding h = new Holding(stock, shares, avg);
+    //     Holding h = new Holding(stock, shares, avg);
 
-        p.getHoldings().put(h.getSymbol(), h);
-    }
+    //     p.getHoldings().put(h.getSymbol(), h);
+    // }
 
-    // MODIFIES: portfolio    
-    // EFFECTS: parses transactions from JSON object and adds it to portfolio    
-    private void addTransactions(JSONArray arr, Portfolio p) {
-        for (int i = 0; i < arr.length(); i++) {
-            addTransaction(arr.getJSONObject(i), p);
-        }
-    }    
+    // // MODIFIES: portfolio    
+    // // EFFECTS: parses transactions from JSON object and adds it to portfolio    
+    // private void addTransactions(JSONArray arr, Portfolio p) {
+    //     for (int i = 0; i < arr.length(); i++) {
+    //         addTransaction(arr.getJSONObject(i), p);
+    //     }
+    // }    
 
 
-    // MODIFIES: portfolio
-    // EFFECTS: parses transaction from JSON object and adds it to portfolio 
-    private void addTransaction(JSONObject jsonObject, Portfolio p) {
-        Transaction t = new Transaction(
-            jsonObject.getString("symbol"),
-            jsonObject.getString("action"),
-            jsonObject.getDouble("shares"),
-            jsonObject.getDouble("price"),
-            LocalDateTime.parse(jsonObject.getString("dateTime"))                        
-        );
-        p.getTransactionManager().addTransaction(t);
-    }
+    // // MODIFIES: portfolio
+    // // EFFECTS: parses transaction from JSON object and adds it to portfolio 
+    // private void addTransaction(JSONObject jsonObject, Portfolio p) {
+    //     Transaction t = new Transaction(
+    //         jsonObject.getString("symbol"),
+    //         jsonObject.getString("action"),
+    //         jsonObject.getDouble("shares"),
+    //         jsonObject.getDouble("price"),
+    //         LocalDateTime.parse(jsonObject.getString("dateTime"))                        
+    //     );
+    //     p.getTransactionManager().addTransaction(t);
+    // }
 }
