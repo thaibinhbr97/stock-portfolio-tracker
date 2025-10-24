@@ -94,11 +94,21 @@ public class TransactionManager {
     }      
     
     public JSONArray toJsonArray() {
-        return null; // stub
+        JSONArray jsonArray = new JSONArray();
+        for (Transaction t : transactions) {
+            jsonArray.put(t.toJson());
+        }
+        return jsonArray;
     }
 
     // EFFECTS: returns a transaction manager array from a JSON object
-    public static Holding fromJsonArray(JSONArray o) {
-        return null; // stub
+    public static TransactionManager fromJsonArray(JSONArray jsonArray) {
+        TransactionManager tm = new TransactionManager();
+        if (jsonArray != null) {
+            for (int i = 0; i < jsonArray.length(); i++) {
+                tm.addTransaction((Transaction.fromJson(jsonArray.getJSONObject(i))));
+            }
+        }
+        return tm;
     }        
 }
