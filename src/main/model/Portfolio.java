@@ -31,7 +31,7 @@ public class Portfolio implements Writable {
         this.ownerName = ownerName;
         this.cashBalance = cashBalance;
         this.portfolioValue = 0;
-        this.lastUpdated = LocalDateTime.now();
+        this.lastUpdated = lastUpdated;
         this.holdings = new HashMap<>();
         this.transactionManager = new TransactionManager();
     }
@@ -179,11 +179,59 @@ public class Portfolio implements Writable {
     @Override
     // EFFECTS: turns a portfolio object to a JSON object
     public JSONObject toJson() {
-        return null;
+        JSONObject jsonObject = new JSONObject();
+        jsonObject.put("ownerName", getOwner());
+        jsonObject.put("cashBalance", getCashBalance());
+        jsonObject.put("lastUpdated", getLastUpdated().toString());
+
+        // holdings
+        JSONArray holds = new JSONArray();
+        for (Holding h : getHoldings().values()) {
+            holds.put(h.toJson());
+        }
+        jsonObject.put("holdings", holds);
+
+        // transactions
+        jsonObject.put("transactions", transactionManager.toJsonArray());
+
+        return jsonObject;
     }
 
-    // EFFECTS: returns a transaction manager array from a JSON object
-    public static Portfolio fromJson(JSONObject o, JSONArray transactionsArray) {
-        return null; // stub
+    // EFFECTS: builds and returns a Portfolio from its JSON representation
+    public static Portfolio fromJson(JSONObject jsonObject) {
+        String owner = jsonObject.getString("ownerName");
+        double cash = jsonObject.getDouble("cashBalance");
+        LocalDateTime lastUpdated = LocalDateTime.parse(jsonObject.getString("lastUpdated"));
+
+        Portfolio p = new Portfolio(owner, cash, lastUpdated);
+
+        // holdings
+        JSONArray holds = jsonObject.getJSONArray("holdings");
+        if (holds != null) {
+            for (int i = 0; i < holds.length(); i++) {
+                JSONObject ho = holds.getJSONObject(i);
+                Holding holding = Holding.fromJson(ho);
+                p.getHoldings().put(holding.getSymbol(), holding);
+            }
+        }
+
+        // transactions
+        JSONArray transactionsArray = jsonObject.getJSONArray("transactions");
+        if (transactionsArray != null) {
+            for (int i = 0; i < transactionsArray.length(); i++) {
+                JSONObject to = transactionsArray.getJSONObject(i);
+                Transaction t = new Transaction(
+                    to.getString("symbol"), 
+                    to.getString("action"), 
+                    to.getDouble("shares"), 
+                    to.getDouble("price"), 
+                    LocalDateTime.parse(to.getString("dateTime"))
+                );
+                p.getTransactionManager().addTransaction(t);
+            }
+        }
+
+        p.calculatePortfolioValue();
+        return p;
     }       
 }
