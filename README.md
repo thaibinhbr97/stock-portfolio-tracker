@@ -37,6 +37,6 @@ In addition to managing stocks, it also provides simple **recommendations** base
 - As a user, I want to filter a transaction history of stocks by all transactions, only buy or only sell, symbol, or date time range.
 
 ### Data Persistence
-- As a user, I want to be able to have an option to save my entire state of stock portfolio and transaction history to file (if I choose).
-- As a user, I want to be able to have an option to load my entire state of stock portfolio and transaction history from file (if I choose).
+- As a user, I want to be able to have an option to save my entire state of stock portfolio including transaction history to file (if I choose).
+- As a user, I want to be able to have an option to load my entire state of stock portfolio including transaction history from file (if I choose).
 
