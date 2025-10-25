@@ -16,7 +16,7 @@ import persistence.Writable;
  * This class is the single source of truth for available listings that the UI and Portfolio consult.
  */
 public class Market implements Writable {
-    private final Map<String, Stock> market;
+    private Map<String, Stock> market;
 
     // EFFECTS: constructs an empty market
     public Market() {
@@ -88,5 +88,4 @@ public class Market implements Writable {
         }
         return m;
     }
-
 }
