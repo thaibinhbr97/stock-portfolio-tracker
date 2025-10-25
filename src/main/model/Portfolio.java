@@ -37,10 +37,13 @@ public class Portfolio implements Writable {
         this.transactionManager = new TransactionManager();
     }
 
-    // REQUIRES: stock != null, quantity > 0, total price (stock current price * quantity) <= cashBalance
+    // REQUIRES: quantity > 0, total price (stock current price * quantity) <= cashBalance
     // MODIFIES: this, Holding, TransactionManager
     // EFFECTS: buy shares of a stock, update portfolio value and cash balance for owner once action is done.
     public void buyShare(Stock stock, double quantity) {
+        if (stock == null) {
+            return;
+        }
         double totalPrice = stock.getCurrentPrice() * quantity;
         if (totalPrice > cashBalance) {
             return;

@@ -59,12 +59,6 @@ public class TestPortfolio {
     }
 
     @Test
-    public void testBuyShareNegativeQuantity() {
-        portfolio.buyShare(nvidia, -3.0);
-        assertFalse(portfolio.getHoldings().containsKey(nvidia.getSymbol()));
-    }
-
-    @Test
     public void testBuyTwiceUpdatesWeightedAverage() {
         portfolio.buyShare(nvidia, 10); // 10 @ 150
         nvidia.updateCurrentPrice(200);

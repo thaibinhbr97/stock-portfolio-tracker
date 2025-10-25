@@ -19,9 +19,9 @@
       "sector": "MSFT"
     }
   ]},
-  "lastUpdated": "2025-10-25T00:48:13.767747",
+  "lastUpdated": "2025-10-25T00:53:22.199711",
   "portfolio": {
-    "lastUpdated": "2025-10-25T00:48:13.767621",
+    "lastUpdated": "2025-10-25T00:53:22.199524",
     "ownerName": "Brad",
     "cashBalance": 5250,
     "holdings": [
@@ -38,7 +38,7 @@
     ],
     "transactions": [
       {
-        "dateTime": "2025-10-25T00:48:13.767592",
+        "dateTime": "2025-10-25T00:53:22.199497",
         "shares": 10,
         "symbol": "AAPL",
         "total": 1800,
@@ -46,7 +46,7 @@
         "action": "BUY"
       },
       {
-        "dateTime": "2025-10-25T00:48:13.767610",
+        "dateTime": "2025-10-25T00:53:22.199512",
         "shares": 5,
         "symbol": "AAPL",
         "total": 1000,
@@ -54,7 +54,7 @@
         "action": "BUY"
       },
       {
-        "dateTime": "2025-10-25T00:48:13.767617",
+        "dateTime": "2025-10-25T00:53:22.199519",
         "shares": 20,
         "symbol": "AMZN",
         "total": 2600,
@@ -62,7 +62,7 @@
         "action": "BUY"
       },
       {
-        "dateTime": "2025-10-25T00:48:13.767621",
+        "dateTime": "2025-10-25T00:53:22.199524",
         "shares": 5,
         "symbol": "AMZN",
         "total": 650,
