@@ -16,6 +16,7 @@ import model.TransactionManager;
 import persistence.JsonReader;
 import persistence.JsonWriter;
 
+// Represents Stock Portfolio application
 public class StockPortfolioApp {
     private static final String JSON_STORE = "./data/portfolio.json";
     private JsonWriter jsonWriter;
@@ -83,13 +84,11 @@ public class StockPortfolioApp {
         System.out.println("5: Update Stock Price");
         System.out.println("6: View Transaction History");
         System.out.println("7: Filter Transactions");
-        System.out.println("s: Save to File");
-        System.out.println("l: Load from File");
+        System.out.println("8: Save to File");
+        System.out.println("9: Load from File");
         System.out.println("q: Quit");
         System.out.println("===============================================");
     }    
-
-
     
     // MODIFIES: this
     // EFFECTS: process user command
@@ -106,7 +105,7 @@ public class StockPortfolioApp {
                 sellStock();
                 break;
             case "4":
-                viewAvailableStocks();
+                viewStockMarket();
                 break;
             case "5":
                 updateStockPrice();
@@ -117,16 +116,16 @@ public class StockPortfolioApp {
             case "7":
                 filterTransactions();
                 break;
-            case "s":
+            case "8":
                 saveStockPortfolioApp();
                 break;
-            case "l":
+            case "9":
                 loadStockPortfolioApp();
                 break;                
             case "q":
                 return false;
             default:
-                System.out.println("Invalid option. Please choose 1-7 or q to quit.");
+                System.out.println("Invalid option. Please choose 1-9 or q to quit.");
         }  
         return true;      
     }
@@ -208,7 +207,7 @@ public class StockPortfolioApp {
         return false;
     }
 
-    private void viewAvailableStocks() {
+    private void viewStockMarket() {
         if (market.isEmpty()) {
             System.out.println("(No market stocks available)");
             return;
@@ -220,7 +219,7 @@ public class StockPortfolioApp {
         }
     }
 
-    // EFFECTS: update stock price
+    // EFFECTS: update stock market price
     private void updateStockPrice() {
         String symbol = readSymbol("Enter stock symbol to update price: ").toUpperCase(Locale.ROOT);
         Stock stock = market.getStock(symbol);
