@@ -7,7 +7,7 @@ import java.util.List;
 import org.json.JSONArray;
 
 /*
- * Represents a history record of all transactions for BUY/SELL action. 
+ * Represents a history record of all transactions for BUY OR SELL action. 
  * TransactionManager allows user filter transactions history based on 
  * BUY/SELL action, stock symbol, date and time.
  * This class is immutable once created and used for maintaining a history record of all transactions.
@@ -53,15 +53,15 @@ public class TransactionManager {
         return filtered;
     }
 
-    // EFFECTS: returns a new transactions object filltered by symbol
+    // EFFECTS: returns a new transactions object filtered by symbol
     public List<Transaction> filterBySymbol(String symbol) {
-        List<Transaction> filltered = new ArrayList<>();
+        List<Transaction> filtered = new ArrayList<>();
         for (Transaction transaction : transactions) {
             if (transaction.getSymbol().equalsIgnoreCase(symbol)) {
-                filltered.add(transaction);
+                filtered.add(transaction);
             }
         }
-        return filltered;        
+        return filtered;        
     }
 
     public List<Transaction> getTransactions() {
