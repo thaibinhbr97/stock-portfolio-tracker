@@ -114,12 +114,6 @@ public class TestTransactionManager {
         transactionManager.addTransaction(sellGoogle);
         assertEquals(4, transactions.size()); 
 
-        // List<Transaction> buyTransactions = new ArrayList<>();  
-        // buyTransactions.add(buyAMZN);                 
-        // buyTransactions.add(buyGOOGL);
-        // assertEquals(2, buyTransactions.size()); 
-        // assertEquals(buyAMZN, buyTransactions.get(0));                 
-        // assertEquals(buyGOOGL, buyTransactions.get(1)); 
         List<Transaction> buys = transactionManager.filterByAction("BUY");
         assertEquals(2, buys.size());
         assertEquals("BUY", buys.get(0).getAction());
@@ -136,12 +130,6 @@ public class TestTransactionManager {
         transactionManager.addTransaction(sellGoogle);
         assertEquals(4, transactions.size()); 
 
-        // List<Transaction> sellTransactions = new ArrayList<>();  
-        // sellTransactions.add(sellAMZN);                 
-        // sellTransactions.add(sellGOOGL);
-        // assertEquals(2, sellTransactions.size()); 
-        // assertEquals(sellAMZN, sellTransactions.get(0));                 
-        // assertEquals(sellGOOGL, sellTransactions.get(1));   
         List<Transaction> sells = transactionManager.filterByAction("SELL");
         assertEquals(2, sells.size());
         assertEquals("SELL", sells.get(0).getAction());

@@ -57,12 +57,12 @@ public class TestMarket {
         assertTrue(testMarket.isEmpty());
     }
 
-    // @Test
-    // void testAddOrReplace_NullSymbol_NoOp() {
-    //     Stock noSymbol = new Stock(null, "No Symbol", "Misc", 1.0);
-    //     testMarket.addOrReplace(noSymbol);
-    //     assertTrue(testMarket.isEmpty());
-    // }
+    @Test
+    void testAddOrReplace_EmptySymbol_NoOp() {
+        Stock nullSymbol = new Stock("", "No Symbol", "Misc", 1.0);
+        testMarket.addOrReplace(nullSymbol);
+        assertTrue(testMarket.isEmpty());     
+    }
 
     @Test
     void testAddAll_NullList_NoOp() {
