@@ -57,33 +57,43 @@
     {
       "symbol": "TSLA",
       "companyName": "Tesla, Inc.",
-      "currentPrice": 100,
+      "currentPrice": 300,
       "sector": "TSLA"
     }
   ]},
-  "lastUpdated": "2025-10-24T13:03:23.317504",
+  "lastUpdated": "2025-10-24T17:49:21.462338",
   "portfolio": {
-    "lastUpdated": "2025-10-24T13:01:35.578660",
+    "lastUpdated": "2025-10-24T17:44:38.967243",
     "ownerName": "Brad",
-    "cashBalance": 9500,
+    "cashBalance": 9700,
     "holdings": [{
-      "shares": 2,
+      "shares": 1.5,
       "symbol": "TSLA",
       "averagePurchasePrice": 250,
       "stock": {
         "symbol": "TSLA",
         "companyName": "Tesla, Inc.",
-        "currentPrice": 100,
+        "currentPrice": 400,
         "sector": "TSLA"
       }
     }],
-    "transactions": [{
-      "dateTime": "2025-10-24T13:01:35.578660",
-      "shares": 2,
-      "symbol": "TSLA",
-      "total": 500,
-      "price": 250,
-      "action": "BUY"
-    }]
+    "transactions": [
+      {
+        "dateTime": "2025-10-24T17:38:57.430832",
+        "shares": 2,
+        "symbol": "TSLA",
+        "total": 500,
+        "price": 250,
+        "action": "BUY"
+      },
+      {
+        "dateTime": "2025-10-24T17:44:38.967243",
+        "shares": 0.5,
+        "symbol": "TSLA",
+        "total": 200,
+        "price": 400,
+        "action": "SELL"
+      }
+    ]
   }
 }

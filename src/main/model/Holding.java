@@ -69,10 +69,10 @@ public class Holding implements Writable {
         return (stock.getCurrentPrice() - averagePurchasePrice) * shares;
     }
 
-    // // setters
-    // public void setAveragePrice(double newAveragePurchasePrice) {
-    //     averagePurchasePrice = newAveragePurchasePrice;
-    // }
+    // setters
+    public void setAveragePrice(double newAveragePurchasePrice) {
+        averagePurchasePrice = newAveragePurchasePrice;
+    }
     
     // EFFECTS: Overriding toString() method of Holding class as example below
     // | Symbol | CurrentPrice | AveragePrice | Shares | MarketValue| Gain/Loss |  
