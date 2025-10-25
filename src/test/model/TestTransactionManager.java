@@ -33,15 +33,16 @@ public class TestTransactionManager {
 
     private List<Transaction> transactions;
 
-    private LocalDateTime dateTime = LocalDateTime.of(2025, 10, 5, 0, 0, 0);
+
 
     // Deterministic date-times for testing
-    private static LocalDateTime t(int hour) {
+    private static LocalDateTime testDateTime(int hour) {
         return LocalDateTime.of(2025, 10, 5, hour, 0, 0);
     }
-    private final LocalDateTime dt10 = t(10);
-    private final LocalDateTime dt12 = t(12);
-    private final LocalDateTime dt14 = t(14);
+
+    private final LocalDateTime dt10 = testDateTime(10);
+    private final LocalDateTime dt12 = testDateTime(12);
+    private final LocalDateTime dt14 = testDateTime(14);
     
     @BeforeEach
     public void runBefore() {
@@ -167,7 +168,7 @@ public class TestTransactionManager {
     }
 
     @Test
-    public void testFilterByDateTime_InclusiveBounds() {
+    public void testFilterByDateTimeInclusiveBounds() {
         transactionManager.addTransaction(buyAmazon);
         transactionManager.addTransaction(sellAmazon);
         transactionManager.addTransaction(buyGoogle);  
@@ -179,7 +180,7 @@ public class TestTransactionManager {
     }
 
     @Test
-    public void testFilterByDateTime_FullRange() {
+    public void testFilterByDateTimeFullRange() {
         transactionManager.addTransaction(buyAmazon);
         transactionManager.addTransaction(sellAmazon);
         transactionManager.addTransaction(buyGoogle);
@@ -189,15 +190,15 @@ public class TestTransactionManager {
         assertEquals(4, filtered.size());        
     }
 
-    public void testFilterByDateTime_OutOfRange() {
+    public void testFilterByDateTimeOutOfRange() {
         transactionManager.addTransaction(buyAmazon);
         transactionManager.addTransaction(sellAmazon);
-        List<Transaction> filtered = transactionManager.filterByDateTime(t(6), t(9));
+        List<Transaction> filtered = transactionManager.filterByDateTime(testDateTime(6), testDateTime(9));
         assertTrue(filtered.isEmpty());
     }
 
     @Test
-    public void testFilterByDateTime_StartAfterEnd_ReturnsEmpty() {
+    public void testFilterByDateTimeStartAfterEndReturnsEmpty() {
         transactionManager.addTransaction(buyAmazon);
         transactionManager.addTransaction(sellAmazon);
         List<Transaction> filtered = transactionManager.filterByDateTime(dt14, dt12);
@@ -227,7 +228,7 @@ public class TestTransactionManager {
     }
 
     @Test
-    public void testFromJsonArray_RoundTrip() {
+    public void testFromJsonArrayRoundTrip() {
         transactionManager.addTransaction(buyAmazon);
         transactionManager.addTransaction(sellAmazon);
         transactionManager.addTransaction(buyGoogle);
@@ -243,14 +244,14 @@ public class TestTransactionManager {
     }
 
     @Test
-    public void testFromJsonArray_Null_ReturnsEmptyManager() {
+    public void testFromJsonArrayNullReturnsEmptyManager() {
         TransactionManager rebuilt = TransactionManager.fromJsonArray(null);
         assertNotNull(rebuilt);
         assertTrue(rebuilt.getTransactions().isEmpty());
     }
 
     @Test
-    public void testSetTransactions_ReplacesUnderlyingList() {
+    public void testSetTransactionsReplacesUnderlyingList() {
         List<Transaction> replacement = new ArrayList<>();
         replacement.add(buyAmazon);
         replacement.add(sellAmazon);

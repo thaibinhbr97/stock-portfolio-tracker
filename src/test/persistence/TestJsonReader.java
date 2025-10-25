@@ -67,6 +67,8 @@ public class TestJsonReader extends TestJson {
             assertNotNull(loadedP);
             assertNotNull(loadedM);
 
+            loadedP.reattachHoldingsToMarket(loadedM);
+
             // Market checks
             assertNotNull(loadedM.getStock("AAPL"));
             assertEquals(200.00, loadedM.getStock("AAPL").getCurrentPrice(), EPSILON);
@@ -75,7 +77,7 @@ public class TestJsonReader extends TestJson {
             // Holdings
             Map<String, Holding> holds = loadedP.getHoldings();
             assertEquals(2, holds.size());
-            double aaplAvg = (10*180.0 + 5*200.0)/15.0;
+            double aaplAvg = (10 * 180.0 + 5 * 200.0) / 15.0;
             assertHolding(holds.get("AAPL"), "AAPL", 15.0, aaplAvg, 200.0);
             assertHolding(holds.get("AMZN"), "AMZN", 15.0, 130.0, 130.0);
 

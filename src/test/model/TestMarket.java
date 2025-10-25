@@ -31,7 +31,7 @@ public class TestMarket {
     }
 
     @Test
-    void testAddOrReplace_AddsNew() {
+    void testAddOrReplaceAddsNew() {
         Stock aapl = new Stock("AAPL", "Apple Inc.", "Technology", 150.00);
         testMarket.addOrReplace(aapl);
 
@@ -41,7 +41,7 @@ public class TestMarket {
     }
 
     @Test
-    void testAddOrReplace_ReplacesExistingBySymbol() {
+    void testAddOrReplaceReplacesExistingBySymbol() {
         testMarket.addOrReplace(new Stock("AAPL", "Apple Inc.", "Technology", 150.00));
         testMarket.addOrReplace(new Stock("AAPL", "Apple Inc.", "Technology", 200.00));
 
@@ -52,26 +52,26 @@ public class TestMarket {
     }
 
     @Test
-    void testAddOrReplace_NullStock_NoOp() {
+    void testAddOrReplaceNullStockNoOp() {
         testMarket.addOrReplace(null);
         assertTrue(testMarket.isEmpty());
     }
 
     @Test
-    void testAddOrReplace_EmptySymbol_NoOp() {
+    void testAddOrReplaceEmptySymbolNoOp() {
         Stock nullSymbol = new Stock("", "No Symbol", "Misc", 1.0);
         testMarket.addOrReplace(nullSymbol);
         assertTrue(testMarket.isEmpty());     
     }
 
     @Test
-    void testAddAll_NullList_NoOp() {
+    void testAddAllNullListNoOp() {
         testMarket.addAll(null);
         assertTrue(testMarket.isEmpty());
     }
 
     @Test
-    void testAddAll_IgnoresNullElements() {
+    void testAddAllIgnoresNullElements() {
         List<Stock> list = new ArrayList<>();
         list.add(new Stock("MSFT", "Microsoft", "Technology", 330.0));
         list.add(null);
@@ -84,7 +84,7 @@ public class TestMarket {
     }       
 
     @Test
-    void testAddAll_AddsMultipleStocks() {
+    void testAddAllAddsMultipleStocks() {
         List<Stock> batch = new ArrayList<>();
         batch.add(new Stock("AAPL", "Apple Inc.", "Technology", 150.00));
         batch.add(new Stock("GOOGL", "Alphabet Inc.", "Technology", 2800.00));
@@ -96,7 +96,7 @@ public class TestMarket {
     }    
 
     @Test
-    void testGetStock_CaseInsensitiveSymbol() {
+    void testGetStockCaseInsensitiveSymbol() {
         testMarket.addOrReplace(new Stock("msft", "Microsoft Corporation", "Technology", 350.00));
         Stock upper = testMarket.getStock("MSFT");
         Stock lower = testMarket.getStock("msft");
@@ -106,17 +106,17 @@ public class TestMarket {
     }
 
     @Test
-    void testGetStock_NotFound() {
+    void testGetStockNotFound() {
         assertNull(testMarket.getStock("ZZZZ"));
     }
 
     @Test
-    void testGetStock_NullSymbol_ReturnsNull() {
+    void testGetStockNullSymbolReturnsNull() {
         assertNull(testMarket.getStock(null));
     }
 
     @Test
-    void testGetAllStocks_Unmodifiable() {
+    void testGetAllStocksUnmodifiable() {
         testMarket.addOrReplace(new Stock("AAPL", "Apple Inc.", "Technology", 150.00));
         testMarket.addOrReplace(new Stock("GOOGL", "Alphabet Inc.", "Technology", 2800.00));
 
@@ -139,7 +139,7 @@ public class TestMarket {
     } 
 
     @Test
-    void testToJson_FromJson_RoundTrip() {
+    void testToJsonFromJsonRoundTrip() {
         testMarket.addOrReplace(new Stock("AAPL", "Apple Inc.", "Technology", 180.0));
         testMarket.addOrReplace(new Stock("AMZN", "Amazon.com, Inc.", "Consumer Discretionary", 130.0));
 
@@ -156,7 +156,7 @@ public class TestMarket {
     }
 
     @Test
-    void testFromJson_WithEmptyArray_ReturnsEmptyMarket() {
+    void testFromJsonWithEmptyArrayReturnsEmptyMarket() {
         JSONObject root = new JSONObject();
         root.put("stocks", new JSONArray());
         Market rebuilt = Market.fromJson(root);
