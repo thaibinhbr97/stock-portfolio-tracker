@@ -30,7 +30,7 @@ public class Market implements Writable {
             return;
         }
         String symbol = stock.getSymbol();
-        if (symbol == null) {
+        if (symbol.isEmpty()) {
             return;
         }
         market.put(symbol.toUpperCase(), stock);
