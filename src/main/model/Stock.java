@@ -26,7 +26,7 @@ public class Stock implements Writable {
 
     // getters
     public String getSymbol() {
-        return symbol;
+        return symbol.toUpperCase();
     }
 
     public String getCompanyName() {
@@ -42,15 +42,14 @@ public class Stock implements Writable {
     }
 
     // setters
+    // MODIFIES: this
+    // EFFECTS: update current price to be a new price
     public void updateCurrentPrice(double newPrice) {
-        if (newPrice < 0) {
-            return;
-        }
         this.currentPrice = newPrice;
     }
 
     // EFFECTS: Overriding toString() method of Stock class as example below
-    // | Symbol |          CompanyName          |          Sector          |          CurrentPrice       |    
+    // | Symbol | CompanyName | Sector | CurrentPrice |    
     @Override
     public String toString() {
         String stockString = String.format("| %s | %s | %s | $%.2f |", 
