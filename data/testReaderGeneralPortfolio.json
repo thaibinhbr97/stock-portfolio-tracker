@@ -19,38 +19,26 @@
       "sector": "MSFT"
     }
   ]},
-  "lastUpdated": "2025-10-24T17:28:28.745456",
+  "lastUpdated": "2025-10-25T00:48:13.756603",
   "portfolio": {
-    "lastUpdated": "2025-10-24T17:28:28.745151",
+    "lastUpdated": "2025-10-25T00:48:13.755910",
     "ownerName": "Brad",
     "cashBalance": 5250,
     "holdings": [
       {
         "shares": 15,
         "symbol": "AAPL",
-        "averagePurchasePrice": 186.66666666666666,
-        "stock": {
-          "symbol": "AAPL",
-          "companyName": "Apple Inc.",
-          "currentPrice": 200,
-          "sector": "AAPL"
-        }
+        "averagePurchasePrice": 186.66666666666666
       },
       {
         "shares": 15,
         "symbol": "AMZN",
-        "averagePurchasePrice": 130,
-        "stock": {
-          "symbol": "AMZN",
-          "companyName": "Amazon.com, Inc.",
-          "currentPrice": 130,
-          "sector": "AMZN"
-        }
+        "averagePurchasePrice": 130
       }
     ],
     "transactions": [
       {
-        "dateTime": "2025-10-24T17:28:28.745109",
+        "dateTime": "2025-10-25T00:48:13.755865",
         "shares": 10,
         "symbol": "AAPL",
         "total": 1800,
@@ -58,7 +46,7 @@
         "action": "BUY"
       },
       {
-        "dateTime": "2025-10-24T17:28:28.745138",
+        "dateTime": "2025-10-25T00:48:13.755890",
         "shares": 5,
         "symbol": "AAPL",
         "total": 1000,
@@ -66,7 +54,7 @@
         "action": "BUY"
       },
       {
-        "dateTime": "2025-10-24T17:28:28.745146",
+        "dateTime": "2025-10-25T00:48:13.755898",
         "shares": 20,
         "symbol": "AMZN",
         "total": 2600,
@@ -74,7 +62,7 @@
         "action": "BUY"
       },
       {
-        "dateTime": "2025-10-24T17:28:28.745151",
+        "dateTime": "2025-10-25T00:48:13.755910",
         "shares": 5,
         "symbol": "AMZN",
         "total": 650,
