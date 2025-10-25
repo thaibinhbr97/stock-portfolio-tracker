@@ -18,7 +18,7 @@ public class Stock implements Writable {
 
     // EFFECTS: constructs a Stock with symbol, companyName, sector, shares, currentPrice
     public Stock(String symbol, String companyName, String sector, double currentPrice) {
-        this.symbol = symbol.toUpperCase();
+        this.symbol = symbol;
         this.companyName = companyName;
         this.sector = sector;
         this.currentPrice = currentPrice;
