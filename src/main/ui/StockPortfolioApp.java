@@ -80,7 +80,7 @@ public class StockPortfolioApp {
         System.out.println("1: View Portfolio");
         System.out.println("2: Buy Stock");
         System.out.println("3: Sell Stock");
-        System.out.println("4: View All Available Stocks");
+        System.out.println("4: View Stock Market");
         System.out.println("5: Update Stock Price");
         System.out.println("6: View Transaction History");
         System.out.println("7: Filter Transactions");
@@ -147,6 +147,7 @@ public class StockPortfolioApp {
             return;
         }
         updatePriceOptionally(stock, "buying");
+
         double quantity = readPositiveDouble("Quantity to buy: ");
         double total = quantity * stock.getCurrentPrice();
         if (!isFundSufficientToBuy(total)) {
@@ -154,7 +155,7 @@ public class StockPortfolioApp {
         }
 
         double beforeCash = portfolio.getCashBalance();
-        portfolio.buyShare(stock, quantity);
+        portfolio.buyShare(stock, quantity);              
         System.out.printf(
                 "Bought %.2f of %s @ $%.2f (Cost: $%.2f). Cash: $%.2f → $%.2f%n",
                 quantity, stock.getSymbol(), stock.getCurrentPrice(), total, beforeCash, portfolio.getCashBalance()
@@ -172,7 +173,7 @@ public class StockPortfolioApp {
         // optional price update
         updatePriceOptionally(holding.getStock(), "selling");
 
-        double quantity = readPositiveDouble("Quantity to SELL: ");
+        double quantity = readPositiveDouble("Quantity to sell: ");
         if (!hasEnoughShares(holding, quantity)) {
             return;
         }
@@ -301,6 +302,7 @@ public class StockPortfolioApp {
         if (isYesNo("Update the price before " + action + "? (y/n): ")) {
             double newPrice = readPositiveDouble("New price: $");
             stock.updateCurrentPrice(newPrice);
+            System.out.println(stock.getCurrentPrice());            
         }
     }
     
@@ -423,11 +425,9 @@ public class StockPortfolioApp {
         try {
             Portfolio loadedPortfolio = jsonReader.readPortfolio();
             Market loadedMarket = jsonReader.readMarket();
-
             if (loadedPortfolio != null) {
                 this.portfolio = loadedPortfolio;
             }
-
             if (loadedMarket != null) {
                 this.market = loadedMarket;
             } else {
@@ -437,7 +437,9 @@ public class StockPortfolioApp {
                     MarketCatalog.seed(this.market);
                 }
             }
-
+            if (this.portfolio != null && this.market != null) {
+                this.portfolio.reattachHoldingsToMarket(this.market);
+            }
             System.out.println("Loaded StockPortfolioApp state from " + JSON_STORE);
         } catch (IOException e) {
             System.out.println("Unable to read from file: " + JSON_STORE);
