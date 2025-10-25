@@ -64,18 +64,22 @@ public class Holding implements Writable {
         return stock.getCurrentPrice() * shares;
     }
 
+    // MODIFIES: this
     // EFFECTS: get unrealized profit/loss of a holding (profit/loss based on current stock's price)
     public double getUnrealizedProfit() {
         return (stock.getCurrentPrice() - averagePurchasePrice) * shares;
     }
 
     // setters
-    public void setAveragePrice(double newAveragePurchasePrice) {
+
+    // MODIFIES: this
+    // EFFECTS: update the average price to be the new average purchase price
+    public void updateAveragePrice(double newAveragePurchasePrice) {
         averagePurchasePrice = newAveragePurchasePrice;
     }
     
     // EFFECTS: Overriding toString() method of Holding class as example below
-    // | Symbol | CurrentPrice | AveragePrice | Shares | MarketValue| Gain/Loss |  
+    // | Symbol | CurrentPrice | AveragePrice | Shares | MarketValue| Gain/Loss | 
     @Override
     public String toString() {
         double profit = getUnrealizedProfit();
