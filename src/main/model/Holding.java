@@ -9,27 +9,45 @@ import persistence.Writable;
  * Holding has the ability to buy or sell shares.
  */
 public class Holding implements Writable {
-    private Stock stock;
+    private Stock stock;    
     private double shares;
-    private double averagePurchasePrice; // cost basis per share
+    private double averagePurchasePrice;
     private String symbol;
 
-    // EFFECTS: Initialized with symbol to be stock symbol, stock, shares, and averagePurchasesPrice
+    // EFFECTS: initializes a holding bound to a market stock
     public Holding(Stock stock, double shares, double averagePurchasePrice) {
         this.stock = stock;
+        if (stock != null) {
+            this.symbol = stock.getSymbol();
+        } else {
+            stock = null;
+        }
         this.shares = shares;
         this.averagePurchasePrice = averagePurchasePrice;
-        this.symbol = stock.getSymbol();
+    }
+
+    // EFFECTS: initializes a detached holding with only a symbol (stock can be reattached later)
+    public Holding(String symbol, double shares, double averagePurchasePrice) {
+        this.symbol = symbol;
+        this.shares = shares;
+        this.averagePurchasePrice = averagePurchasePrice;
+        this.stock = null;
     }
 
     // REQUIRES: quantity > 0
     // MODIFIES: this
     // EFFECTS: buy quantity shares of a stock, and update average purchase price and shares
     public void buyShare(double quantity) {
-        double totalShares = shares + quantity;
-        double totalCost = (averagePurchasePrice * shares) + (stock.getCurrentPrice() * quantity);
-        averagePurchasePrice = totalCost / totalShares;
-        shares = totalShares;
+        double price;
+        if (stock != null) {
+            price = stock.getCurrentPrice();
+        } else {
+            price = averagePurchasePrice;
+        }
+        double totalCostBefore = averagePurchasePrice * shares;
+        double totalCostAfter = totalCostBefore + price * quantity;
+        shares += quantity;
+        averagePurchasePrice = totalCostAfter / shares;
     }
 
     // REQUIRES: quantity > 0
@@ -61,22 +79,35 @@ public class Holding implements Writable {
 
     // EFFECTS: get the market value of a stock in a holding
     public double getMarketValue() {
-        return stock.getCurrentPrice() * shares;
+        double price = 0.0;
+        if (stock != null) {
+            price = stock.getCurrentPrice();
+        }
+        return price * shares;
     }
 
     // MODIFIES: this
     // EFFECTS: get unrealized profit/loss of a holding (profit/loss based on current stock's price)
     public double getUnrealizedProfit() {
-        return (stock.getCurrentPrice() - averagePurchasePrice) * shares;
+        double price = 0.0;
+        if (stock != null) {
+            price = stock.getCurrentPrice();
+        }
+        return (price - averagePurchasePrice) * shares;
     }
-
-    // setters
 
     // MODIFIES: this
     // EFFECTS: update the average price to be the new average purchase price
     public void updateAveragePrice(double newAveragePurchasePrice) {
         averagePurchasePrice = newAveragePurchasePrice;
     }
+
+    public void setStock(Stock stock) {
+        this.stock = stock;
+        if (stock != null) {
+            this.symbol = stock.getSymbol();
+        }
+    }    
     
     // EFFECTS: Overriding toString() method of Holding class as example below
     // | Symbol | CurrentPrice | AveragePrice | Shares | MarketValue| Gain/Loss | 
@@ -90,15 +121,18 @@ public class Holding implements Writable {
             profitString += "-";            
         }
         profitString += String.format("$%.2f", Math.abs(profit));
+        double currentPrice = 0.0;
+        if (stock != null) {
+            currentPrice = stock.getCurrentPrice();
+        }
         String holdingString = String.format("| %s | $%.2f | $%.2f | %.2f | $%.2f | %s |", 
-                getSymbol(), stock.getCurrentPrice(), getAveragePrice(), getShares(), getMarketValue(), profitString);
+                getSymbol(), currentPrice, getAveragePrice(), getShares(), getMarketValue(), profitString);
         return holdingString;
     }
 
     @Override
     public JSONObject toJson() {
         JSONObject jsonObject = new JSONObject();
-        jsonObject.put("stock", stock.toJson());
         jsonObject.put("shares", getShares());
         jsonObject.put("averagePurchasePrice", getAveragePrice());
         jsonObject.put("symbol",getSymbol());
@@ -107,9 +141,10 @@ public class Holding implements Writable {
 
     // EFFECTS: returns a holding object from a JSON object
     public static Holding fromJson(JSONObject jsonObject) {
-        Stock s = Stock.fromJson(jsonObject.getJSONObject("stock"));
+        String symbol = jsonObject.getString("symbol");
         double shares = jsonObject.getDouble("shares");
         double avg = jsonObject.getDouble("averagePurchasePrice");
-        return new Holding(s, shares, avg);
+        // Detached holding; will be reattached to Market's stock later        
+        return new Holding(symbol, shares, avg);
     }    
 }
