@@ -41,10 +41,6 @@ public class Portfolio implements Writable {
     // MODIFIES: this, Holding, TransactionManager
     // EFFECTS: buy shares of a stock, update portfolio value and cash balance for owner once action is done.
     public void buyShare(Stock stock, double quantity) {
-        if (stock == null || quantity <= 0) {
-            return;
-        }
-
         double totalPrice = stock.getCurrentPrice() * quantity;
         if (totalPrice > cashBalance) {
             return;
@@ -57,6 +53,7 @@ public class Portfolio implements Writable {
             holdings.put(symbol, holding);
         } else {
             holding.buyShare(quantity);
+
         }
 
         cashBalance -= totalPrice;
@@ -68,14 +65,11 @@ public class Portfolio implements Writable {
         transactionManager.addTransaction(transaction);
     }
 
-    // REQUIRES: shares > 0, quantity <= current shares for this stock holding
+    // REQUIRES: symbol != null, quantity > 0, shares > 0, quantity <= current shares for this stock holding
     // MODIFIES: this, Holding, TransactionManager
     // EFFECTS: sell shares of a stock symbol with stock's current price. 
     // Update portfolio value and cash balance for owner once action is done.
     public void sellShare(String symbol, double quantity) {
-        if (symbol == null || quantity < 0) {
-            return;
-        }
         Holding holding = holdings.get(symbol);
         if (holding == null || quantity > holding.getShares()) {
             return; // no holding exits yet or not enough shares to sell
@@ -106,7 +100,12 @@ public class Portfolio implements Writable {
     public void calculatePortfolioValue() {
         double total = 0.0;
         for (Holding h : holdings.values()) {
-            total += h.getStock().getCurrentPrice() * h.getShares();
+            Stock s = h.getStock();
+            double price = 0.0;
+            if (s != null) {
+                price = s.getCurrentPrice();
+            }
+            total += price * h.getShares();
         }
         this.portfolioValue = total;
     }
@@ -135,6 +134,22 @@ public class Portfolio implements Writable {
     public TransactionManager getTransactionManager() {
         return transactionManager;
     }    
+
+    // MODIFIES: this
+    // EFFECTS: for each holding, if the market has a matching symbol,
+    // rebind to the market's stock and refresh value
+    public void reattachHoldingsToMarket(Market market) {
+        if (market == null) {
+            return;
+        }
+        for (Holding h : holdings.values()) {
+            Stock ms = market.getStock(h.getSymbol());
+            if (ms != null) {
+                h.setStock(ms);
+            }
+        }
+        calculatePortfolioValue();
+    }
 
     // EFFECTS: returns portfolio information with owner name, cash balance, and portfolio.
     // with the format as below:
