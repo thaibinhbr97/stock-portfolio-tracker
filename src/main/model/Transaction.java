@@ -15,7 +15,7 @@ import persistence.Writable;
 public class Transaction implements Writable {
     private LocalDateTime dateTime;
     private String symbol;
-    private String action; // BUY/SELL
+    private String action; // BUY OR SELL
     private double shares;
     private double price;
 
@@ -24,8 +24,8 @@ public class Transaction implements Writable {
     // symbol, action, shares, price,
     // a recent action (BUY/SELL) for a stock.
     public Transaction(String symbol, String action, Double shares, Double price, LocalDateTime dateTime) {
-        this.symbol = symbol.toUpperCase();
-        this.action = action.toUpperCase();
+        this.symbol = symbol;
+        this.action = action;
         this.shares = shares;
         this.price = price;
         this.dateTime = dateTime;
@@ -37,11 +37,11 @@ public class Transaction implements Writable {
     }
 
     public String getSymbol() {
-        return symbol;
+        return symbol.toUpperCase();
     }
 
     public String getAction() {
-        return action;
+        return action.toUpperCase();
     }
 
     public double getShares() {
