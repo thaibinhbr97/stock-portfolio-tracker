@@ -9,7 +9,7 @@ import persistence.Writable;
  * Holding has the ability to buy or sell shares.
  */
 public class Holding implements Writable {
-    private Stock stock;    
+    private Stock stock;
     private double shares;
     private double averagePurchasePrice;
     private String symbol;
@@ -26,7 +26,8 @@ public class Holding implements Writable {
         this.averagePurchasePrice = averagePurchasePrice;
     }
 
-    // EFFECTS: initializes a detached holding with only a symbol (stock can be reattached later)
+    // EFFECTS: initializes a detached holding with only a symbol (stock can be
+    // reattached later)
     public Holding(String symbol, double shares, double averagePurchasePrice) {
         this.symbol = symbol;
         this.shares = shares;
@@ -36,7 +37,8 @@ public class Holding implements Writable {
 
     // REQUIRES: quantity > 0
     // MODIFIES: this
-    // EFFECTS: buy quantity shares of a stock, and update average purchase price and shares
+    // EFFECTS: buy quantity shares of a stock, and update average purchase price
+    // and shares
     public void buyShare(double quantity) {
         double price;
         if (stock != null) {
@@ -52,7 +54,8 @@ public class Holding implements Writable {
 
     // REQUIRES: quantity > 0
     // MODIFIES: this
-    // EFFECTS: sell quantity shares of a stock, and update shares if quanity <= shares. Otherwise, do nothing.
+    // EFFECTS: sell quantity shares of a stock, and update shares if quanity <=
+    // shares. Otherwise, do nothing.
     public void sellShare(double quantity) {
         if (quantity <= shares) {
             shares = shares - quantity;
@@ -87,7 +90,8 @@ public class Holding implements Writable {
     }
 
     // MODIFIES: this
-    // EFFECTS: get unrealized profit/loss of a holding (profit/loss based on current stock's price)
+    // EFFECTS: get unrealized profit/loss of a holding (profit/loss based on
+    // current stock's price)
     public double getUnrealizedProfit() {
         double price = 0.0;
         if (stock != null) {
@@ -107,10 +111,10 @@ public class Holding implements Writable {
         if (stock != null) {
             this.symbol = stock.getSymbol();
         }
-    }    
-    
+    }
+
     // EFFECTS: Overriding toString() method of Holding class as example below
-    // | Symbol | CurrentPrice | AveragePrice | Shares | MarketValue| Gain/Loss | 
+    // | Symbol | CurrentPrice | AveragePrice | Shares | MarketValue| Gain/Loss |
     @Override
     public String toString() {
         double profit = getUnrealizedProfit();
@@ -118,14 +122,14 @@ public class Holding implements Writable {
         if (profit > 0) {
             profitString += "+";
         } else if (profit < 0) {
-            profitString += "-";            
+            profitString += "-";
         }
         profitString += String.format("$%.2f", Math.abs(profit));
         double currentPrice = 0.0;
         if (stock != null) {
             currentPrice = stock.getCurrentPrice();
         }
-        String holdingString = String.format("| %s | $%.2f | $%.2f | %.2f | $%.2f | %s |", 
+        String holdingString = String.format("| %s | $%.2f | $%.2f | %.2f | $%.2f | %s |",
                 getSymbol(), currentPrice, getAveragePrice(), getShares(), getMarketValue(), profitString);
         return holdingString;
     }
@@ -135,7 +139,7 @@ public class Holding implements Writable {
         JSONObject jsonObject = new JSONObject();
         jsonObject.put("shares", getShares());
         jsonObject.put("averagePurchasePrice", getAveragePrice());
-        jsonObject.put("symbol",getSymbol());
+        jsonObject.put("symbol", getSymbol());
         return jsonObject;
     }
 
@@ -144,7 +148,7 @@ public class Holding implements Writable {
         String symbol = jsonObject.getString("symbol");
         double shares = jsonObject.getDouble("shares");
         double avg = jsonObject.getDouble("averagePurchasePrice");
-        // Detached holding; will be reattached to Market's stock later        
+        // Detached holding; will be reattached to Market's stock later
         return new Holding(symbol, shares, avg);
-    }    
+    }
 }
