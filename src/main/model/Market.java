@@ -12,8 +12,10 @@ import persistence.Writable;
 
 /**
  * Represents a stock market containing available stocks.
- * Internally uses a TreeMap to keep stocks sorted alphabetically by their symbol.
- * This class is the single source of truth for available listings that the UI and Portfolio consult.
+ * Internally uses a TreeMap to keep stocks sorted alphabetically by their
+ * symbol.
+ * This class is the single source of truth for available listings that the UI
+ * and Portfolio consult.
  */
 public class Market implements Writable {
     private Map<String, Stock> market;
@@ -24,7 +26,8 @@ public class Market implements Writable {
     }
 
     // MODIFIES: this
-    // EFFECTS: adds or replaces the given stock in the market (keyed by uppercase symbol)
+    // EFFECTS: adds or replaces the given stock in the market (keyed by uppercase
+    // symbol)
     public void addOrReplace(Stock stock) {
         if (stock == null) {
             return;
@@ -33,7 +36,8 @@ public class Market implements Writable {
         if (symbol.isEmpty()) {
             return;
         }
-        market.put(symbol.toUpperCase(), stock);
+        symbol = symbol.toUpperCase();
+        market.put(symbol, stock);
     }
 
     // MODIFIES: this
@@ -55,8 +59,8 @@ public class Market implements Writable {
         return market.get(symbol.toUpperCase());
     }
 
-
-    // EFFECTS: returns an unmodifiable view of all stocks in the market (sorted by symbol)
+    // EFFECTS: returns an unmodifiable view of all stocks in the market (sorted by
+    // symbol)
     public Collection<Stock> getAllStocks() {
         return Collections.unmodifiableCollection(market.values());
     }
@@ -87,5 +91,16 @@ public class Market implements Writable {
             }
         }
         return m;
+    }
+
+    // EFFECTS: copy other market to current market
+    public void copyFrom(Market other) {
+        if (other == null) {
+            return;
+        }
+
+        // replace market
+        this.market.clear();
+        this.addAll(other.getAllStocks());
     }
 }
