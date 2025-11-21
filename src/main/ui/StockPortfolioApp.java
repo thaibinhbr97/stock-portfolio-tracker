@@ -21,18 +21,17 @@ public class StockPortfolioApp {
     private static final String JSON_STORE = "./data/portfolio.json";
     private JsonWriter jsonWriter;
     private JsonReader jsonReader;
-    
+
     private Market market;
     private Portfolio portfolio;
     private Scanner input;
-    
 
     public StockPortfolioApp() {
         runStockPortfolioApp();
     }
 
     public void runStockPortfolioApp() {
-        
+
         try {
             init();
             System.out.println("\nWelcome to the Stock Portfolio Application!\n");
@@ -45,11 +44,11 @@ public class StockPortfolioApp {
             System.out.println("Goodbye!");
             if (input != null) {
                 input.close();
-            }                
+            }
         } catch (FileNotFoundException e) {
             System.out.println("Unable to find file at " + JSON_STORE);
-        }    
-        
+        }
+
     }
 
     // EFFECTS: initialize portfolio
@@ -59,7 +58,7 @@ public class StockPortfolioApp {
         jsonReader = new JsonReader(JSON_STORE);
 
         input.useDelimiter("\r?\n|\r");
-        
+
         // create demo portfolio
         portfolio = new Portfolio("Brad", 10_000.00, LocalDateTime.now());
         market = new Market();
@@ -68,9 +67,9 @@ public class StockPortfolioApp {
 
     // EFFECTS: print market by listing each stock to the console
     public void printMarket() {
-        for (Stock stock: market.getAllStocks()) {
+        for (Stock stock : market.getAllStocks()) {
             System.out.printf("| %s | %s | %s | $%.2f |\n",
-                    stock.getSymbol(), stock.getCompanyName(), stock.getSector(), stock.getCurrentPrice());   
+                    stock.getSymbol(), stock.getCompanyName(), stock.getSector(), stock.getCurrentPrice());
         }
     }
 
@@ -88,8 +87,8 @@ public class StockPortfolioApp {
         System.out.println("9: Load from File");
         System.out.println("q: Quit");
         System.out.println("===============================================");
-    }    
-    
+    }
+
     // MODIFIES: this
     // EFFECTS: process user command
     @SuppressWarnings("methodlength")
@@ -121,15 +120,14 @@ public class StockPortfolioApp {
                 break;
             case "9":
                 loadStockPortfolioApp();
-                break;                
+                break;
             case "q":
                 return false;
             default:
                 System.out.println("Invalid option. Please choose 1-9 or q to quit.");
-        }  
-        return true;      
+        }
+        return true;
     }
-
 
     // Main menu actions
 
@@ -155,11 +153,10 @@ public class StockPortfolioApp {
         }
 
         double beforeCash = portfolio.getCashBalance();
-        portfolio.buyShare(stock, quantity);              
+        portfolio.buyShare(stock, quantity);
         System.out.printf(
                 "Bought %.2f of %s @ $%.2f (Cost: $%.2f). Cash: $%.2f → $%.2f%n",
-                quantity, stock.getSymbol(), stock.getCurrentPrice(), total, beforeCash, portfolio.getCashBalance()
-        );
+                quantity, stock.getSymbol(), stock.getCurrentPrice(), total, beforeCash, portfolio.getCashBalance());
     }
 
     // EFFECTS: sell stock
@@ -196,10 +193,11 @@ public class StockPortfolioApp {
         }
         System.out.printf("You hold %.2f of %s. Current price $%.2f, Avg price $%.2f%n",
                 holding.getShares(), symbol, holding.getStock().getCurrentPrice(), holding.getAveragePrice());
-        return holding;        
+        return holding;
     }
 
-    // EFFECTS: returns true if the holding has at least qty shares; otherwise prints an error
+    // EFFECTS: returns true if the holding has at least qty shares; otherwise
+    // prints an error
     private boolean hasEnoughShares(Holding holding, double quantity) {
         if (quantity <= holding.getShares()) {
             return true;
@@ -216,7 +214,7 @@ public class StockPortfolioApp {
         System.out.println("\n| Symbol | Company | Sector | Price |");
         for (Stock stock : market.getAllStocks()) {
             System.out.printf("| %s | %s | %s | $%.2f |%n",
-                    stock.getSymbol(), stock.getCompanyName(), stock.getSector(), stock.getCurrentPrice());            
+                    stock.getSymbol(), stock.getCompanyName(), stock.getSector(), stock.getCurrentPrice());
         }
     }
 
@@ -232,7 +230,7 @@ public class StockPortfolioApp {
         stock.updateCurrentPrice(newPrice);
         portfolio.calculatePortfolioValue();
         System.out.printf("%s price updated to $%.2f%n", symbol, stock.getCurrentPrice());
-    }    
+    }
 
     // EFFECTS: view transactions history
     private void viewTransactionHistory() {
@@ -243,7 +241,7 @@ public class StockPortfolioApp {
         }
         System.out.println();
         System.out.println(transactionManager.toString());
-    }    
+    }
 
     // EFFECTS: filterTransaction based on user commands
     private void filterTransactions() {
@@ -271,7 +269,7 @@ public class StockPortfolioApp {
                 // back or invalid
                 break;
         }
-    }    
+    }
 
     // EFFECTS: prompts for symbol; returns existing market stock,
     // or (if not found) optionally creates a new one.
@@ -296,16 +294,17 @@ public class StockPortfolioApp {
     }
 
     // MODIFIES: stock
-    // EFFECTS: optionally updates current price before an action (e.g., buying/selling)
+    // EFFECTS: optionally updates current price before an action (e.g.,
+    // buying/selling)
     private void updatePriceOptionally(Stock stock, String action) {
         System.out.printf("Current price for %s is $%.2f%n", stock.getSymbol(), stock.getCurrentPrice());
         if (isYesNo("Update the price before " + action + "? (y/n): ")) {
             double newPrice = readPositiveDouble("New price: $");
             stock.updateCurrentPrice(newPrice);
-            System.out.println(stock.getCurrentPrice());            
+            System.out.println(stock.getCurrentPrice());
         }
     }
-    
+
     // EFFECTS: ensure sufficient fund from cash balance before buying a stock
     private boolean isFundSufficientToBuy(double total) {
         double cash = portfolio.getCashBalance();
@@ -313,7 +312,7 @@ public class StockPortfolioApp {
             return true;
         }
         System.out.printf("Insufficient cash. Need $%.2f, have $%.2f%n", total, cash);
-        return false;        
+        return false;
     }
 
     // EFFECTS: filter transactions by action (BUY/SELL)
@@ -357,7 +356,7 @@ public class StockPortfolioApp {
             System.out.println("Invalid date format. Please use YYYY-MM-DD.");
         }
     }
-    
+
     // =========================================================
     // Input helpers
     // EFFECTS: read prompt and process input
@@ -406,7 +405,7 @@ public class StockPortfolioApp {
             }
             System.out.println("Please answer y/n.");
         }
-    }    
+    }
 
     // EFFECTS: saves stock portfolio data to file
     private void saveStockPortfolioApp() {

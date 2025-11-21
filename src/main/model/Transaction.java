@@ -19,7 +19,7 @@ public class Transaction implements Writable {
     private double shares;
     private double price;
 
-    // EFFECTS: constructs a Transaction with dateTime 
+    // EFFECTS: constructs a Transaction with dateTime
     // is initialized to LocalDateTime.now(),
     // symbol, action, shares, price,
     // a recent action (BUY/SELL) for a stock.
@@ -57,11 +57,11 @@ public class Transaction implements Writable {
     }
 
     // EFFECTS: Overriding toString() method of Transaction class as example below
-    // | Date | Symbol | Action | Shares |  Price | Total |
+    // | Date | Symbol | Action | Shares | Price | Total |
     // | 2025-10-05T06:23:32 | AMZN | BUY | 5.00 |$200.00 | $1000.00 |
     @Override
     public String toString() {
-        String transactionString = String.format("| %s | %s | %s | %.2f | $%.2f | $%.2f |", 
+        String transactionString = String.format("| %s | %s | %s | %.2f | $%.2f | $%.2f |",
                 getDateTime().toString(), getSymbol(), getAction(), getShares(), getPrice(), getTotal());
         return transactionString;
     }
@@ -81,13 +81,11 @@ public class Transaction implements Writable {
     // EFFECTS: returns a transaction object from a JSON object
     public static Transaction fromJson(JSONObject jsonObject) {
         return new Transaction(
-            jsonObject.getString("symbol"), 
-            jsonObject.getString("action"), 
-            jsonObject.getDouble("shares"), 
-            jsonObject.getDouble("price"), 
-            LocalDateTime.parse(jsonObject.getString("dateTime"))
-        );
-    }     
-    
-    
+                jsonObject.getString("symbol"),
+                jsonObject.getString("action"),
+                jsonObject.getDouble("shares"),
+                jsonObject.getDouble("price"),
+                LocalDateTime.parse(jsonObject.getString("dateTime")));
+    }
+
 }

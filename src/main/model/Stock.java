@@ -16,7 +16,8 @@ public class Stock implements Writable {
     private String sector;
     private double currentPrice;
 
-    // EFFECTS: constructs a Stock with symbol, companyName, sector, shares, currentPrice
+    // EFFECTS: constructs a Stock with symbol, companyName, sector, shares,
+    // currentPrice
     public Stock(String symbol, String companyName, String sector, double currentPrice) {
         this.symbol = symbol;
         this.companyName = companyName;
@@ -49,10 +50,10 @@ public class Stock implements Writable {
     }
 
     // EFFECTS: Overriding toString() method of Stock class as example below
-    // | Symbol | CompanyName | Sector | CurrentPrice |    
+    // | Symbol | CompanyName | Sector | CurrentPrice |
     @Override
     public String toString() {
-        String stockString = String.format("| %s | %s | %s | $%.2f |", 
+        String stockString = String.format("| %s | %s | %s | $%.2f |",
                 symbol, companyName, sector, currentPrice);
         return stockString;
     }
@@ -71,10 +72,9 @@ public class Stock implements Writable {
     // EFFECTS: returns a stock object from a JSON object
     public static Stock fromJson(JSONObject jsonObject) {
         return new Stock(
-            jsonObject.getString("symbol"), 
-            jsonObject.getString("companyName"), 
-            jsonObject.getString("sector"), 
-            jsonObject.getDouble("currentPrice")
-        ); 
+                jsonObject.getString("symbol"),
+                jsonObject.getString("companyName"),
+                jsonObject.getString("sector"),
+                jsonObject.getDouble("currentPrice"));
     }
 }

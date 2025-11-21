@@ -15,7 +15,8 @@ import org.json.JSONArray;
 public class TransactionManager {
     private List<Transaction> transactions;
 
-    // EFFECTS: constructs a TransactionManager with transactions set to a new List of Transaction
+    // EFFECTS: constructs a TransactionManager with transactions set to a new List
+    // of Transaction
     public TransactionManager() {
         transactions = new ArrayList<>();
     }
@@ -43,10 +44,10 @@ public class TransactionManager {
         List<Transaction> filtered = new ArrayList<>();
         for (Transaction transaction : transactions) {
             LocalDateTime dateTime = transaction.getDateTime();
-            if ((dateTime.isEqual(startTime) 
-                    || dateTime.isAfter(startTime)) 
-                    && (dateTime.isEqual(endTime) 
-                    || dateTime.isBefore(endTime))) {
+            if ((dateTime.isEqual(startTime)
+                    || dateTime.isAfter(startTime))
+                    && (dateTime.isEqual(endTime)
+                            || dateTime.isBefore(endTime))) {
                 filtered.add(transaction);
             }
         }
@@ -61,7 +62,7 @@ public class TransactionManager {
                 filtered.add(transaction);
             }
         }
-        return filtered;        
+        return filtered;
     }
 
     public List<Transaction> getTransactions() {
@@ -94,8 +95,8 @@ public class TransactionManager {
             contentBuilder.append(transaction.toString()).append("\n");
         }
         return contentBuilder.toString();
-    }      
-    
+    }
+
     public JSONArray toJsonArray() {
         JSONArray jsonArray = new JSONArray();
         for (Transaction t : transactions) {
@@ -113,5 +114,5 @@ public class TransactionManager {
             }
         }
         return tm;
-    }        
+    }
 }
