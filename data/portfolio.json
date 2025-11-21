@@ -649,11 +649,11 @@
       "sector": "XOM"
     }
   ]},
-  "lastUpdated": "2025-11-20T22:22:51.655401",
+  "lastUpdated": "2025-11-21T01:13:49.895530",
   "portfolio": {
-    "lastUpdated": "2025-11-20T22:22:43.977364",
+    "lastUpdated": "2025-11-21T01:13:47.412623",
     "ownerName": "Brad",
-    "cashBalance": 7362,
+    "cashBalance": 6917.7,
     "holdings": [
       {
         "shares": 2,
@@ -661,19 +661,34 @@
         "averagePurchasePrice": 680
       },
       {
-        "shares": 5,
-        "symbol": "ABBV",
-        "averagePurchasePrice": 150
-      },
-      {
         "shares": 3,
         "symbol": "CVX",
         "averagePurchasePrice": 160
       },
       {
+        "shares": 1.5,
+        "symbol": "QCOM",
+        "averagePurchasePrice": 115
+      },
+      {
+        "shares": 3.72,
+        "symbol": "USB",
+        "averagePurchasePrice": 35
+      },
+      {
         "shares": 4,
         "symbol": "F",
         "averagePurchasePrice": 12
+      },
+      {
+        "shares": 5,
+        "symbol": "ABBV",
+        "averagePurchasePrice": 150
+      },
+      {
+        "shares": 2.95,
+        "symbol": "UBER",
+        "averagePurchasePrice": 48
       }
     ],
     "transactions": [
@@ -715,6 +730,30 @@
         "symbol": "ABBV",
         "total": 750,
         "price": 150,
+        "action": "BUY"
+      },
+      {
+        "dateTime": "2025-11-21T01:13:15.012320",
+        "shares": 1.5,
+        "symbol": "QCOM",
+        "total": 172.5,
+        "price": 115,
+        "action": "BUY"
+      },
+      {
+        "dateTime": "2025-11-21T01:13:35.966047",
+        "shares": 2.95,
+        "symbol": "UBER",
+        "total": 141.60000000000002,
+        "price": 48,
+        "action": "BUY"
+      },
+      {
+        "dateTime": "2025-11-21T01:13:47.412623",
+        "shares": 3.72,
+        "symbol": "USB",
+        "total": 130.20000000000002,
+        "price": 35,
         "action": "BUY"
       }
     ]
