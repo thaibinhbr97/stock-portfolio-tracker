@@ -15,7 +15,7 @@ import persistence.Writable;
  * methods for buying, selling, showcase current holdings as well 
  * as calculating the total value of all owned stock holdings.
  */
-public class Portfolio implements Writable { 
+public class Portfolio implements Writable {
     private String ownerName;
     private double cashBalance;
     private double portfolioValue;
@@ -23,10 +23,12 @@ public class Portfolio implements Writable {
     private TransactionManager transactionManager;
 
     private Map<String, Holding> holdings;
-    
-    // EFFECTS: constructs a Portfolio with owner name, cash balance, 
-    // portfolioValue initilized to 0.0, lastUpdated initialized to LocalDateTime.now(), 
-    // holdings initialized to HashMap<>() to keep track of key-value pairs String symbol: Holding holding, initialize
+
+    // EFFECTS: constructs a Portfolio with owner name, cash balance,
+    // portfolioValue initilized to 0.0, lastUpdated initialized to
+    // LocalDateTime.now(),
+    // holdings initialized to HashMap<>() to keep track of key-value pairs String
+    // symbol: Holding holding, initialize
     // TransactionManager object
     public Portfolio(String ownerName, double cashBalance, LocalDateTime lastUpdated) {
         this.ownerName = ownerName;
@@ -37,18 +39,29 @@ public class Portfolio implements Writable {
         this.transactionManager = new TransactionManager();
     }
 
-    // REQUIRES: quantity > 0, total price (stock current price * quantity) <= cashBalance
+    // REQUIRES: quantity > 0, total price (stock current price * quantity) <=
+    // cashBalance
     // MODIFIES: this, Holding, TransactionManager
-    // EFFECTS: buy shares of a stock, update portfolio value and cash balance for owner once action is done.
+    // EFFECTS: buy shares of a stock, update portfolio value and cash balance for
+    // owner once action is done.
     public void buyShare(Stock stock, double quantity) {
-        if (stock == null) {
+        if (stock == null)
             return;
-        }
-        double totalPrice = stock.getCurrentPrice() * quantity;
-        if (totalPrice > cashBalance) {
-            return;
-        }
 
+        double totalPrice = stock.getCurrentPrice() * quantity;
+        if (totalPrice > cashBalance)
+            return;
+
+        updateHoldingsForBuy(stock, quantity);
+
+        cashBalance -= totalPrice;
+        calculatePortfolioValue();
+        lastUpdated = LocalDateTime.now();
+
+        recordBuyTransaction(stock, quantity);
+    }
+
+    private void updateHoldingsForBuy(Stock stock, double quantity) {
         String symbol = stock.getSymbol();
         Holding holding = holdings.get(symbol);
         if (holding == null) {
@@ -56,21 +69,19 @@ public class Portfolio implements Writable {
             holdings.put(symbol, holding);
         } else {
             holding.buyShare(quantity);
-
         }
+    }
 
-        cashBalance -= totalPrice;
-        calculatePortfolioValue();
-        lastUpdated = LocalDateTime.now();
-
-        // create and record buy transaction
-        Transaction transaction = new Transaction(symbol, "BUY", quantity, stock.getCurrentPrice(), lastUpdated);
+    private void recordBuyTransaction(Stock stock, double quantity) {
+        Transaction transaction = new Transaction(stock.getSymbol(), "BUY", quantity, stock.getCurrentPrice(),
+                lastUpdated);
         transactionManager.addTransaction(transaction);
     }
 
-    // REQUIRES: symbol != null, quantity > 0, shares > 0, quantity <= current shares for this stock holding
+    // REQUIRES: symbol != null, quantity > 0, shares > 0, quantity <= current
+    // shares for this stock holding
     // MODIFIES: this, Holding, TransactionManager
-    // EFFECTS: sell shares of a stock symbol with stock's current price. 
+    // EFFECTS: sell shares of a stock symbol with stock's current price.
     // Update portfolio value and cash balance for owner once action is done.
     public void sellShare(String symbol, double quantity) {
         Holding holding = holdings.get(symbol);
@@ -98,7 +109,8 @@ public class Portfolio implements Writable {
     }
 
     // MODIFIES: this, Transaction, Holding
-    // EFFECTS: recalculates and updates portfolioValue once a successful BUY/SELL action occurs.
+    // EFFECTS: recalculates and updates portfolioValue once a successful BUY/SELL
+    // action occurs.
     // (shares * current stock price)
     public void calculatePortfolioValue() {
         double total = 0.0;
@@ -113,7 +125,7 @@ public class Portfolio implements Writable {
         this.portfolioValue = total;
     }
 
-    // getters 
+    // getters
     public double getCashBalance() {
         return cashBalance;
     }
@@ -129,14 +141,14 @@ public class Portfolio implements Writable {
     public LocalDateTime getLastUpdated() {
         return lastUpdated;
     }
-    
+
     public String getOwner() {
         return ownerName;
     }
 
     public TransactionManager getTransactionManager() {
         return transactionManager;
-    }    
+    }
 
     // MODIFIES: this
     // EFFECTS: for each holding, if the market has a matching symbol,
@@ -154,7 +166,8 @@ public class Portfolio implements Writable {
         calculatePortfolioValue();
     }
 
-    // EFFECTS: returns portfolio information with owner name, cash balance, and portfolio.
+    // EFFECTS: returns portfolio information with owner name, cash balance, and
+    // portfolio.
     // with the format as below:
     // Owner name: Brad
     // Cash balance: $10000
@@ -163,26 +176,27 @@ public class Portfolio implements Writable {
         String portfolioInformationString = String.format("Owner Name: %s\nCash Balance: $%.2f\nPortfolio Value: $%.2f",
                 ownerName,
                 cashBalance,
-                portfolioValue
-        );
+                portfolioValue);
         return portfolioInformationString;
     }
 
     // EFFECTS: returns a header as a below format
-    // | Symbol | Current Price | Average Price | Shares | Market Value | Profit/Loss |
+    // | Symbol | Current Price | Average Price | Shares | Market Value |
+    // Profit/Loss |
     public String getHeader() {
         String headerString = String.format("| %s | %s | %s | %s | %s | %s |",
                 "Symbol", "Current Price", "Average Price", "Shares", "Market Value", "Profit/Loss");
         return headerString;
-    }    
+    }
 
     // EFFECTS: Overriding toString() method of Portfolio class
     // with the format as an example below:
     // ================================ Portfolio ==================================
     // Owner name: Brad
     // Cash Balance: $10000
-    // | Symbol | Current Price | Average Price | Shares | Market Value | Profit/Loss |
-    // |  AAPL  | $100.00 | $150.00 | 2.00 | $300.00 | +$100.00 |
+    // | Symbol | Current Price | Average Price | Shares | Market Value |
+    // Profit/Loss |
+    // | AAPL | $100.00 | $150.00 | 2.00 | $300.00 | +$100.00 |
     @Override
     public String toString() {
         StringBuilder contentBuilder = new StringBuilder();
@@ -238,7 +252,7 @@ public class Portfolio implements Writable {
 
         p.calculatePortfolioValue();
         return p;
-    }       
+    }
 
     // MODIFIES: p
     // EFFECTS: parses holdings array and inserts into portfolio by symbol
@@ -251,7 +265,8 @@ public class Portfolio implements Writable {
     }
 
     // MODIFIES: p
-    // EFFECTS: parses transactions array and appends to the portfolio's transaction manager
+    // EFFECTS: parses transactions array and appends to the portfolio's transaction
+    // manager
     private static void parseTransactions(JSONArray transactionsArray, Portfolio p) {
         for (int i = 0; i < transactionsArray.length(); i++) {
             JSONObject to = transactionsArray.getJSONObject(i);
@@ -260,9 +275,27 @@ public class Portfolio implements Writable {
                     to.getString("action"),
                     to.getDouble("shares"),
                     to.getDouble("price"),
-                    LocalDateTime.parse(to.getString("dateTime"))
-            );
+                    LocalDateTime.parse(to.getString("dateTime")));
             p.getTransactionManager().addTransaction(t);
         }
-    }    
+    }
+
+    // MODIFIES: this
+    // EFFECTS: copy other portfolio to the current portfolio
+    public void copyFrom(Portfolio other) {
+        if (other == null) {
+            return;
+        }
+
+        this.ownerName = other.ownerName;
+        this.cashBalance = other.cashBalance;
+
+        // Replace holdings
+        this.holdings.clear();
+        this.holdings.putAll(other.holdings);
+
+        // Replace transaction manager
+        this.transactionManager = other.transactionManager;
+    }
+
 }
