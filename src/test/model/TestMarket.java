@@ -61,7 +61,7 @@ public class TestMarket {
     void testAddOrReplaceEmptySymbolNoOp() {
         Stock nullSymbol = new Stock("", "No Symbol", "Misc", 1.0);
         testMarket.addOrReplace(nullSymbol);
-        assertTrue(testMarket.isEmpty());     
+        assertTrue(testMarket.isEmpty());
     }
 
     @Test
@@ -81,7 +81,7 @@ public class TestMarket {
         assertEquals(2, testMarket.getAllStocks().size());
         assertNotNull(testMarket.getStock("MSFT"));
         assertNotNull(testMarket.getStock("AMZN"));
-    }       
+    }
 
     @Test
     void testAddAllAddsMultipleStocks() {
@@ -93,7 +93,7 @@ public class TestMarket {
         assertEquals(2, testMarket.getAllStocks().size());
         assertNotNull(testMarket.getStock("AAPL"));
         assertNotNull(testMarket.getStock("GOOGL"));
-    }    
+    }
 
     @Test
     void testGetStockCaseInsensitiveSymbol() {
@@ -136,7 +136,7 @@ public class TestMarket {
         assertEquals("AAPL", list.get(0).getSymbol());
         assertEquals("GOOGL", list.get(1).getSymbol());
         assertEquals("TSLA", list.get(2).getSymbol());
-    } 
+    }
 
     @Test
     void testToJsonFromJsonRoundTrip() {
@@ -161,5 +161,25 @@ public class TestMarket {
         root.put("stocks", new JSONArray());
         Market rebuilt = Market.fromJson(root);
         assertTrue(rebuilt.isEmpty());
-    }    
+    }
+
+    @Test
+    void testCopyFrom() {
+        Market other = new Market();
+        other.addOrReplace(new Stock("AAPL", "Apple Inc.", "Technology", 150.00));
+        other.addOrReplace(new Stock("GOOGL", "Alphabet Inc.", "Technology", 2800.00));
+
+        testMarket.copyFrom(other);
+        assertEquals(2, testMarket.getAllStocks().size());
+        assertNotNull(testMarket.getStock("AAPL"));
+        assertNotNull(testMarket.getStock("GOOGL"));
+    }
+
+    @Test
+    void testCopyFromNull() {
+        testMarket.addOrReplace(new Stock("AAPL", "Apple Inc.", "Technology", 150.00));
+        testMarket.copyFrom(null);
+        assertEquals(1, testMarket.getAllStocks().size());
+        assertNotNull(testMarket.getStock("AAPL"));
+    }
 }

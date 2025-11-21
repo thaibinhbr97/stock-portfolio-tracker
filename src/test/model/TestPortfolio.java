@@ -19,7 +19,7 @@ public class TestPortfolio {
     private static final String NVDA = "NVDA";
     private static final String COST = "COST";
     private static final String JPM = "JPM";
-    
+
     private Stock apple;
     private Stock amazon;
     private Stock google;
@@ -29,16 +29,16 @@ public class TestPortfolio {
     private Stock nullStock;
 
     private Portfolio portfolio;
-    
+
     @BeforeEach
     public void runBefore() {
         // constructor with shares parameter
-        apple = new Stock("AAPL", "Apple Inc.", "Technology",250.00);
-        amazon = new Stock("AMZN", "Amazon Com Inc.", "Consumer Discretionary",200.00);
-        google = new Stock("GOOGL", "Alphabet Inc.", "Technology",150.00);
-        nvidia = new Stock("NVDA", "Nvidia Corp", "Technology",150.00);
-        costco = new Stock("COST", "Costco Wholesale Corp.", "Consumer Staples",450.00);
-        jpmorgan = new Stock("JPM", "JPMorgan Chase & Corp", "Financial Services",300.00);
+        apple = new Stock("AAPL", "Apple Inc.", "Technology", 250.00);
+        amazon = new Stock("AMZN", "Amazon Com Inc.", "Consumer Discretionary", 200.00);
+        google = new Stock("GOOGL", "Alphabet Inc.", "Technology", 150.00);
+        nvidia = new Stock("NVDA", "Nvidia Corp", "Technology", 150.00);
+        costco = new Stock("COST", "Costco Wholesale Corp.", "Consumer Staples", 450.00);
+        jpmorgan = new Stock("JPM", "JPMorgan Chase & Corp", "Financial Services", 300.00);
 
         LocalDateTime lastUpdated = LocalDateTime.of(2025, 10, 5, 6, 23, 32);
         portfolio = new Portfolio("Brad", 10000.00, lastUpdated);
@@ -85,8 +85,8 @@ public class TestPortfolio {
         assertEquals(10000.0 - 150.0 * 6.0, portfolio.getCashBalance());
         assertEquals(150.0 * 6.0, portfolio.getPortfolioValue());
         assertTrue(portfolio.getHoldings().containsKey(NVDA));
-    }   
-    
+    }
+
     @Test
     public void testBuyShareWhichExceedCashBalanace() {
         assertFalse(portfolio.getHoldings().containsKey(NVDA));
@@ -133,7 +133,7 @@ public class TestPortfolio {
         assertEquals(10000.0 - 150.0 * 10.0, portfolio.getCashBalance());
         assertEquals(150.0 * 10.0, portfolio.getPortfolioValue());
         portfolio.sellShare(NVDA, 10.0);
-        assertFalse(portfolio.getHoldings().containsKey(NVDA));        
+        assertFalse(portfolio.getHoldings().containsKey(NVDA));
         assertEquals(10000.0, portfolio.getCashBalance());
         assertEquals(0.0, portfolio.getPortfolioValue());
     }
@@ -145,7 +145,7 @@ public class TestPortfolio {
         assertEquals(10000.0 - 150.0 * 10.0, portfolio.getCashBalance());
         assertEquals(150.0 * 10.0, portfolio.getPortfolioValue());
         portfolio.sellShare(NVDA, 5.0);
-        assertTrue(portfolio.getHoldings().containsKey(NVDA));        
+        assertTrue(portfolio.getHoldings().containsKey(NVDA));
         assertEquals(10000.0 - 150.0 * 5.0, portfolio.getCashBalance());
         assertEquals(150.0 * 5.0, portfolio.getPortfolioValue());
     }
@@ -159,18 +159,18 @@ public class TestPortfolio {
         nvidia.updateCurrentPrice(123);
         portfolio.buyShare(nvidia, 1);
         assertEquals(123.0, portfolio.getHoldings().get("NVDA").getAveragePrice(), 1e-9);
-    }   
-    
+    }
+
     @Test
     public void testRecordsBuyAndSellTransactions() {
         portfolio.buyShare(nvidia, 2);
         portfolio.sellShare(NVDA, 1);
         List<Transaction> transactions = portfolio.getTransactionManager().getTransactions();
         assertEquals(2, transactions.size());
-        assertEquals("BUY",  transactions.get(0).getAction());
+        assertEquals("BUY", transactions.get(0).getAction());
         assertEquals("SELL", transactions.get(1).getAction());
         assertEquals("NVDA", transactions.get(0).getSymbol());
-    }    
+    }
 
     @Test
     public void testPortfolioValueReflectsPriceChanges() {
@@ -179,7 +179,7 @@ public class TestPortfolio {
         portfolio.calculatePortfolioValue();
         assertEquals(2 * 300.0, portfolio.getPortfolioValue(), 1e-3);
     }
-    
+
     @Test
     public void testLastUpdatedChangesOnBuySell() {
         LocalDateTime before = portfolio.getLastUpdated();
@@ -206,5 +206,29 @@ public class TestPortfolio {
         assertEquals(portfolioString, portfolio.toString());
     }
 
-    
+    @Test
+    public void testCopyFrom() {
+        Portfolio other = new Portfolio("Alice", 5000.00, LocalDateTime.now());
+        other.buyShare(apple, 10);
+        other.buyShare(google, 5);
+
+        portfolio.copyFrom(other);
+
+        assertEquals("Alice", portfolio.getOwner());
+        assertEquals(5000.00 - (250 * 10) - (150 * 5), portfolio.getCashBalance());
+        assertEquals(2, portfolio.getHoldings().size());
+        assertTrue(portfolio.getHoldings().containsKey("AAPL"));
+        assertTrue(portfolio.getHoldings().containsKey("GOOGL"));
+        assertEquals(2, portfolio.getTransactionManager().getTransactions().size());
+    }
+
+    @Test
+    public void testCopyFromNull() {
+        portfolio.buyShare(apple, 10);
+        portfolio.copyFrom(null);
+
+        assertEquals("Brad", portfolio.getOwner());
+        assertEquals(10000.00 - (250 * 10), portfolio.getCashBalance());
+        assertEquals(1, portfolio.getHoldings().size());
+    }
 }
