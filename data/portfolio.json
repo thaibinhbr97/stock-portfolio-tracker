@@ -3,111 +3,718 @@
     {
       "symbol": "AAPL",
       "companyName": "Apple Inc.",
-      "currentPrice": 150,
+      "currentPrice": 175,
       "sector": "AAPL"
     },
     {
+      "symbol": "ABBV",
+      "companyName": "AbbVie Inc.",
+      "currentPrice": 150,
+      "sector": "ABBV"
+    },
+    {
+      "symbol": "ABT",
+      "companyName": "Abbott Labs",
+      "currentPrice": 95,
+      "sector": "ABT"
+    },
+    {
+      "symbol": "ADBE",
+      "companyName": "Adobe Inc.",
+      "currentPrice": 550,
+      "sector": "ADBE"
+    },
+    {
+      "symbol": "AEP",
+      "companyName": "American Electric",
+      "currentPrice": 80,
+      "sector": "AEP"
+    },
+    {
+      "symbol": "AMD",
+      "companyName": "Advanced Micro Devices",
+      "currentPrice": 105,
+      "sector": "AMD"
+    },
+    {
+      "symbol": "AMGN",
+      "companyName": "Amgen Inc.",
+      "currentPrice": 265,
+      "sector": "AMGN"
+    },
+    {
+      "symbol": "AMT",
+      "companyName": "American Tower",
+      "currentPrice": 180,
+      "sector": "AMT"
+    },
+    {
       "symbol": "AMZN",
-      "companyName": "Amazon.com, Inc.",
-      "currentPrice": 3300,
+      "companyName": "Amazon.com Inc.",
+      "currentPrice": 145,
       "sector": "AMZN"
     },
     {
-      "symbol": "BABA",
-      "companyName": "Alibaba Group Holding Limited",
-      "currentPrice": 85,
-      "sector": "BABA"
+      "symbol": "AVGO",
+      "companyName": "Broadcom Inc.",
+      "currentPrice": 880,
+      "sector": "AVGO"
+    },
+    {
+      "symbol": "AXP",
+      "companyName": "American Express",
+      "currentPrice": 155,
+      "sector": "AXP"
+    },
+    {
+      "symbol": "BA",
+      "companyName": "Boeing Co.",
+      "currentPrice": 195,
+      "sector": "BA"
+    },
+    {
+      "symbol": "BAC",
+      "companyName": "Bank of America",
+      "currentPrice": 28,
+      "sector": "BAC"
+    },
+    {
+      "symbol": "BKNG",
+      "companyName": "Booking Holdings",
+      "currentPrice": 3100,
+      "sector": "BKNG"
+    },
+    {
+      "symbol": "BLK",
+      "companyName": "BlackRock Inc.",
+      "currentPrice": 680,
+      "sector": "BLK"
+    },
+    {
+      "symbol": "BMY",
+      "companyName": "Bristol-Myers Squibb",
+      "currentPrice": 58,
+      "sector": "BMY"
+    },
+    {
+      "symbol": "C",
+      "companyName": "Citigroup Inc.",
+      "currentPrice": 41,
+      "sector": "C"
+    },
+    {
+      "symbol": "CAT",
+      "companyName": "Caterpillar",
+      "currentPrice": 270,
+      "sector": "CAT"
+    },
+    {
+      "symbol": "CCI",
+      "companyName": "Crown Castle",
+      "currentPrice": 100,
+      "sector": "CCI"
+    },
+    {
+      "symbol": "CL",
+      "companyName": "Colgate-Palmolive",
+      "currentPrice": 75,
+      "sector": "CL"
+    },
+    {
+      "symbol": "CMG",
+      "companyName": "Chipotle",
+      "currentPrice": 1900,
+      "sector": "CMG"
+    },
+    {
+      "symbol": "COF",
+      "companyName": "Capital One",
+      "currentPrice": 100,
+      "sector": "COF"
+    },
+    {
+      "symbol": "COP",
+      "companyName": "ConocoPhillips",
+      "currentPrice": 120,
+      "sector": "COP"
+    },
+    {
+      "symbol": "COST",
+      "companyName": "Costco Wholesale",
+      "currentPrice": 560,
+      "sector": "COST"
+    },
+    {
+      "symbol": "CRM",
+      "companyName": "Salesforce Inc.",
+      "currentPrice": 215,
+      "sector": "CRM"
+    },
+    {
+      "symbol": "CSCO",
+      "companyName": "Cisco Systems",
+      "currentPrice": 53,
+      "sector": "CSCO"
+    },
+    {
+      "symbol": "CVS",
+      "companyName": "CVS Health",
+      "currentPrice": 70,
+      "sector": "CVS"
+    },
+    {
+      "symbol": "CVX",
+      "companyName": "Chevron Corp.",
+      "currentPrice": 160,
+      "sector": "CVX"
+    },
+    {
+      "symbol": "D",
+      "companyName": "Dominion Energy",
+      "currentPrice": 45,
+      "sector": "D"
+    },
+    {
+      "symbol": "DE",
+      "companyName": "Deere & Co.",
+      "currentPrice": 380,
+      "sector": "DE"
+    },
+    {
+      "symbol": "DHR",
+      "companyName": "Danaher Corp.",
+      "currentPrice": 250,
+      "sector": "DHR"
+    },
+    {
+      "symbol": "DOW",
+      "companyName": "Dow Inc.",
+      "currentPrice": 52,
+      "sector": "DOW"
+    },
+    {
+      "symbol": "DUK",
+      "companyName": "Duke Energy",
+      "currentPrice": 90,
+      "sector": "DUK"
+    },
+    {
+      "symbol": "EL",
+      "companyName": "Estee Lauder",
+      "currentPrice": 145,
+      "sector": "EL"
+    },
+    {
+      "symbol": "EOG",
+      "companyName": "EOG Resources",
+      "currentPrice": 130,
+      "sector": "EOG"
+    },
+    {
+      "symbol": "EQIX",
+      "companyName": "Equinix Inc.",
+      "currentPrice": 750,
+      "sector": "EQIX"
+    },
+    {
+      "symbol": "F",
+      "companyName": "Ford Motor",
+      "currentPrice": 12,
+      "sector": "F"
+    },
+    {
+      "symbol": "FCX",
+      "companyName": "Freeport-McMoRan",
+      "currentPrice": 38,
+      "sector": "FCX"
+    },
+    {
+      "symbol": "GE",
+      "companyName": "General Electric",
+      "currentPrice": 115,
+      "sector": "GE"
+    },
+    {
+      "symbol": "GILD",
+      "companyName": "Gilead Sciences",
+      "currentPrice": 75,
+      "sector": "GILD"
+    },
+    {
+      "symbol": "GM",
+      "companyName": "General Motors",
+      "currentPrice": 32,
+      "sector": "GM"
     },
     {
       "symbol": "GOOGL",
       "companyName": "Alphabet Inc.",
-      "currentPrice": 2800,
+      "currentPrice": 135,
       "sector": "GOOGL"
     },
     {
+      "symbol": "GS",
+      "companyName": "Goldman Sachs",
+      "currentPrice": 325,
+      "sector": "GS"
+    },
+    {
+      "symbol": "HD",
+      "companyName": "Home Depot",
+      "currentPrice": 320,
+      "sector": "HD"
+    },
+    {
+      "symbol": "HON",
+      "companyName": "Honeywell",
+      "currentPrice": 190,
+      "sector": "HON"
+    },
+    {
+      "symbol": "IBM",
+      "companyName": "IBM Corp.",
+      "currentPrice": 145,
+      "sector": "IBM"
+    },
+    {
+      "symbol": "INTC",
+      "companyName": "Intel Corp.",
+      "currentPrice": 38,
+      "sector": "INTC"
+    },
+    {
+      "symbol": "ISRG",
+      "companyName": "Intuitive Surgical",
+      "currentPrice": 295,
+      "sector": "ISRG"
+    },
+    {
+      "symbol": "JNJ",
+      "companyName": "Johnson & Johnson",
+      "currentPrice": 160,
+      "sector": "JNJ"
+    },
+    {
+      "symbol": "JPM",
+      "companyName": "JPMorgan Chase",
+      "currentPrice": 150,
+      "sector": "JPM"
+    },
+    {
+      "symbol": "KHC",
+      "companyName": "Kraft Heinz",
+      "currentPrice": 35,
+      "sector": "KHC"
+    },
+    {
+      "symbol": "KMI",
+      "companyName": "Kinder Morgan",
+      "currentPrice": 17,
+      "sector": "KMI"
+    },
+    {
+      "symbol": "KO",
+      "companyName": "Coca-Cola",
+      "currentPrice": 58,
+      "sector": "KO"
+    },
+    {
+      "symbol": "LIN",
+      "companyName": "Linde plc",
+      "currentPrice": 380,
+      "sector": "LIN"
+    },
+    {
+      "symbol": "LLY",
+      "companyName": "Eli Lilly",
+      "currentPrice": 580,
+      "sector": "LLY"
+    },
+    {
+      "symbol": "LMT",
+      "companyName": "Lockheed Martin",
+      "currentPrice": 440,
+      "sector": "LMT"
+    },
+    {
+      "symbol": "LOW",
+      "companyName": "Lowe's",
+      "currentPrice": 210,
+      "sector": "LOW"
+    },
+    {
+      "symbol": "LULU",
+      "companyName": "Lululemon",
+      "currentPrice": 380,
+      "sector": "LULU"
+    },
+    {
+      "symbol": "MA",
+      "companyName": "Mastercard Inc.",
+      "currentPrice": 410,
+      "sector": "MA"
+    },
+    {
+      "symbol": "MAR",
+      "companyName": "Marriott Int.",
+      "currentPrice": 200,
+      "sector": "MAR"
+    },
+    {
+      "symbol": "MCD",
+      "companyName": "McDonald's",
+      "currentPrice": 280,
+      "sector": "MCD"
+    },
+    {
       "symbol": "META",
-      "companyName": "Meta Platforms, Inc.",
-      "currentPrice": 470,
+      "companyName": "Meta Platforms",
+      "currentPrice": 310,
       "sector": "META"
     },
     {
+      "symbol": "MMM",
+      "companyName": "3M Company",
+      "currentPrice": 95,
+      "sector": "MMM"
+    },
+    {
+      "symbol": "MO",
+      "companyName": "Altria Group",
+      "currentPrice": 42,
+      "sector": "MO"
+    },
+    {
+      "symbol": "MPC",
+      "companyName": "Marathon Petroleum",
+      "currentPrice": 150,
+      "sector": "MPC"
+    },
+    {
+      "symbol": "MRK",
+      "companyName": "Merck & Co.",
+      "currentPrice": 105,
+      "sector": "MRK"
+    },
+    {
+      "symbol": "MS",
+      "companyName": "Morgan Stanley",
+      "currentPrice": 85,
+      "sector": "MS"
+    },
+    {
       "symbol": "MSFT",
-      "companyName": "Microsoft Corporation",
-      "currentPrice": 350,
+      "companyName": "Microsoft Corp.",
+      "currentPrice": 330,
       "sector": "MSFT"
     },
     {
+      "symbol": "NEE",
+      "companyName": "NextEra Energy",
+      "currentPrice": 60,
+      "sector": "NEE"
+    },
+    {
+      "symbol": "NEM",
+      "companyName": "Newmont Corp.",
+      "currentPrice": 40,
+      "sector": "NEM"
+    },
+    {
       "symbol": "NFLX",
-      "companyName": "Netflix, Inc.",
-      "currentPrice": 600,
+      "companyName": "Netflix Inc.",
+      "currentPrice": 440,
       "sector": "NFLX"
     },
     {
+      "symbol": "NKE",
+      "companyName": "Nike Inc.",
+      "currentPrice": 105,
+      "sector": "NKE"
+    },
+    {
       "symbol": "NVDA",
-      "companyName": "NVIDIA Corporation",
-      "currentPrice": 900,
+      "companyName": "NVIDIA Corp.",
+      "currentPrice": 460,
       "sector": "NVDA"
     },
     {
       "symbol": "ORCL",
-      "companyName": "Oracle Corporation",
-      "currentPrice": 120,
+      "companyName": "Oracle Corp.",
+      "currentPrice": 110,
       "sector": "ORCL"
     },
     {
+      "symbol": "OXY",
+      "companyName": "Occidental Petro",
+      "currentPrice": 65,
+      "sector": "OXY"
+    },
+    {
+      "symbol": "PEP",
+      "companyName": "PepsiCo",
+      "currentPrice": 170,
+      "sector": "PEP"
+    },
+    {
+      "symbol": "PFE",
+      "companyName": "Pfizer Inc.",
+      "currentPrice": 33,
+      "sector": "PFE"
+    },
+    {
+      "symbol": "PG",
+      "companyName": "Procter & Gamble",
+      "currentPrice": 150,
+      "sector": "PG"
+    },
+    {
+      "symbol": "PLD",
+      "companyName": "Prologis Inc.",
+      "currentPrice": 110,
+      "sector": "PLD"
+    },
+    {
+      "symbol": "PM",
+      "companyName": "Philip Morris",
+      "currentPrice": 95,
+      "sector": "PM"
+    },
+    {
+      "symbol": "PNC",
+      "companyName": "PNC Financial",
+      "currentPrice": 120,
+      "sector": "PNC"
+    },
+    {
+      "symbol": "PSA",
+      "companyName": "Public Storage",
+      "currentPrice": 260,
+      "sector": "PSA"
+    },
+    {
+      "symbol": "PSX",
+      "companyName": "Phillips 66",
+      "currentPrice": 120,
+      "sector": "PSX"
+    },
+    {
+      "symbol": "PYPL",
+      "companyName": "PayPal Holdings",
+      "currentPrice": 58,
+      "sector": "PYPL"
+    },
+    {
+      "symbol": "QCOM",
+      "companyName": "Qualcomm Inc.",
+      "currentPrice": 115,
+      "sector": "QCOM"
+    },
+    {
+      "symbol": "REGN",
+      "companyName": "Regeneron Pharm",
+      "currentPrice": 820,
+      "sector": "REGN"
+    },
+    {
+      "symbol": "RTX",
+      "companyName": "Raytheon Tech",
+      "currentPrice": 80,
+      "sector": "RTX"
+    },
+    {
+      "symbol": "SBUX",
+      "companyName": "Starbucks",
+      "currentPrice": 95,
+      "sector": "SBUX"
+    },
+    {
+      "symbol": "SCHW",
+      "companyName": "Charles Schwab",
+      "currentPrice": 55,
+      "sector": "SCHW"
+    },
+    {
+      "symbol": "SHW",
+      "companyName": "Sherwin-Williams",
+      "currentPrice": 260,
+      "sector": "SHW"
+    },
+    {
+      "symbol": "SLB",
+      "companyName": "Schlumberger",
+      "currentPrice": 58,
+      "sector": "SLB"
+    },
+    {
+      "symbol": "SO",
+      "companyName": "Southern Co.",
+      "currentPrice": 68,
+      "sector": "SO"
+    },
+    {
+      "symbol": "TFC",
+      "companyName": "Truist Financial",
+      "currentPrice": 30,
+      "sector": "TFC"
+    },
+    {
+      "symbol": "TGT",
+      "companyName": "Target Corp.",
+      "currentPrice": 125,
+      "sector": "TGT"
+    },
+    {
+      "symbol": "TJX",
+      "companyName": "TJX Companies",
+      "currentPrice": 90,
+      "sector": "TJX"
+    },
+    {
+      "symbol": "TMO",
+      "companyName": "Thermo Fisher",
+      "currentPrice": 510,
+      "sector": "TMO"
+    },
+    {
       "symbol": "TSLA",
-      "companyName": "Tesla, Inc.",
-      "currentPrice": 600,
+      "companyName": "Tesla Inc.",
+      "currentPrice": 240,
       "sector": "TSLA"
+    },
+    {
+      "symbol": "TXN",
+      "companyName": "Texas Instruments",
+      "currentPrice": 160,
+      "sector": "TXN"
+    },
+    {
+      "symbol": "UBER",
+      "companyName": "Uber Technologies",
+      "currentPrice": 48,
+      "sector": "UBER"
+    },
+    {
+      "symbol": "UNH",
+      "companyName": "UnitedHealth Group",
+      "currentPrice": 480,
+      "sector": "UNH"
+    },
+    {
+      "symbol": "UNP",
+      "companyName": "Union Pacific",
+      "currentPrice": 210,
+      "sector": "UNP"
+    },
+    {
+      "symbol": "UPS",
+      "companyName": "UPS",
+      "currentPrice": 155,
+      "sector": "UPS"
+    },
+    {
+      "symbol": "USB",
+      "companyName": "US Bancorp",
+      "currentPrice": 35,
+      "sector": "USB"
+    },
+    {
+      "symbol": "V",
+      "companyName": "Visa Inc.",
+      "currentPrice": 245,
+      "sector": "V"
+    },
+    {
+      "symbol": "VLO",
+      "companyName": "Valero Energy",
+      "currentPrice": 135,
+      "sector": "VLO"
+    },
+    {
+      "symbol": "WFC",
+      "companyName": "Wells Fargo",
+      "currentPrice": 42,
+      "sector": "WFC"
+    },
+    {
+      "symbol": "WMT",
+      "companyName": "Walmart Inc.",
+      "currentPrice": 160,
+      "sector": "WMT"
+    },
+    {
+      "symbol": "XOM",
+      "companyName": "Exxon Mobil",
+      "currentPrice": 115,
+      "sector": "XOM"
     }
   ]},
-  "lastUpdated": "2025-10-24T23:07:16.477743",
+  "lastUpdated": "2025-11-20T22:22:51.655401",
   "portfolio": {
-    "lastUpdated": "2025-10-24T23:06:39.731906",
+    "lastUpdated": "2025-11-20T22:22:43.977364",
     "ownerName": "Brad",
-    "cashBalance": 8200,
-    "holdings": [{
-      "shares": 4,
-      "symbol": "TSLA",
-      "averagePurchasePrice": 425,
-      "stock": {
-        "symbol": "TSLA",
-        "companyName": "Tesla, Inc.",
-        "currentPrice": 500,
-        "sector": "TSLA"
+    "cashBalance": 7362,
+    "holdings": [
+      {
+        "shares": 2,
+        "symbol": "BLK",
+        "averagePurchasePrice": 680
+      },
+      {
+        "shares": 5,
+        "symbol": "ABBV",
+        "averagePurchasePrice": 150
+      },
+      {
+        "shares": 3,
+        "symbol": "CVX",
+        "averagePurchasePrice": 160
+      },
+      {
+        "shares": 4,
+        "symbol": "F",
+        "averagePurchasePrice": 12
       }
-    }],
+    ],
     "transactions": [
       {
-        "dateTime": "2025-10-24T23:05:35.893494",
-        "shares": 1,
-        "symbol": "TSLA",
-        "total": 300,
-        "price": 300,
+        "dateTime": "2025-11-20T22:01:56.545942",
+        "shares": 2,
+        "symbol": "BLK",
+        "total": 1360,
+        "price": 680,
         "action": "BUY"
       },
       {
-        "dateTime": "2025-10-24T23:05:44.061028",
-        "shares": 1,
-        "symbol": "TSLA",
-        "total": 400,
-        "price": 400,
+        "dateTime": "2025-11-20T22:02:11.994371",
+        "shares": 3,
+        "symbol": "CVX",
+        "total": 480,
+        "price": 160,
         "action": "BUY"
       },
       {
-        "dateTime": "2025-10-24T23:06:02.405866",
-        "shares": 1,
-        "symbol": "TSLA",
-        "total": 500,
-        "price": 500,
+        "dateTime": "2025-11-20T22:03:10.697507",
+        "shares": 5,
+        "symbol": "F",
+        "total": 60,
+        "price": 12,
         "action": "BUY"
       },
       {
-        "dateTime": "2025-10-24T23:06:39.731906",
+        "dateTime": "2025-11-20T22:03:18.109511",
         "shares": 1,
-        "symbol": "TSLA",
-        "total": 600,
-        "price": 600,
+        "symbol": "F",
+        "total": 12,
+        "price": 12,
+        "action": "SELL"
+      },
+      {
+        "dateTime": "2025-11-20T22:16:51.787771",
+        "shares": 5,
+        "symbol": "ABBV",
+        "total": 750,
+        "price": 150,
         "action": "BUY"
       }
     ]
