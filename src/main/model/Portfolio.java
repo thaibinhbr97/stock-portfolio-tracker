@@ -45,12 +45,14 @@ public class Portfolio implements Writable {
     // EFFECTS: buy shares of a stock, update portfolio value and cash balance for
     // owner once action is done.
     public void buyShare(Stock stock, double quantity) {
-        if (stock == null)
+        if (stock == null) {
             return;
+        }
 
         double totalPrice = stock.getCurrentPrice() * quantity;
-        if (totalPrice > cashBalance)
+        if (totalPrice > cashBalance) {
             return;
+        }
 
         updateHoldingsForBuy(stock, quantity);
 
