@@ -13,6 +13,7 @@ public final class MarketCatalog {
 
     }
 
+    @SuppressWarnings("methodlength")
     // EFFECTS: returns a list of stocks
     public static List<Stock> marketStocks() {
         List<Stock> stocks = new ArrayList<>();
