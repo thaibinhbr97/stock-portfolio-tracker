@@ -10,7 +10,7 @@ In addition to managing stocks, it also provides simple **recommendations** base
 - Allow users to buy, sell, and view stocks in their portfolio.
 - Allow users to view their holdings and profit/loss in their portfolio.
 - Record buy/sell transactions and maintain a history of investments.
-- Filter transactions by action(buy/sell), date and time, or symbol.
+- Filter transactions by action(buy/sell), date and time, or stock symbol.
 
 ### Who will use it?
 - Individual investors who want to track their holdings.  
@@ -24,16 +24,17 @@ In addition to managing stocks, it also provides simple **recommendations** base
 
 ### User Stories
 #### Holding
-- As a user, I want to buy or sell holding of a stock including fields such as symbol, sector, company name, shares, current stock price.
+- As a user, I want to buy/sell holding of a stock including fields such as stock symbol, sector, company name, shares, current stock price.
 - As a user, I want to view a market value of my holding.
-- As a user, I want to see my unrealized profit or loss of my holding.
+- As a user, I want to see my unrealized profit/loss of my holding.
 
 #### Portflio
-- As a user, I want to use my cash balance to buy or sell shares of a stock in my portfolio.
+- As a user, I want to use my cash balance when buy/sell shares of a stock in my portfolio.
 - As a user, I want to view my current portfolio value.
+- As a user, I want to view my unrealized profit/loss of my entire portfolio.
 
 #### TransactionManager
-- As a user, I want to view a record of stocks that I buy and sell in transaction manager including date time, symbol, action, share, purchase price, total.
+- As a user, I want to view a record of stocks that I buy/sell in transaction manager including date time, stock symbol, action, share, purchase price, total.
 - As a user, I want to filter a transaction history of stocks by all transactions, only buy or only sell, symbol, or date time range.
 
 ### Data Persistence
