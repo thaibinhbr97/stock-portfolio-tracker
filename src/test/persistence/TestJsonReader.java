@@ -21,7 +21,7 @@ public class TestJsonReader extends TestJson {
     @Test
     void testReaderNonExistentFile() {
         try {
-            JsonReader reader = new JsonReader("./data/noSuchFile.json");            
+            JsonReader reader = new JsonReader("./data/noSuchFile.json");
             Portfolio portfolio = reader.readPortfolio();
             Market market = reader.readMarket();
             fail("IOException expected");
@@ -33,7 +33,7 @@ public class TestJsonReader extends TestJson {
     @Test
     void testReaderEmptyPortfolio() {
         try {
-            JsonReader reader = new JsonReader("./data/testReaderEmptyPortfolio.json");            
+            JsonReader reader = new JsonReader("./data/testReaderEmptyPortfolio.json");
             Portfolio portfolio = reader.readPortfolio();
             assertEquals("Brad", portfolio.getOwner());
             assertEquals(10000, portfolio.getCashBalance());
@@ -62,7 +62,7 @@ public class TestJsonReader extends TestJson {
             // read
             JsonReader reader = new JsonReader(dest);
             Portfolio loadedP = reader.readPortfolio();
-            Market loadedM = reader.readMarket();    
+            Market loadedM = reader.readMarket();
 
             assertNotNull(loadedP);
             assertNotNull(loadedM);
@@ -92,10 +92,10 @@ public class TestJsonReader extends TestJson {
             // Cash & value
             assertEquals(5250.0, loadedP.getCashBalance(), EPSILON);
             double expectedValue = 15.0 * loadedM.getStock("AAPL").getCurrentPrice()
-                                + 15.0 * loadedM.getStock("AMZN").getCurrentPrice();
+                    + 15.0 * loadedM.getStock("AMZN").getCurrentPrice();
             assertEquals(expectedValue, loadedP.getPortfolioValue(), EPSILON);
         } catch (IOException e) {
             fail("Couldn't read from file");
         }
-    }    
+    }
 }

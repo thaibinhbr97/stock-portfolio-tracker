@@ -12,7 +12,7 @@ public class TestStock {
     private Stock nvidia;
     private Stock costco;
     private Stock jpmorgan;
-    
+
     @BeforeEach
     public void runBefore() {
         // constructor with shares parameter
@@ -20,7 +20,7 @@ public class TestStock {
         amazon = new Stock("AMZN", "Amazon Com Inc.", "Consumer Discretionary", 219.51);
         google = new Stock("GOOGL", "Alphabet Inc.", "Technology", 246.45);
         nvidia = new Stock("NVDA", "Nvidia Corp", "Technology", 187.55);
-        costco = new Stock("COST", "Costco Wholesale Corp.", "Consumer Staples",915.95);
+        costco = new Stock("COST", "Costco Wholesale Corp.", "Consumer Staples", 915.95);
         jpmorgan = new Stock("JPM", "JPMorgan Chase & Corp", "Financial Services", 310.35);
     }
 

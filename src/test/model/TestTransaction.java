@@ -13,7 +13,7 @@ public class TestTransaction {
     private Transaction sellAmazon;
     private Transaction buyGoogle;
     private Transaction sellGoogle;
-    
+
     private LocalDateTime dateTime;
 
     @BeforeEach
@@ -31,7 +31,7 @@ public class TestTransaction {
         assertEquals(200.00, buyAmazon.getPrice());
         assertEquals(1000.00, buyAmazon.getTotal());
     }
-    
+
     @Test
     public void testTransactionToString() {
         String transactionString = "| 2025-10-05T06:23:32 | AMZN | BUY | 5.00 | $200.00 | $1000.00 |";

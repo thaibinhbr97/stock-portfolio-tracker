@@ -24,7 +24,7 @@ public class TestTransactionManager {
     private static final String GOOGL = "GOOGL";
     private static final String NVDA = "NVDA";
     private static final String COST = "COST";
-    private static final String JPM = "JPM";    
+    private static final String JPM = "JPM";
 
     private Transaction buyAmazon;
     private Transaction sellAmazon;
@@ -32,8 +32,6 @@ public class TestTransactionManager {
     private Transaction sellGoogle;
 
     private List<Transaction> transactions;
-
-
 
     // Deterministic date-times for testing
     private static LocalDateTime testDateTime(int hour) {
@@ -43,14 +41,14 @@ public class TestTransactionManager {
     private final LocalDateTime dt10 = testDateTime(10);
     private final LocalDateTime dt12 = testDateTime(12);
     private final LocalDateTime dt14 = testDateTime(14);
-    
+
     @BeforeEach
     public void runBefore() {
         transactionManager = new TransactionManager();
 
-        buyAmazon  = new Transaction("AMZN", "BUY",  5.0, 200.00, dt10);
+        buyAmazon = new Transaction("AMZN", "BUY", 5.0, 200.00, dt10);
         sellAmazon = new Transaction("AMZN", "SELL", 3.0, 200.00, dt12);
-        buyGoogle  = new Transaction("GOOGL", "BUY", 10.0, 300.00, dt14);
+        buyGoogle = new Transaction("GOOGL", "BUY", 10.0, 300.00, dt14);
         sellGoogle = new Transaction("GOOGL", "SELL", 5.0, 200.00, dt14);
 
         transactions = transactionManager.getTransactions();
@@ -87,33 +85,33 @@ public class TestTransactionManager {
     @Test
     public void testAddOneSellTransaction() {
         assertFalse(transactions.contains(sellAmazon));
-        transactionManager.addTransaction(buyAmazon);        
+        transactionManager.addTransaction(buyAmazon);
         transactionManager.addTransaction(sellAmazon);
         assertTrue(transactions.contains(sellAmazon));
-        assertEquals(2, transactions.size());   
-        assertEquals(sellAmazon, transactions.get(1));           
+        assertEquals(2, transactions.size());
+        assertEquals(sellAmazon, transactions.get(1));
     }
 
     @Test
     public void testAddMoreThanOneSellTransaction() {
         assertFalse(transactions.contains(sellAmazon));
-        transactionManager.addTransaction(buyAmazon);        
-        transactionManager.addTransaction(buyAmazon);        
+        transactionManager.addTransaction(buyAmazon);
+        transactionManager.addTransaction(buyAmazon);
         transactionManager.addTransaction(sellAmazon);
         transactionManager.addTransaction(sellAmazon);
         assertTrue(transactions.contains(sellAmazon));
-        assertEquals(4, transactions.size()); 
+        assertEquals(4, transactions.size());
         assertEquals(sellAmazon, transactions.get(2));
         assertEquals(sellAmazon, transactions.get(3));
     }
-    
+
     @Test
     public void testFilterByBuyAction() {
         transactionManager.addTransaction(buyAmazon);
-        transactionManager.addTransaction(buyGoogle);  
+        transactionManager.addTransaction(buyGoogle);
         transactionManager.addTransaction(sellAmazon);
         transactionManager.addTransaction(sellGoogle);
-        assertEquals(4, transactions.size()); 
+        assertEquals(4, transactions.size());
 
         List<Transaction> buys = transactionManager.filterByAction("BUY");
         assertEquals(2, buys.size());
@@ -121,22 +119,22 @@ public class TestTransactionManager {
         assertEquals("BUY", buys.get(1).getAction());
         assertEquals(buyAmazon, buys.get(0));
         assertEquals(buyGoogle, buys.get(1));
-    }           
-    
+    }
+
     @Test
     public void testFilterBySellAction() {
         transactionManager.addTransaction(buyAmazon);
-        transactionManager.addTransaction(buyGoogle);  
+        transactionManager.addTransaction(buyGoogle);
         transactionManager.addTransaction(sellAmazon);
         transactionManager.addTransaction(sellGoogle);
-        assertEquals(4, transactions.size()); 
+        assertEquals(4, transactions.size());
 
         List<Transaction> sells = transactionManager.filterByAction("SELL");
         assertEquals(2, sells.size());
         assertEquals("SELL", sells.get(0).getAction());
         assertEquals("SELL", sells.get(1).getAction());
         assertEquals(sellAmazon, sells.get(0));
-        assertEquals(sellGoogle, sells.get(1));       
+        assertEquals(sellGoogle, sells.get(1));
     }
 
     @Test
@@ -171,7 +169,7 @@ public class TestTransactionManager {
     public void testFilterByDateTimeInclusiveBounds() {
         transactionManager.addTransaction(buyAmazon);
         transactionManager.addTransaction(sellAmazon);
-        transactionManager.addTransaction(buyGoogle);  
+        transactionManager.addTransaction(buyGoogle);
 
         List<Transaction> filtered = transactionManager.filterByDateTime(dt12, dt14);
         assertEquals(2, filtered.size());
@@ -187,7 +185,7 @@ public class TestTransactionManager {
         transactionManager.addTransaction(sellGoogle);
 
         List<Transaction> filtered = transactionManager.filterByDateTime(dt10, dt14);
-        assertEquals(4, filtered.size());        
+        assertEquals(4, filtered.size());
     }
 
     public void testFilterByDateTimeOutOfRange() {
@@ -203,28 +201,28 @@ public class TestTransactionManager {
         transactionManager.addTransaction(sellAmazon);
         List<Transaction> filtered = transactionManager.filterByDateTime(dt14, dt12);
         assertTrue(filtered.isEmpty());
-    }    
+    }
 
     @Test
     public void testFilterBySymbol() {
         transactionManager.addTransaction(buyAmazon);
-        transactionManager.addTransaction(buyGoogle);  
+        transactionManager.addTransaction(buyGoogle);
         transactionManager.addTransaction(sellAmazon);
-        transactionManager.addTransaction(sellGoogle);  
-        
-        List<Transaction> symbolTransactions = new ArrayList<>(); 
+        transactionManager.addTransaction(sellGoogle);
+
+        List<Transaction> symbolTransactions = new ArrayList<>();
         symbolTransactions = transactionManager.filterBySymbol(AMZN);
-        assertEquals(2, symbolTransactions.size());   
-        assertEquals(buyAmazon, symbolTransactions.get(0)); 
-        assertEquals(sellAmazon, symbolTransactions.get(1));         
+        assertEquals(2, symbolTransactions.size());
+        assertEquals(buyAmazon, symbolTransactions.get(0));
+        assertEquals(sellAmazon, symbolTransactions.get(1));
     }
 
-    @Test 
+    @Test
     public void testTransactionManagerToString() {
         String expected = transactionManager.getHeader() + "\n";
         transactionManager.addTransaction(buyAmazon);
         expected += buyAmazon.toString() + "\n";
-        assertEquals(expected, transactionManager.toString());      
+        assertEquals(expected, transactionManager.toString());
     }
 
     @Test
@@ -260,5 +258,5 @@ public class TestTransactionManager {
         assertSame(replacement, transactionManager.getTransactions());
         assertEquals(2, transactionManager.getTransactions().size());
         assertEquals("AMZN", transactionManager.getTransactions().get(0).getSymbol());
-    }    
+    }
 }

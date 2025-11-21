@@ -22,7 +22,7 @@ public abstract class TestJson {
         m.addOrReplace(new Stock("AAPL", "Apple Inc.", "Technology", 180.00));
         m.addOrReplace(new Stock("AMZN", "Amazon.com, Inc.", "Consumer Discretionary", 130.00));
         m.addOrReplace(new Stock("MSFT", "Microsoft Corporation", "Technology", 330.00));
-        return m;        
+        return m;
     }
 
     protected Portfolio makeEmptyPortfolio() {
@@ -32,10 +32,10 @@ public abstract class TestJson {
     protected Portfolio makePortfolioWithTrades(Market m) {
         Portfolio p = makeEmptyPortfolio();
         p.buyShare(m.getStock("AAPL"), 10.0); // @ 180
-        m.getStock("AAPL").updateCurrentPrice(200.00); 
-        p.buyShare(m.getStock("AAPL"), 5.0);  // @ 200
+        m.getStock("AAPL").updateCurrentPrice(200.00);
+        p.buyShare(m.getStock("AAPL"), 5.0); // @ 200
         p.buyShare(m.getStock("AMZN"), 20.0); // @ 130
-        p.sellShare("AMZN", 5.0);             // @ 130
+        p.sellShare("AMZN", 5.0); // @ 130
         return p;
     }
 
@@ -48,7 +48,7 @@ public abstract class TestJson {
     }
 
     protected void assertTransaction(Transaction t, String symbol, String action,
-                                     double shares, double price) {
+            double shares, double price) {
         assertNotNull(t);
         assertEquals(symbol, t.getSymbol());
         assertEquals(action, t.getAction());
