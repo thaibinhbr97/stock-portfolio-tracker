@@ -8,6 +8,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
+import ca.ubc.cs.ExcludeFromJacocoGeneratedReport;
 import model.Market;
 import model.Portfolio;
 import model.Stock;
@@ -17,6 +18,7 @@ import model.Stock;
  * Allows the user to input a stock symbol and quantity to purchase shares.
  * Can pre-fill the symbol from the MarketPanel selection.
  */
+@ExcludeFromJacocoGeneratedReport
 public class BuyStockPanel extends JPanel {
     private Portfolio portfolio;
     private Market market;
