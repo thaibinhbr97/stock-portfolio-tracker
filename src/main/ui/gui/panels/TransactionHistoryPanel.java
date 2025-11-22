@@ -15,6 +15,7 @@ import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
 
+import ca.ubc.cs.ExcludeFromJacocoGeneratedReport;
 import model.Holding;
 import model.Portfolio;
 import model.Transaction;
@@ -24,6 +25,7 @@ import model.Transaction;
  * Shows a table of all transactions (BUY/SELL).
  * Provides filtering options by Date, Action, and Symbol.
  */
+@ExcludeFromJacocoGeneratedReport
 public class TransactionHistoryPanel extends JPanel {
 
     private Portfolio portfolio;

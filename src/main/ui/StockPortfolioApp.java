@@ -6,6 +6,7 @@ import java.time.LocalDateTime;
 import java.util.Locale;
 import java.util.Scanner;
 
+import ca.ubc.cs.ExcludeFromJacocoGeneratedReport;
 import model.Holding;
 import model.Market;
 import model.MarketCatalog;
@@ -16,7 +17,9 @@ import model.TransactionManager;
 import persistence.JsonReader;
 import persistence.JsonWriter;
 
+
 // Represents Stock Portfolio application
+@ExcludeFromJacocoGeneratedReport
 public class StockPortfolioApp {
     private static final String JSON_STORE = "./data/portfolio.json";
     private JsonWriter jsonWriter;

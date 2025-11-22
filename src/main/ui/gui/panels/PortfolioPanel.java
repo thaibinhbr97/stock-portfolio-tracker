@@ -8,6 +8,7 @@ import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
+import ca.ubc.cs.ExcludeFromJacocoGeneratedReport;
 import model.Holding;
 import model.Portfolio;
 
@@ -18,6 +19,7 @@ import model.Portfolio;
  * market value, and profit/loss.
  * Allows the user to select a holding from the table.
  */
+@ExcludeFromJacocoGeneratedReport
 public class PortfolioPanel extends JPanel {
     private Portfolio portfolio;
     private JTable portfolioTable;
@@ -28,9 +30,9 @@ public class PortfolioPanel extends JPanel {
     public PortfolioPanel(Portfolio portfolio) {
         this.portfolio = portfolio;
         setLayout(new BorderLayout());
-        setBorder(BorderFactory.createTitledBorder("Your Portfolio"));
+        setBorder(BorderFactory.createTitledBorder(portfolio.getOwner() + "'s Portfolio"));
 
-        String[] columns = { "Symbol", "Shares", "Avg Price", "Cur Price", "Value", "P/L" };
+        String[] columns = { "Symbol", "Shares", "Avg Price", "Cur Price", "Value", "Profit/Loss" };
         tableModel = new DefaultTableModel(columns, 0) {
             @Override
             public boolean isCellEditable(int row, int column) {

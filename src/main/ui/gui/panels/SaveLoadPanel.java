@@ -8,6 +8,7 @@ import javax.swing.JButton;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
+import ca.ubc.cs.ExcludeFromJacocoGeneratedReport;
 import model.Market;
 import model.Portfolio;
 import persistence.JsonReader;
@@ -17,6 +18,7 @@ import persistence.JsonWriter;
  * Represents the panel for saving and loading the portfolio data.
  * Provides buttons to save the current state to a JSON file or load from it.
  */
+@ExcludeFromJacocoGeneratedReport
 public class SaveLoadPanel extends JPanel {
     private final Portfolio portfolio;
     private final Market market;

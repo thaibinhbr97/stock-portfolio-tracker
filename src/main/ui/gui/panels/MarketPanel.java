@@ -8,6 +8,7 @@ import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
+import ca.ubc.cs.ExcludeFromJacocoGeneratedReport;
 import model.Market;
 import model.Stock;
 
@@ -16,6 +17,7 @@ import model.Stock;
  * Shows a table of available stocks with their current prices.
  * Allows the user to select a stock from the table.
  */
+@ExcludeFromJacocoGeneratedReport
 public class MarketPanel extends JPanel {
     private Market market;
     private JTable marketTable;

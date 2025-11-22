@@ -6,12 +6,14 @@ import javax.swing.BorderFactory;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
+import ca.ubc.cs.ExcludeFromJacocoGeneratedReport;
 import model.Portfolio;
 
 /**
  * Represents the panel that displays the user's account information,
  * including owner name, cash balance, and total portfolio value.
  */
+@ExcludeFromJacocoGeneratedReport
 public class AccountInfoPanel extends JPanel {
     private Portfolio portfolio;
     private JLabel ownerLabel;
@@ -23,7 +25,7 @@ public class AccountInfoPanel extends JPanel {
     public AccountInfoPanel(Portfolio portfolio) {
         this.portfolio = portfolio;
         setLayout(new GridLayout(3, 1, 5, 5));
-        setBorder(BorderFactory.createTitledBorder("Account Info"));
+        setBorder(BorderFactory.createTitledBorder("Account Information"));
 
         ownerLabel = new JLabel();
         cashLabel = new JLabel();
