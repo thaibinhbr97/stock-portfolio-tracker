@@ -1,13 +1,16 @@
 package ui.gui;
 
 import java.awt.BorderLayout;
+import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.GridLayout;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+import javax.swing.JTabbedPane;
 
+import ca.ubc.cs.ExcludeFromJacocoGeneratedReport;
 import model.Market;
 import model.MarketCatalog;
 import model.Portfolio;
@@ -18,6 +21,7 @@ import ui.gui.panels.PortfolioPanel;
 import ui.gui.panels.SaveLoadPanel;
 import ui.gui.panels.SellStockPanel;
 import ui.gui.panels.TransactionHistoryPanel;
+import ui.gui.panels.UpdateStockPanel;
 
 /**
  * The MainFrame contains all the graphical user interface components
@@ -25,6 +29,7 @@ import ui.gui.panels.TransactionHistoryPanel;
  * panels for different functionalities (market, portfolio, buy/sell, history),
  * and handles user interactions.
  */
+@ExcludeFromJacocoGeneratedReport
 public class MainFrame extends JFrame {
 
     private Portfolio portfolio;
@@ -35,6 +40,7 @@ public class MainFrame extends JFrame {
     private MarketPanel marketPanel;
     private BuyStockPanel buyStockPanel;
     private SellStockPanel sellStockPanel;
+    private UpdateStockPanel updateStockPanel;
     private TransactionHistoryPanel transactionHistoryPanel;
     private JFrame transactionHistoryFrame;
 
@@ -78,6 +84,7 @@ public class MainFrame extends JFrame {
 
         buyStockPanel = new BuyStockPanel(portfolio, market, portfolioPanel, marketPanel, accountInfoPanel);
         sellStockPanel = new SellStockPanel(portfolio, portfolioPanel, marketPanel, accountInfoPanel);
+        updateStockPanel = new UpdateStockPanel(market, marketPanel, portfolioPanel);
         transactionHistoryPanel = new TransactionHistoryPanel(portfolio);
     }
 
@@ -90,18 +97,23 @@ public class MainFrame extends JFrame {
         return topPanel;
     }
 
-    // EFFECTS: Creates and returns the bottom panel containing Buy/Sell controls,
+    // EFFECTS: Creates and returns the bottom panel containing Buy/Sell/Update controls,
     // Account Info, and Save/Load options.
     private JPanel createBottomPanel() {
-        JPanel actionPanel = new JPanel(new FlowLayout(FlowLayout.CENTER, 20, 10));
-        actionPanel.add(buyStockPanel);
-        actionPanel.add(sellStockPanel);
+        JTabbedPane actionTabs = new JTabbedPane();
+        actionTabs.setPreferredSize(new Dimension(350, 140));
+        actionTabs.addTab("Buy Stock", buyStockPanel);
+        actionTabs.addTab("Sell Stock", sellStockPanel);
+        actionTabs.addTab("Update Price", updateStockPanel);
+
+        JPanel actionWrapper = new JPanel(new FlowLayout(FlowLayout.RIGHT));
+        actionWrapper.add(actionTabs);
 
         SaveLoadPanel saveLoadPanel = createSaveLoadPanel();
 
         JPanel bottomWrapper = new JPanel(new BorderLayout());
         bottomWrapper.add(accountInfoPanel, BorderLayout.WEST);
-        bottomWrapper.add(actionPanel, BorderLayout.CENTER);
+        bottomWrapper.add(actionWrapper, BorderLayout.CENTER);
         bottomWrapper.add(saveLoadPanel, BorderLayout.SOUTH);
         return bottomWrapper;
     }
