@@ -591,7 +591,7 @@
     {
       "symbol": "UBER",
       "companyName": "Uber Technologies",
-      "currentPrice": 48,
+      "currentPrice": 52,
       "sector": "UBER"
     },
     {
@@ -649,11 +649,11 @@
       "sector": "XOM"
     }
   ]},
-  "lastUpdated": "2025-11-21T01:13:49.895530",
+  "lastUpdated": "2025-11-21T13:39:22.149099",
   "portfolio": {
-    "lastUpdated": "2025-11-21T01:13:47.412623",
+    "lastUpdated": "2025-11-21T13:39:17.401922",
     "ownerName": "Brad",
-    "cashBalance": 6917.7,
+    "cashBalance": 6782.7,
     "holdings": [
       {
         "shares": 2,
@@ -679,6 +679,11 @@
         "shares": 4,
         "symbol": "F",
         "averagePurchasePrice": 12
+      },
+      {
+        "shares": 1,
+        "symbol": "VLO",
+        "averagePurchasePrice": 135
       },
       {
         "shares": 5,
@@ -754,6 +759,14 @@
         "symbol": "USB",
         "total": 130.20000000000002,
         "price": 35,
+        "action": "BUY"
+      },
+      {
+        "dateTime": "2025-11-21T13:39:17.401922",
+        "shares": 1,
+        "symbol": "VLO",
+        "total": 135,
+        "price": 135,
         "action": "BUY"
       }
     ]
