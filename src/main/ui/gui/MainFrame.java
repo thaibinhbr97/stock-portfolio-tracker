@@ -1,9 +1,16 @@
 package ui.gui;
 
+import static javax.swing.JOptionPane.NO_OPTION;
+import static javax.swing.JOptionPane.WARNING_MESSAGE;
+import static javax.swing.JOptionPane.YES_NO_OPTION;
+import static javax.swing.JOptionPane.showConfirmDialog;
+
 import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.GridLayout;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -11,6 +18,7 @@ import javax.swing.JPanel;
 import javax.swing.JTabbedPane;
 
 import ca.ubc.cs.ExcludeFromJacocoGeneratedReport;
+import model.EventLog;
 import model.Market;
 import model.MarketCatalog;
 import model.Portfolio;
@@ -34,7 +42,6 @@ public class MainFrame extends JFrame {
 
     private Portfolio portfolio;
     private Market market;
-
     private AccountInfoPanel accountInfoPanel;
     private PortfolioPanel portfolioPanel;
     private MarketPanel marketPanel;
@@ -42,13 +49,15 @@ public class MainFrame extends JFrame {
     private SellStockPanel sellStockPanel;
     private UpdateStockPanel updateStockPanel;
     private TransactionHistoryPanel transactionHistoryPanel;
+    
     private JFrame transactionHistoryFrame;
 
     // EFFECTS: Constructs the main frame, initializes data, sets up components,
     // and makes the window visible.
     public MainFrame() {
         setTitle("Stock Portfolio Application");
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
+        addWindowListener(windowClosing);
         setSize(1200, 800);
         setLocationRelativeTo(null);
 
@@ -97,7 +106,8 @@ public class MainFrame extends JFrame {
         return topPanel;
     }
 
-    // EFFECTS: Creates and returns the bottom panel containing Buy/Sell/Update controls,
+    // EFFECTS: Creates and returns the bottom panel containing Buy/Sell/Update
+    // controls,
     // Account Info, and Save/Load options.
     private JPanel createBottomPanel() {
         JTabbedPane actionTabs = new JTabbedPane();
@@ -146,4 +156,33 @@ public class MainFrame extends JFrame {
         transactionHistoryFrame.setVisible(true);
         transactionHistoryFrame.toFront();
     }
+
+    /**
+     * WindowAdapter to handle windowClosing.
+     */
+    /**
+     * WindowAdapter to handle windowClosing.
+     */
+    private WindowAdapter windowClosing = new WindowAdapter() {
+        /**
+         * Asks the user to confirm before closing the app and autosaving.
+         *
+         * @param we the WindowEvent
+         */
+        @Override
+        public void windowClosing(WindowEvent we) {
+            int option = showConfirmDialog(
+                    null, "Are you sure you want to close StockPortfolioApp?",
+                    "Confirm Close", YES_NO_OPTION, WARNING_MESSAGE);
+            if (option == NO_OPTION) { // if user selects no, abort close
+                return;
+            }
+            for (model.Event e : EventLog.getInstance()) {
+                System.out.println(e);
+            }
+            System.exit(0);
+        }
+    };
+
 }
+
