@@ -46,6 +46,8 @@ public class Stock implements Writable {
     // MODIFIES: this
     // EFFECTS: update current price to be a new price
     public void updateCurrentPrice(double newPrice) {
+        Event updateEvent = new Event("Updated " + symbol + " price: $" + currentPrice + " ---> $" + newPrice);
+        EventLog.getInstance().logEvent(updateEvent);        
         this.currentPrice = newPrice;
     }
 
