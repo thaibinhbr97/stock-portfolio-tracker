@@ -2,6 +2,7 @@ package ui;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.Locale;
 import java.util.Scanner;
@@ -17,7 +18,6 @@ import model.TransactionManager;
 import persistence.JsonReader;
 import persistence.JsonWriter;
 
-
 // Represents Stock Portfolio application
 @ExcludeFromJacocoGeneratedReport
 public class StockPortfolioApp {
@@ -27,6 +27,7 @@ public class StockPortfolioApp {
 
     private Market market;
     private Portfolio portfolio;
+    
     private Scanner input;
 
     public StockPortfolioApp() {
@@ -341,10 +342,10 @@ public class StockPortfolioApp {
         String startInput = readLine("Enter start date (YYYY-MM-DD): ");
         String endInput = readLine("Enter end date (YYYY-MM-DD): ");
         try {
-            java.time.LocalDate startDate = java.time.LocalDate.parse(startInput);
-            java.time.LocalDate endDate = java.time.LocalDate.parse(endInput);
-            java.time.LocalDateTime startOfDay = startDate.atStartOfDay();
-            java.time.LocalDateTime endOfDay = endDate.atTime(23, 59, 59, 999_999_999);
+            LocalDate startDate = java.time.LocalDate.parse(startInput);
+            LocalDate endDate = java.time.LocalDate.parse(endInput);
+            LocalDateTime startOfDay = startDate.atStartOfDay();
+            LocalDateTime endOfDay = endDate.atTime(23, 59, 59, 999_999_999);
 
             if (endOfDay.isBefore(startOfDay)) {
                 System.out.println("End date cannot be before start date.");
@@ -395,7 +396,7 @@ public class StockPortfolioApp {
             System.out.println("Please enter a positive number");
         }
     }
-
+ 
     // EFFECTS: read prompt and process yes/no input
     private boolean isYesNo(String prompt) {
         while (true) {
