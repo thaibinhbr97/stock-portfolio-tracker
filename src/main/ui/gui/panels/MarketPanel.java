@@ -20,6 +20,7 @@ import model.Stock;
 @ExcludeFromJacocoGeneratedReport
 public class MarketPanel extends JPanel {
     private Market market;
+    
     private JTable marketTable;
     private DefaultTableModel tableModel;
 

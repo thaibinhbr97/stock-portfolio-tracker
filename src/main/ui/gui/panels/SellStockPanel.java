@@ -22,12 +22,11 @@ public class SellStockPanel extends JPanel {
     private Portfolio portfolio;
     private PortfolioPanel portfolioPanel;
     private MarketPanel marketPanel;
+    private AccountInfoPanel accountInfoPanel;
 
     private JTextField symbolInput;
     private JTextField qtyInput;
     private JLabel result;
-
-    private AccountInfoPanel accountInfoPanel;
 
     // EFFECTS: Constructs the SellStockPanel with necessary dependencies.
     // Initializes the UI components.

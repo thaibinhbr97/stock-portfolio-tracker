@@ -50,52 +50,55 @@ public class TestJsonReader extends TestJson {
     void testReaderGeneralPortfolio() {
         try {
             String dest = "./data/testReaderGeneralPortfolio.json";
-            Market market = makeMarket();
-            Portfolio portfolio = makePortfolioWithTrades(market);
+            writeGeneralPortfolio(dest);
 
-            // write
-            JsonWriter writer = new JsonWriter(dest);
-            writer.open();
-            writer.write(market, portfolio);
-            writer.close();
-
-            // read
             JsonReader reader = new JsonReader(dest);
             Portfolio loadedP = reader.readPortfolio();
             Market loadedM = reader.readMarket();
 
             assertNotNull(loadedP);
             assertNotNull(loadedM);
-
             loadedP.reattachHoldingsToMarket(loadedM);
-
-            // Market checks
-            assertNotNull(loadedM.getStock("AAPL"));
-            assertEquals(200.00, loadedM.getStock("AAPL").getCurrentPrice(), EPSILON);
-            assertEquals("Apple Inc.", loadedM.getStock("AAPL").getCompanyName());
-
-            // Holdings
-            Map<String, Holding> holds = loadedP.getHoldings();
-            assertEquals(2, holds.size());
-            double aaplAvg = (10 * 180.0 + 5 * 200.0) / 15.0;
-            assertHolding(holds.get("AAPL"), "AAPL", 15.0, aaplAvg, 200.0);
-            assertHolding(holds.get("AMZN"), "AMZN", 15.0, 130.0, 130.0);
-
-            // Transactions
-            List<Transaction> txs = loadedP.getTransactionManager().getTransactions();
-            assertEquals(4, txs.size());
-            assertTransaction(txs.get(0), "AAPL", "BUY", 10.0, 180.0);
-            assertTransaction(txs.get(1), "AAPL", "BUY", 5.0, 200.0);
-            assertTransaction(txs.get(2), "AMZN", "BUY", 20.0, 130.0);
-            assertTransaction(txs.get(3), "AMZN", "SELL", 5.0, 130.0);
-
-            // Cash & value
-            assertEquals(5250.0, loadedP.getCashBalance(), EPSILON);
-            double expectedValue = 15.0 * loadedM.getStock("AAPL").getCurrentPrice()
-                    + 15.0 * loadedM.getStock("AMZN").getCurrentPrice();
-            assertEquals(expectedValue, loadedP.getPortfolioValue(), EPSILON);
+            verifyGeneralPortfolioState(loadedP, loadedM);
         } catch (IOException e) {
             fail("Couldn't read from file");
         }
+    }
+
+    private void writeGeneralPortfolio(String dest) throws IOException {
+        Market market = makeMarket();
+        Portfolio portfolio = makePortfolioWithTrades(market);
+        JsonWriter writer = new JsonWriter(dest);
+        writer.open();
+        writer.write(market, portfolio);
+        writer.close();
+    }
+
+    private void verifyGeneralPortfolioState(Portfolio loadedP, Market loadedM) {
+        // Market checks
+        assertNotNull(loadedM.getStock("AAPL"));
+        assertEquals(200.00, loadedM.getStock("AAPL").getCurrentPrice(), EPSILON);
+        assertEquals("Apple Inc.", loadedM.getStock("AAPL").getCompanyName());
+
+        // Holdings
+        Map<String, Holding> holds = loadedP.getHoldings();
+        assertEquals(2, holds.size());
+        double aaplAvg = (10 * 180.0 + 5 * 200.0) / 15.0;
+        assertHolding(holds.get("AAPL"), "AAPL", 15.0, aaplAvg, 200.0);
+        assertHolding(holds.get("AMZN"), "AMZN", 15.0, 130.0, 130.0);
+
+        // Transactions
+        List<Transaction> txs = loadedP.getTransactionManager().getTransactions();
+        assertEquals(4, txs.size());
+        assertTransaction(txs.get(0), "AAPL", "BUY", 10.0, 180.0);
+        assertTransaction(txs.get(1), "AAPL", "BUY", 5.0, 200.0);
+        assertTransaction(txs.get(2), "AMZN", "BUY", 20.0, 130.0);
+        assertTransaction(txs.get(3), "AMZN", "SELL", 5.0, 130.0);
+
+        // Cash & value
+        assertEquals(5250.0, loadedP.getCashBalance(), EPSILON);
+        double expectedValue = 15.0 * loadedM.getStock("AAPL").getCurrentPrice()
+                + 15.0 * loadedM.getStock("AMZN").getCurrentPrice();
+        assertEquals(expectedValue, loadedP.getPortfolioValue(), EPSILON);
     }
 }

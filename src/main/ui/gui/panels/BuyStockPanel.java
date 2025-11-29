@@ -24,12 +24,11 @@ public class BuyStockPanel extends JPanel {
     private Market market;
     private PortfolioPanel portfolioPanel;
     private MarketPanel marketPanel;
+    private AccountInfoPanel accountInfoPanel;    
 
     private JTextField symbolInput;
     private JTextField qtyInput;
     private JLabel result;
-
-    private AccountInfoPanel accountInfoPanel;
 
     // EFFECTS: Constructs the BuyStockPanel with necessary dependencies.
     // Initializes the UI components.

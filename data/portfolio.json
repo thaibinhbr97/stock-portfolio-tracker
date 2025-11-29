@@ -135,7 +135,7 @@
     {
       "symbol": "COP",
       "companyName": "ConocoPhillips",
-      "currentPrice": 120,
+      "currentPrice": 70,
       "sector": "COP"
     },
     {
@@ -591,7 +591,7 @@
     {
       "symbol": "UBER",
       "companyName": "Uber Technologies",
-      "currentPrice": 52,
+      "currentPrice": 48,
       "sector": "UBER"
     },
     {
@@ -649,125 +649,55 @@
       "sector": "XOM"
     }
   ]},
-  "lastUpdated": "2025-11-21T13:39:22.149099",
+  "lastUpdated": "2025-11-27T21:55:24.088780",
   "portfolio": {
-    "lastUpdated": "2025-11-21T13:39:17.401922",
+    "lastUpdated": "2025-11-27T21:55:02.588836",
     "ownerName": "Brad",
-    "cashBalance": 6782.7,
+    "cashBalance": 7960,
     "holdings": [
       {
         "shares": 2,
-        "symbol": "BLK",
-        "averagePurchasePrice": 680
-      },
-      {
-        "shares": 3,
-        "symbol": "CVX",
-        "averagePurchasePrice": 160
-      },
-      {
-        "shares": 1.5,
-        "symbol": "QCOM",
-        "averagePurchasePrice": 115
-      },
-      {
-        "shares": 3.72,
-        "symbol": "USB",
-        "averagePurchasePrice": 35
-      },
-      {
-        "shares": 4,
-        "symbol": "F",
-        "averagePurchasePrice": 12
+        "symbol": "CVS",
+        "averagePurchasePrice": 70
       },
       {
         "shares": 1,
-        "symbol": "VLO",
-        "averagePurchasePrice": 135
-      },
-      {
-        "shares": 5,
-        "symbol": "ABBV",
-        "averagePurchasePrice": 150
-      },
-      {
-        "shares": 2.95,
-        "symbol": "UBER",
-        "averagePurchasePrice": 48
+        "symbol": "CMG",
+        "averagePurchasePrice": 1900
       }
     ],
     "transactions": [
       {
-        "dateTime": "2025-11-20T22:01:56.545942",
+        "dateTime": "2025-11-27T21:54:45.240965",
+        "shares": 1,
+        "symbol": "CVS",
+        "total": 70,
+        "price": 70,
+        "action": "BUY"
+      },
+      {
+        "dateTime": "2025-11-27T21:54:51.257471",
+        "shares": 1,
+        "symbol": "CVS",
+        "total": 70,
+        "price": 70,
+        "action": "BUY"
+      },
+      {
+        "dateTime": "2025-11-27T21:54:57.222212",
         "shares": 2,
-        "symbol": "BLK",
-        "total": 1360,
-        "price": 680,
+        "symbol": "CMG",
+        "total": 3800,
+        "price": 1900,
         "action": "BUY"
       },
       {
-        "dateTime": "2025-11-20T22:02:11.994371",
-        "shares": 3,
-        "symbol": "CVX",
-        "total": 480,
-        "price": 160,
-        "action": "BUY"
-      },
-      {
-        "dateTime": "2025-11-20T22:03:10.697507",
-        "shares": 5,
-        "symbol": "F",
-        "total": 60,
-        "price": 12,
-        "action": "BUY"
-      },
-      {
-        "dateTime": "2025-11-20T22:03:18.109511",
+        "dateTime": "2025-11-27T21:55:02.588836",
         "shares": 1,
-        "symbol": "F",
-        "total": 12,
-        "price": 12,
+        "symbol": "CMG",
+        "total": 1900,
+        "price": 1900,
         "action": "SELL"
-      },
-      {
-        "dateTime": "2025-11-20T22:16:51.787771",
-        "shares": 5,
-        "symbol": "ABBV",
-        "total": 750,
-        "price": 150,
-        "action": "BUY"
-      },
-      {
-        "dateTime": "2025-11-21T01:13:15.012320",
-        "shares": 1.5,
-        "symbol": "QCOM",
-        "total": 172.5,
-        "price": 115,
-        "action": "BUY"
-      },
-      {
-        "dateTime": "2025-11-21T01:13:35.966047",
-        "shares": 2.95,
-        "symbol": "UBER",
-        "total": 141.60000000000002,
-        "price": 48,
-        "action": "BUY"
-      },
-      {
-        "dateTime": "2025-11-21T01:13:47.412623",
-        "shares": 3.72,
-        "symbol": "USB",
-        "total": 130.20000000000002,
-        "price": 35,
-        "action": "BUY"
-      },
-      {
-        "dateTime": "2025-11-21T13:39:17.401922",
-        "shares": 1,
-        "symbol": "VLO",
-        "total": 135,
-        "price": 135,
-        "action": "BUY"
       }
     ]
   }

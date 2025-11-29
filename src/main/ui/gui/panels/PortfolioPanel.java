@@ -22,6 +22,7 @@ import model.Portfolio;
 @ExcludeFromJacocoGeneratedReport
 public class PortfolioPanel extends JPanel {
     private Portfolio portfolio;
+    
     private JTable portfolioTable;
     private DefaultTableModel tableModel;
 
