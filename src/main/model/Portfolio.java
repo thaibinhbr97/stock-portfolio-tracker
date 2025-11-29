@@ -41,7 +41,7 @@ public class Portfolio implements Writable {
 
     // REQUIRES: quantity > 0, total price (stock current price * quantity) <=
     // cashBalance
-    // MODIFIES: this, Holding, TransactionManager
+    // MODIFIES: this, Holding, Transaction, TransactionManager
     // EFFECTS: buy shares of a stock, update portfolio value and cash balance for
     // owner once action is done.
     public void buyShare(Stock stock, double quantity) {
@@ -63,14 +63,25 @@ public class Portfolio implements Writable {
         recordBuyTransaction(stock, quantity);
     }
 
+    // MODIFIES: this, Holding, Transaction, TransactionManager
+    // EFFECTS: buy shares quantity in holding given holding exists; otherwise
+    // create a new holding with stock and quantity.
     private void updateHoldingsForBuy(Stock stock, double quantity) {
         String symbol = stock.getSymbol();
         Holding holding = holdings.get(symbol);
         if (holding == null) {
             holding = new Holding(stock, quantity, stock.getCurrentPrice());
             holdings.put(symbol, holding);
+            EventLog.getInstance().logEvent(
+                    new Event("Added " + stock.getSymbol() + " @ " + stock.getCurrentPrice() + " to portfolio."));
+            EventLog.getInstance().logEvent(
+                    new Event("Increased " + quantity + " shares of " + stock.getSymbol() + " @ $"
+                            + stock.getCurrentPrice()));
         } else {
             holding.buyShare(quantity);
+            EventLog.getInstance().logEvent(
+                    new Event("Increased " + quantity + " shares of " + stock.getSymbol() + " @ $"
+                            + stock.getCurrentPrice()));
         }
     }
 
@@ -78,11 +89,14 @@ public class Portfolio implements Writable {
         Transaction transaction = new Transaction(stock.getSymbol(), "BUY", quantity, stock.getCurrentPrice(),
                 lastUpdated);
         transactionManager.addTransaction(transaction);
+        EventLog.getInstance().logEvent(new Event(
+                "Recorded transaction: BUY " + quantity + " shares of " + stock.getSymbol() + " @ $"
+                        + stock.getCurrentPrice()));
     }
 
     // REQUIRES: symbol != null, quantity > 0, shares > 0, quantity <= current
     // shares for this stock holding
-    // MODIFIES: this, Holding, TransactionManager
+    // MODIFIES: this, Holding, Transaction, TransactionManager
     // EFFECTS: sell shares of a stock symbol with stock's current price.
     // Update portfolio value and cash balance for owner once action is done.
     public void sellShare(String symbol, double quantity) {
@@ -95,10 +109,14 @@ public class Portfolio implements Writable {
         double totalProceeds = currentPrice * quantity;
 
         holding.sellShare(quantity);
+        EventLog.getInstance().logEvent(new Event("Decreased " + quantity + " shares of " + symbol + " @ $"
+                + currentPrice));
+
         cashBalance += totalProceeds;
 
         if (holding.getShares() == 0) {
             holdings.remove(symbol);
+            EventLog.getInstance().logEvent(new Event("Removed " + symbol + " from portfolio"));
         }
 
         calculatePortfolioValue();
@@ -107,7 +125,9 @@ public class Portfolio implements Writable {
         // create and record sell transaction
         Transaction transaction = new Transaction(symbol, "SELL", quantity, currentPrice, lastUpdated);
         transactionManager.addTransaction(transaction);
-
+        EventLog.getInstance()
+                .logEvent(new Event("Recorded transaction: SELL " + quantity + " shares of " + symbol + " @ $"
+                        + currentPrice));
     }
 
     // MODIFIES: this, Transaction, Holding
