@@ -8,6 +8,8 @@ import java.util.Locale;
 import java.util.Scanner;
 
 import ca.ubc.cs.ExcludeFromJacocoGeneratedReport;
+import model.Event;
+import model.EventLog;
 import model.Holding;
 import model.Market;
 import model.MarketCatalog;
@@ -27,7 +29,7 @@ public class StockPortfolioApp {
 
     private Market market;
     private Portfolio portfolio;
-    
+
     private Scanner input;
 
     public StockPortfolioApp() {
@@ -396,7 +398,7 @@ public class StockPortfolioApp {
             System.out.println("Please enter a positive number");
         }
     }
- 
+
     // EFFECTS: read prompt and process yes/no input
     private boolean isYesNo(String prompt) {
         while (true) {
@@ -417,6 +419,7 @@ public class StockPortfolioApp {
             jsonWriter.open();
             jsonWriter.write(market, portfolio);
             jsonWriter.close();
+            EventLog.getInstance().logEvent(new Event("Portfolio state saved to file: " + JSON_STORE));
             System.out.println("Save StockPortfolioApp state to " + JSON_STORE);
         } catch (FileNotFoundException e) {
             System.out.println("Unable to write to file: " + JSON_STORE);
@@ -443,6 +446,7 @@ public class StockPortfolioApp {
             if (this.portfolio != null && this.market != null) {
                 this.portfolio.reattachHoldingsToMarket(this.market);
             }
+            EventLog.getInstance().logEvent(new Event("Portfolio state loaded from file: " + JSON_STORE));
             System.out.println("Loaded StockPortfolioApp state from " + JSON_STORE);
         } catch (IOException e) {
             System.out.println("Unable to read from file: " + JSON_STORE);

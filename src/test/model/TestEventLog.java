@@ -22,6 +22,10 @@ public class TestEventLog {
     private boolean transactionFound = false;
     private boolean addedFound = false;
     private boolean increasedFound = false;
+    private boolean insufficientFundsFound = false;
+    private boolean filterByActionFound = false;
+    private boolean filterBySymbolFound = false;
+    private boolean filterByDateFound = false;
 
     @BeforeEach
     public void setUp() {
@@ -113,5 +117,62 @@ public class TestEventLog {
         }
 
         assertTrue(updateFound, "Should log price update");
+    }
+
+    @Test
+    public void testInsufficientFundsLogging() {
+        Stock expensiveStock = new Stock("TSLA", "Tesla Inc.", "Technology", 20000.0);
+        portfolio.buyShare(expensiveStock, 10); // Requires $200,000, only have $10,000
+
+        List<Event> events = new ArrayList<>();
+        for (Event event : eventLog) {
+            events.add(event);
+        }
+
+        insufficientFundsFound = false;
+        for (Event e : events) {
+            if (e.getDescription().contains("Failed to buy")
+                    && e.getDescription().contains("insufficient funds")) {
+                insufficientFundsFound = true;
+            }
+        }
+
+        assertTrue(insufficientFundsFound, "Should log insufficient funds error");
+    }
+
+    @Test
+    public void testTransactionFilteringLogging() {
+        // Add some transactions first
+        portfolio.buyShare(stock, 5);
+        eventLog.clear();
+
+        // Filter transactions
+        portfolio.getTransactionManager().filterByAction("BUY");
+        portfolio.getTransactionManager().filterBySymbol("AAPL");
+        LocalDateTime start = LocalDateTime.now().minusDays(1);
+        LocalDateTime end = LocalDateTime.now().plusDays(1);
+        portfolio.getTransactionManager().filterByDateTime(start, end);
+
+        List<Event> events = new ArrayList<>();
+        for (Event event : eventLog) {
+            events.add(event);
+        }
+
+        for (Event e : events) {
+            String desc = e.getDescription();
+            if (desc.contains("Filtered transactions by action: BUY")) {
+                filterByActionFound = true;
+            }
+            if (desc.contains("Filtered transactions by symbol: AAPL")) {
+                filterBySymbolFound = true;
+            }
+            if (desc.contains("Filtered transactions by date range")) {
+                filterByDateFound = true;
+            }
+        }
+
+        assertTrue(filterByActionFound, "Should log filtering by action");
+        assertTrue(filterBySymbolFound, "Should log filtering by symbol");
+        assertTrue(filterByDateFound, "Should log filtering by date");
     }
 }

@@ -29,6 +29,7 @@ public class TransactionManager {
 
     // EFFECTS: returns a new transactions object filltered by action (BUY/SELL)
     public List<Transaction> filterByAction(String action) {
+        EventLog.getInstance().logEvent(new Event("Filtered transactions by action: " + action));
         List<Transaction> filltered = new ArrayList<>();
         for (Transaction transaction : transactions) {
             if (transaction.getAction().equalsIgnoreCase(action)) {
@@ -41,6 +42,8 @@ public class TransactionManager {
     // REQUIRES: endTime has to be >= starTime in Unix Timestamp
     // EFFECTS: returns a new transactions object filltered by date
     public List<Transaction> filterByDateTime(LocalDateTime startTime, LocalDateTime endTime) {
+        EventLog.getInstance()
+                .logEvent(new Event("Filtered transactions by date range: " + startTime + " to " + endTime));
         List<Transaction> filtered = new ArrayList<>();
         for (Transaction transaction : transactions) {
             LocalDateTime dateTime = transaction.getDateTime();
@@ -56,6 +59,7 @@ public class TransactionManager {
 
     // EFFECTS: returns a new transactions object filtered by symbol
     public List<Transaction> filterBySymbol(String symbol) {
+        EventLog.getInstance().logEvent(new Event("Filtered transactions by symbol: " + symbol));
         List<Transaction> filtered = new ArrayList<>();
         for (Transaction transaction : transactions) {
             if (transaction.getSymbol().equalsIgnoreCase(symbol)) {

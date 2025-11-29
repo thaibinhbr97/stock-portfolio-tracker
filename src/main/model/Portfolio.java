@@ -51,6 +51,10 @@ public class Portfolio implements Writable {
 
         double totalPrice = stock.getCurrentPrice() * quantity;
         if (totalPrice > cashBalance) {
+            EventLog.getInstance().logEvent(new Event("Failed to buy " + quantity + " shares of "
+                    + stock.getSymbol() + " @ $"
+                    + stock.getCurrentPrice() + " : insufficient funds (required $" + String.format("%.2f", totalPrice)
+                    + ", available $" + String.format("%.2f", cashBalance) + ")"));
             return;
         }
 

@@ -50,18 +50,48 @@ In addition to managing stocks, it also provides simple **recommendations** base
 - You can reload the state of my application by clicking the load button at the bottom of the application.
 
 # Phase 4: Task 2
-Thu Nov 27 22:40:05 PST 2025
+Sample event logs demonstrating the comprehensive logging system:
+
+```
+Thu Nov 28 17:20:00 PST 2025
 Event log cleared.
-Thu Nov 27 22:40:06 PST 2025
+
+Thu Nov 28 17:20:02 PST 2025
+Failed to buy 100 of TSLA @ $150.0: insufficient funds (required $15000.00, available $10000.00)
+
+Thu Nov 28 17:20:03 PST 2025
 Added AAPL @ 150.0 to portfolio.
-Thu Nov 27 22:40:06 PST 2025
+
+Thu Nov 28 17:20:03 PST 2025
 Increased 10.0 shares of AAPL @ $150.0
-Thu Nov 27 22:40:06 PST 2025
+
+Thu Nov 28 17:20:03 PST 2025
 Recorded transaction: BUY 10.0 shares of AAPL @ $150.0
-Thu Nov 27 22:40:06 PST 2025
-Decreased 5.0 shares of AAPL @ $150.0
-Thu Nov 27 22:40:06 PST 2025
-Recorded transaction: SELL 5.0 shares of AAPL @ $150.0
+
+Thu Nov 28 17:20:04 PST 2025
+Updated AAPL price: $150.0 ---> $160.0
+
+Thu Nov 28 17:20:05 PST 2025
+Decreased 5.0 shares of AAPL @ $160.0
+
+Thu Nov 28 17:20:05 PST 2025
+Recorded transaction: SELL 5.0 shares of AAPL @ $160.0
+
+Thu Nov 28 17:20:06 PST 2025
+Filtered transactions by action: BUY
+
+Thu Nov 28 17:20:07 PST 2025
+Filtered transactions by symbol: AAPL
+
+Thu Nov 28 17:20:08 PST 2025
+Filtered transactions by date range: 2025-11-27T00:00 to 2025-11-28T23:59:59.999999999
+
+Thu Nov 28 17:20:09 PST 2025
+Portfolio state saved to file: ./data/portfolio.json
+
+Thu Nov 28 17:20:10 PST 2025
+Portfolio state loaded from file: ./data/portfolio.json
+```
 
 # Phase 4: Task 3
 If I had more time to work on the project, I would refactor the design to implement the **Observer Pattern** for the GUI updates. Currently, the `MainFrame` and its sub-panels (`PortfolioPanel`, `MarketPanel`, etc.) are tightly coupled. When an action occurs (like buying a stock), the panels often need to be manually refreshed or rely on the `MainFrame` to orchestrate updates.

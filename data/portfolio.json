@@ -105,7 +105,7 @@
     {
       "symbol": "CAT",
       "companyName": "Caterpillar",
-      "currentPrice": 270,
+      "currentPrice": 1.2,
       "sector": "CAT"
     },
     {
@@ -135,7 +135,7 @@
     {
       "symbol": "COP",
       "companyName": "ConocoPhillips",
-      "currentPrice": 70,
+      "currentPrice": 120,
       "sector": "COP"
     },
     {
@@ -649,54 +649,31 @@
       "sector": "XOM"
     }
   ]},
-  "lastUpdated": "2025-11-27T21:55:24.088780",
+  "lastUpdated": "2025-11-28T17:27:57.504562",
   "portfolio": {
-    "lastUpdated": "2025-11-27T21:55:02.588836",
+    "lastUpdated": "2025-11-28T17:26:57.657734",
     "ownerName": "Brad",
-    "cashBalance": 7960,
-    "holdings": [
-      {
-        "shares": 2,
-        "symbol": "CVS",
-        "averagePurchasePrice": 70
-      },
-      {
-        "shares": 1,
-        "symbol": "CMG",
-        "averagePurchasePrice": 1900
-      }
-    ],
+    "cashBalance": 9890,
+    "holdings": [{
+      "shares": 1.0999999999999999,
+      "symbol": "CCI",
+      "averagePurchasePrice": 100
+    }],
     "transactions": [
       {
-        "dateTime": "2025-11-27T21:54:45.240965",
-        "shares": 1,
-        "symbol": "CVS",
-        "total": 70,
-        "price": 70,
+        "dateTime": "2025-11-28T17:26:45.791687",
+        "shares": 1.2,
+        "symbol": "CCI",
+        "total": 120,
+        "price": 100,
         "action": "BUY"
       },
       {
-        "dateTime": "2025-11-27T21:54:51.257471",
-        "shares": 1,
-        "symbol": "CVS",
-        "total": 70,
-        "price": 70,
-        "action": "BUY"
-      },
-      {
-        "dateTime": "2025-11-27T21:54:57.222212",
-        "shares": 2,
-        "symbol": "CMG",
-        "total": 3800,
-        "price": 1900,
-        "action": "BUY"
-      },
-      {
-        "dateTime": "2025-11-27T21:55:02.588836",
-        "shares": 1,
-        "symbol": "CMG",
-        "total": 1900,
-        "price": 1900,
+        "dateTime": "2025-11-28T17:26:57.657734",
+        "shares": 0.1,
+        "symbol": "CCI",
+        "total": 10,
+        "price": 100,
         "action": "SELL"
       }
     ]
