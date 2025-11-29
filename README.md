@@ -48,3 +48,22 @@ In addition to managing stocks, it also provides simple **recommendations** base
 - You can locate my visual component by running the application on start.
 - You can save the state of my application by clicking the save button at the bottom of the application.
 - You can reload the state of my application by clicking the load button at the bottom of the application.
+
+# Phase 4: Task 2
+Thu Nov 27 22:40:05 PST 2025
+Event log cleared.
+Thu Nov 27 22:40:06 PST 2025
+Added AAPL @ 150.0 to portfolio.
+Thu Nov 27 22:40:06 PST 2025
+Increased 10.0 shares of AAPL @ $150.0
+Thu Nov 27 22:40:06 PST 2025
+Recorded transaction: BUY 10.0 shares of AAPL @ $150.0
+Thu Nov 27 22:40:06 PST 2025
+Decreased 5.0 shares of AAPL @ $150.0
+Thu Nov 27 22:40:06 PST 2025
+Recorded transaction: SELL 5.0 shares of AAPL @ $150.0
+
+# Phase 4: Task 3
+If I had more time to work on the project, I would refactor the design to implement the **Observer Pattern** for the GUI updates. Currently, the `MainFrame` and its sub-panels (`PortfolioPanel`, `MarketPanel`, etc.) are tightly coupled. When an action occurs (like buying a stock), the panels often need to be manually refreshed or rely on the `MainFrame` to orchestrate updates.
+
+By making the `Portfolio` and `Market` classes subjects (observables) and the panels observers, the model could notify the view directly whenever its state changes. This would decouple the controller logic from the view updates, making the code cleaner, more modular, and easier to maintain. It would also eliminate the need for explicit `refresh()` calls scattered throughout the UI code.
