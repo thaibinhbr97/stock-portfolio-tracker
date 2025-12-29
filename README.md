@@ -41,7 +41,7 @@ In addition to managing stocks, it also provides simple **recommendations** base
 - As a user, I want to be able to have an option to save my entire state of stock portfolio including transaction history to file (if I choose).
 - As a user, I want to be able to have an option to load my entire state of stock portfolio including transaction history from file (if I choose).
 
-# Instructions for End User
+### Instructions for End User
 - You can view the current stock market on the left panel called Market. You can view the portfolio on the right panel called Portfolio. You can view the transaction history on the bottom panel called Transaction History. You can view your information on the bottom left panel called Account Information. You can save the state of your application by clicking the save button at the bottom of the application. You can load the state of your application by clicking the load button at the bottom of the application. You can also filter Transaction History by action, symbol, or date time range by toggle between different options and input required fields.
 - You can view the panel that displays the portfolio's stocks by buying/selling stocks. The display of the portfolio panel is automatically updated after each buy/sell action. Price on the portfolio panel can also be updated after updating the price of a stock.
 - You can view the panel that displays the transaction history of buying/selling stocks. The display of the transaction history panel is automatically updated after each buy/sell action.
@@ -49,8 +49,7 @@ In addition to managing stocks, it also provides simple **recommendations** base
 - You can save the state of my application by clicking the save button at the bottom of the application.
 - You can reload the state of my application by clicking the load button at the bottom of the application.
 
-# Phase 4: Task 2
-Sample event logs demonstrating the comprehensive logging system:
+#### Sample event logs demonstrating the comprehensive logging system:
 
 ```
 Thu Nov 28 17:20:00 PST 2025
@@ -93,7 +92,7 @@ Thu Nov 28 17:20:10 PST 2025
 Portfolio state loaded from file: ./data/portfolio.json
 ```
 
-# Phase 4: Task 3
+### Future improvements
 If I had more time to work on the project, I would refactor the design to implement the **Observer Pattern** for the GUI updates. Currently, the `MainFrame` and its sub-panels (`PortfolioPanel`, `MarketPanel`, etc.) are tightly coupled. When an action occurs (like buying a stock), the panels often need to be manually refreshed or rely on the `MainFrame` to orchestrate updates.
 
 By making the `Portfolio` and `Market` classes subjects (observables) and the panels observers, the model could notify the view directly whenever its state changes. This would decouple the controller logic from the view updates, making the code cleaner, more modular, and easier to maintain. It would also eliminate the need for explicit `refresh()` calls scattered throughout the UI code.
